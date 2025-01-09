@@ -1,0 +1,50 @@
+@font-face {
+    font-family: 'Inter';
+    src: url("../font/Inter/Inter-Italic-VariableFont_opsz,wght.ttf") format('woff2'),
+            url("../font/Inter/Inter-VariableFont_opsz,wght.ttf") format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url("../font/Montserrat/Montserrat-Italic-VariableFont_wght.ttf") format('woff2'),
+            url("../font/Montserrat/Montserrat-VariableFont_wght.ttf") format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Playfair_Display';
+    src: url("../font/Playfair_Display/PlayfairDisplay-Italic-VariableFont_wght.ttf") format('woff2'),
+            url("../font/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf") format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+:root {
+    /* Màu khi ở chế độ mặc định ( light mode )  */
+    --color-primary: #006BFF;
+    --color-secondary: #BCF2F6;
+    --text-color: 55,65,81;
+    --bg-color: #ffffff;
+
+    /* Định dạng chữ */
+    --font-title: 'Montserrat', sans-serif;
+    --font-mini-title: 'Playfair_Display', serif;
+    --font-text: 'Inter', sans-serif;
+
+    --font-size-title: 2.5rem;
+    --font-size-mini-title: 1.5rem;
+    --font-size-text: 1rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root{
+        /* Màu khi ở chế độ dark mode */
+        --color-primary: #006BFF;
+        --color-secondary: #BCF2F6;
+        --text-color: #ffffff;
+        --bg-color: 31,41,55;
+    }
+}
