@@ -1,5 +1,5 @@
-import React, { Suspense, lazy } from 'react';
-import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
+import { Suspense } from 'react';
+import { Routes, Route } from 'react-router-dom';
 
 import PublicRoutes from './public/PublicRoutes';
 import UserRoutes from './user/UserRoutes';
