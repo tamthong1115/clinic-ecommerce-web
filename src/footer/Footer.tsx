@@ -33,8 +33,8 @@ const Footer = () => {
             opacity: !isHidden ? 0 : 1,
         },
         animate: {
-            height: !isHidden && isMobile ? 'max-content' : 0,
-            opacity: !isHidden && isMobile ? 1 : 0,
+            height: !isHidden ? 'max-content' : 0,
+            opacity: !isHidden ? 1 : 0,
         },
         transition: {
             height: {duration: 0.5},
@@ -59,9 +59,17 @@ const Footer = () => {
         };
     }, []);
 
+
     useEffect(() => {
         console.log(hideContent);
     }, [hideContent]);
+
+    useEffect(() => {
+        if (windowWidth > limitDesktop)
+            setHideContent([false, false, false, false, false])
+        else
+            setHideContent([true, true, true, true, true, true])
+    }, [windowWidth])
 
     return (
         <div className="flex flex-col w-full justify-center items-center bg-white text-black">
@@ -69,7 +77,7 @@ const Footer = () => {
             <div className={'w-1/3 sm:max-lg:w-1/4 h-0.5 sm:max-lg:h-1.5 lg:h-2 bg-emerald-600 rounded-full'}></div>
             {/*those are contents of footer*/}
             <div
-                className="w-full  lg:max-xl:w-11/12 xl:grid xl:grid-cols-5 xl:justify-items-center xl:gap-9 flex flex-col justify-start  p-2.5">
+                className="w-full lg:max-xl:w-11/12 xl:grid xl:grid-cols-5 xl:justify-items-center lg:gap-0 xl:gap-9 flex flex-col justify-start  p-2.5">
                 <div className="text-left ms:max-lg:w-full">
                     <div
                         className={'font-bold w-full border xl:border-0 p-2 xl:p-0 cursor-pointer xl:cursor-text'}
@@ -78,7 +86,7 @@ const Footer = () => {
                             <AnimatePresence initial={false}>
                                 {!hideContent[0] ? (
                                     <motion.ul
-                                        {...getMotionConfig(hideContent[0], windowWidth <= limitDesktop)}
+                                        {...getMotionConfig(hideContent[0], false)}
                                         className={'list-none lg:max-xl:p-2 m-0 text-emerald-600'}>
                                         <li className="flex flex-row ml-2 items-center leading-8 text-gray-800">
                                             <BsIcon.BsGeoAlt className={'mx-1'}/> chilli powder
@@ -113,7 +121,7 @@ const Footer = () => {
                 </div>
                 <div className="text-left ms:max-lg:w-full">
                     <div
-                        className={'font-bold w-full h-full border xl:border-0 p-2 xl:p-0 cursor-pointer xl:cursor-text'}
+                        className={'font-bold w-full h-full xl:h-fit border xl:border-0 p-2 xl:p-0 cursor-pointer xl:cursor-text'}
                         onClick={() => showContent(1)}>Về chúng tôi
                     </div>
                     <MotionConfig>
@@ -223,7 +231,7 @@ const Footer = () => {
                     </MotionConfig>
                 </div>
                 <div
-                    className={' w-full flex flex-col items-start lg:items-center justify-start text-center sm:max-lg:mt-2.5 sm:max-lg:flex-col sm:max-lg:justify-center sm:max-lg:items-start'}>
+                    className={' w-full flex flex-col items-start lg:items-center justify-start text-center sm:max-lg:flex-col sm:max-lg:justify-center sm:max-lg:items-start'}>
                     <div className={'xl:mr-1 xl:p-2 w-full'}>
                         <div
                             className={'text-left xl:text-center font-bold w-full border xl:border-0 p-2 xl:p-0 cursor-pointer xl:cursor-text'}
