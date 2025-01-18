@@ -1,16 +1,12 @@
-import './App.css'
-import Footer from './footer/Footer.tsx'
-import {BrowserRouter} from "react-router-dom";
+import { BrowserRouter as Router } from 'react-router-dom';
+import AppRoutes from './routes';
 
 function App() {
-
-    return (
-        <>
-            <BrowserRouter basename="/">
-                <Footer/>
-            </BrowserRouter>
-        </>
-    )
+  return (
+    <Router>
+      <AppRoutes />
+    </Router>
+  );
 }
 
 export default App
