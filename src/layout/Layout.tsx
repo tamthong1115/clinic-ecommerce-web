@@ -6,12 +6,11 @@ const Layout = () => {
   return (
     <div className="">
       <Header />
-      <main>
+      <main className={`flex-1 flex container p-10 mx-auto shadow-2xl`}>
         <Outlet />
       </main>
       <Footer />
     </div>
   );
 };
-
 export default Layout;
