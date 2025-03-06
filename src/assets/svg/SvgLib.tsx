@@ -1,11 +1,12 @@
-import { ReactComponent as Momo } from './momo_ebbd8eb9b0.svg';
-import { ReactComponent as Amex } from './amex_2610a984a5.svg';
-import { ReactComponent as Jcb } from './jcb_7655e615ce.svg';
-import { ReactComponent as Mtc } from './mtc_1ed684ff7c.svg';
-import { ReactComponent as Visa } from './visa_fdc3324c35.svg';
-import { ReactComponent as Vnpay } from './vnpay_1f73f546c4.svg';
-import { ReactComponent as Zalopay } from './zalopay_884e503cf9.svg';
-import { ReactComponent as Zalo } from './icons8-zalo.svg';
+import Momo from './momo_ebbd8eb9b0.svg?react';
+import Amex from './amex_2610a984a5.svg?react';
+import Jcb from './jcb_7655e615ce.svg?react';
+import Mtc from './mtc_1ed684ff7c.svg?react';
+import Visa from './visa_fdc3324c35.svg?react';
+import Vnpay from './vnpay_1f73f546c4.svg?react';
+import Zalopay from './zalopay_884e503cf9.svg?react';
+import Zalo from './icons8-zalo.svg?react';
+
 import React from 'react';
 
 const SvgComponents = (SvgElement: JSX.Element) => {
