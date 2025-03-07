@@ -9,6 +9,7 @@ import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import { linkHeader } from '../../constants/header/linkHeader';
 import { navLink } from '../../constants/header/navLink';
 import { MdOutlinePhoneIphone, MdOutlinePhoneInTalk } from 'react-icons/md';
+
 const Header: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [nameNav, setNameNav] = useState('');
