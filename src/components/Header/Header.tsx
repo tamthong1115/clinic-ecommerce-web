@@ -11,7 +11,6 @@ import { navLink } from '../../constants/header/navLink';
 import { MdOutlinePhoneIphone, MdOutlinePhoneInTalk } from 'react-icons/md';
 const Header: React.FC = () => {
   const [open, setOpen] = useState(false);
-  const [token, setToken] = useState(true);
   const [nameNav, setNameNav] = useState('');
   const handleEnter = (nameLink: string) => {
     setNameNav(nameLink);
@@ -64,25 +63,14 @@ const Header: React.FC = () => {
               </div>
             </form>
             <div className="flex items-center">
-              {token === true ? (
-                <Link to={PublicPaths.LOGIN}>
-                  <div className="flex items-center mr-[20px] text-[white] font-[700]">
-                    <div className="text-[24px]">
-                      <FaRegUser />
-                    </div>
-                    <div className="ml-[8px]">{linkHeader.SIGN_IN}</div>
+              <Link to={PublicPaths.LOGIN}>
+                <div className="flex items-center mr-[20px] text-[white] font-[700]">
+                  <div className="text-[24px]">
+                    <FaRegUser />
                   </div>
-                </Link>
-              ) : (
-                <Link to={'/profile'}>
-                  <div className="flex items-center mr-[20px] text-[white] font-[700]">
-                    <div className="text-[24px]">
-                      <FaRegUser />
-                    </div>
-                    <div className="ml-[8px]">User Name</div>
-                  </div>
-                </Link>
-              )}
+                  <div className="ml-[8px]">{linkHeader.SIGN_IN}</div>
+                </div>
+              </Link>
               <Link to={PublicPaths.BOOKING_CART}>
                 <div className="flex items-center text-[white] font-[700] bg-[#2db192] px-[20px] py-[10px] rounded-full">
                   <div className="text-[24px]">
