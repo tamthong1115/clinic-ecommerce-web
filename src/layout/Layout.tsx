@@ -7,7 +7,7 @@ const Layout = () => {
     <div className="">
       <Header />
       <main
-        className={`flex-1 flex container p-10 mx-auto shadow-2xl justify-center`}
+        className={`flex-1 flex container p-10 mx-auto shadow-2xl justify-center fix`}
       >
         <Outlet />
       </main>
