@@ -57,7 +57,7 @@ const SignIn = () => {
 
               <Link to={PublicPaths.SIGN_UP}>
                 <div className="hover:text-green-700 font-[700]">
-                  -- Đăng ký tài khoản
+                  Đăng ký tài khoản
                 </div>
               </Link>
             </div>
