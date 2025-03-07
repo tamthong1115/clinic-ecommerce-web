@@ -63,7 +63,6 @@ const SignIn = () => {
           </div>
         </motion.div>
       </div>
-    </div>
   );
 };
 
