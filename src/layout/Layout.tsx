@@ -6,7 +6,9 @@ const Layout = () => {
   return (
     <div className="">
       <Header />
-      <main className={`flex-1 flex container p-10 mx-auto shadow-2xl`}>
+      <main
+        className={`flex-1 flex container p-10 mx-auto shadow-2xl justify-center`}
+      >
         <Outlet />
       </main>
       <Footer />
