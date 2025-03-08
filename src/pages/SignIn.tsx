@@ -1,15 +1,29 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import PublicPaths from '../routes/public/pathPublic';
-
+import { useNavigate } from 'react-router-dom';
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const handleSubmit = (e: { preventDefault: () => void }) => {
+  const navigate = useNavigate();
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Email:', email, 'Password:', password);
+    if (!email || !password) {
+      return;
+    }
+
+    try {
+      const response = await axios.post('https://reqres.in/api/login', {
+        email,
+        password,
+      });
+      localStorage.setItem('token', response.data.token);
+      navigate(PublicPaths.HOME);
+    } catch (err) {
+      console.error('Lỗi đăng nhập:', err);
+    }
   };
 
   return (
@@ -20,7 +34,7 @@ const SignIn = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div className="w-[100%] p-6 shadow-lg bg-white rounded-2xl h-[350px]">
+          <div className="w-[100%] p-6 shadow-lg bg-white rounded-2xl h-[380px]">
             <h2 className="text-center text-[35px] font-bold mb-4">
               Đăng nhập
             </h2>
@@ -30,7 +44,6 @@ const SignIn = () => {
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                required
                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 h-[50px]"
               />
               <input
@@ -38,7 +51,6 @@ const SignIn = () => {
                 placeholder="Mật khẩu"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                required
                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 h-[50px]"
               />
               <button
@@ -48,10 +60,11 @@ const SignIn = () => {
                 Đăng nhập
               </button>
             </form>
+
             <div className="mt-[20px] flex justify-between items-center">
               <Link to={PublicPaths.SIGN_UP}>
                 <div className="hover:text-green-700">
-                  Bạn chưa có tài khoản ?
+                  Bạn chưa có tài khoản?
                 </div>
               </Link>
 
