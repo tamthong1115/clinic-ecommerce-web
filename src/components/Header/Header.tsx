@@ -1,135 +1,173 @@
-import React, { useState } from 'react';
-import logo from '../../assets/logo.jpg';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
-import PublicPaths from '../../routes/public/pathPublic';
-import { CiSearch } from 'react-icons/ci';
 import { FaRegUser } from 'react-icons/fa';
 import { RiLoopRightFill } from 'react-icons/ri';
+import { MdOutlinePhoneIphone, MdOutlinePhoneInTalk } from 'react-icons/md';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import { CiSearch } from 'react-icons/ci';
+import logo from '../../assets/logo.jpg';
+import PublicPaths from '../../routes/public/pathPublic';
 import { linkHeader } from '../../constants/header/linkHeader';
 import { navLink } from '../../constants/header/navLink';
-import { MdOutlinePhoneIphone, MdOutlinePhoneInTalk } from 'react-icons/md';
 
 const Header: React.FC = () => {
+  const [tokenLogin, setTokenLogin] = useState(localStorage.getItem('token'));
+  const [fullName, setFullName] = useState('');
+
   const [open, setOpen] = useState(false);
   const [nameNav, setNameNav] = useState('');
+
   const handleEnter = (nameLink: string) => {
     setNameNav(nameLink);
     setOpen(true);
   };
+
+  // Fetch user info when tokenLogin changes
+  useEffect(() => {
+    const fetchData = async () => {
+      if (tokenLogin) {
+        try {
+          const response = await axios.post('http://localhost:3000/auth/me', {
+            token: tokenLogin,
+          });
+          setFullName(response.data.user.fullName);
+        } catch (error) {
+          console.error('Lỗi lấy thông tin user:', error);
+          setFullName(''); // Reset tên nếu lỗi
+        }
+      } else {
+        setFullName(''); // Reset khi không có token
+      }
+    };
+
+    fetchData();
+  }, [tokenLogin]);
+
+  // Lắng nghe sự thay đổi của localStorage khi token thay đổi
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const newToken = localStorage.getItem('token');
+      setTokenLogin(newToken);
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleAuthChange = () => {
+      setTokenLogin(localStorage.getItem('token'));
+    };
+
+    window.addEventListener('authChanged', handleAuthChange);
+
+    return () => {
+      window.removeEventListener('authChanged', handleAuthChange);
+    };
+  }, []);
+
   return (
     <header className="bg-gradient-to-r from-yellow-400 to-green-700 p-4 shadow-md h-[210px]">
       <div className="container mx-auto px-[160px]">
-        <div className="pt-[]">
-          <div className="mb-[10px] flex justify-between items-center">
-            <div className="flex items-center text-[white] font-[500]">
-              <div className="mr-[9px] text-[20px]">
-                <MdOutlinePhoneInTalk />
-              </div>
-              <div className="">
-                <Link to={'/'}>Liên hệ ngay: 1800 1919.</Link>
-              </div>
-            </div>
-
-            <div className="flex items-center text-[white] font-[500]">
-              <div className="mr-[9px] text-[20px]">
-                <MdOutlinePhoneIphone />
-              </div>
-              <div className="">
-                <Link to={'/'}>Tải ứng dụng.</Link>
-              </div>
-            </div>
+        {/* Top section */}
+        <div className="mb-[10px] flex justify-between items-center">
+          <div className="flex items-center text-[white] font-[500]">
+            <MdOutlinePhoneInTalk className="mr-[9px] text-[20px]" />
+            <Link to="/">Liên hệ ngay: 1800 1919.</Link>
           </div>
-
-          <div className="flex justify-between items-center mb-[20px]">
-            <div className="w-[100px]">
-              <Link to={PublicPaths.HOME}>
-                <img
-                  src={logo}
-                  alt=""
-                  className="object-cover aspect-square rounded-full truncate p-[10px]"
-                />
-              </Link>
-            </div>
-            <form className="flex flex-1 px-[20px] h-[52px] relative">
-              <div className="w-full h-fulls flex relative">
-                <input
-                  type="text"
-                  placeholder="Tra cứu phòng khám....."
-                  className="w-full h-full px-[30px] py-[6px] rounded-full outline-none"
-                />
-                <div className="absolute top-1 right-4 text-[40px] opacity-40">
-                  <CiSearch />
-                </div>
-              </div>
-            </form>
-            <div className="flex items-center">
-              <Link to={PublicPaths.LOGIN}>
-                <div className="flex items-center mr-[20px] text-[white] font-[700]">
-                  <div className="text-[24px]">
-                    <FaRegUser />
-                  </div>
-                  <div className="ml-[8px]">{linkHeader.SIGN_IN}</div>
-                </div>
-              </Link>
-              <Link to={PublicPaths.BOOKING_CART}>
-                <div className="flex items-center text-[white] font-[700] bg-[#2db192] px-[20px] py-[10px] rounded-full">
-                  <div className="text-[24px]">
-                    <RiLoopRightFill />
-                  </div>
-                  <div className="ml-[8px]">{linkHeader.BOOKING_CART}</div>
-                </div>
-              </Link>
-            </div>
-          </div>
-
-          <div className="px-[200px]">
-            <ul className="flex justify-between items-center">
-              {navLink.map((item, index) => (
-                <li
-                  className="text-[white] font-[500] flex items-center gap-2 text-[20px] mb-[20px] relative"
-                  onMouseEnter={() => handleEnter(item.nameLink)}
-                  onMouseLeave={() => setOpen(false)}
-                  key={index}
-                >
-                  <Link to={item.routerLink}>{item.nameLink}</Link>
-                  {open === true && nameNav === item.nameLink ? (
-                    <div className="text-[20px]">
-                      <IoIosArrowUp />
-                    </div>
-                  ) : (
-                    <div className="text-[20px]">
-                      <IoIosArrowDown />
-                    </div>
-                  )}
-
-                  {open === true && nameNav === item.nameLink ? (
-                    <ul className=" absolute top-[30px] bg-[white] text-[black] w-[200px] z-50 rounded-[10px]">
-                      <li
-                        className=" cursor-pointer mb-[5px] hover:bg-[#46b346] hover:text-[white] p-[10px] rounded-[10px]"
-                        key={index}
-                      >
-                        {item.item.item1}
-                      </li>
-                      <li
-                        className=" cursor-pointer mb-[5px] hover:bg-[#46b346] hover:text-[white] p-[10px] rounded-[10px]"
-                        key={index}
-                      >
-                        {item.item.item2}
-                      </li>
-                      <li
-                        className=" cursor-pointer mb-[5px] hover:bg-[#46b346] hover:text-[white] p-[10px] rounded-[10px]"
-                        key={index}
-                      >
-                        {item.item.item3}
-                      </li>
-                    </ul>
-                  ) : null}
-                </li>
-              ))}
-            </ul>
+          <div className="flex items-center text-[white] font-[500]">
+            <MdOutlinePhoneIphone className="mr-[9px] text-[20px]" />
+            <Link to="/">Tải ứng dụng.</Link>
           </div>
         </div>
+
+        {/* Middle section */}
+        <div className="flex justify-between items-center mb-[20px]">
+          {/* Logo */}
+          <Link to={PublicPaths.HOME} className="w-[100px]">
+            <img
+              src={logo}
+              alt="Logo"
+              className="object-cover rounded-full p-[10px]"
+            />
+          </Link>
+
+          {/* Search Bar */}
+          <form className="flex flex-1 px-[20px] h-[52px] relative">
+            <input
+              type="text"
+              placeholder="Tra cứu phòng khám....."
+              className="w-full h-full px-[30px] py-[6px] rounded-full outline-none"
+            />
+            <CiSearch className="absolute top-1 right-6 text-[40px] opacity-40" />
+          </form>
+
+          {/* User Info & Booking */}
+          <div className="flex items-center">
+            {fullName ? (
+              <Link
+                to={'/profile'}
+                className="flex items-center mr-[20px] text-[white] font-[700]"
+              >
+                <FaRegUser className="text-[24px]" />
+                <span className="ml-[8px]">{fullName}</span>
+              </Link>
+            ) : (
+              <Link
+                to={PublicPaths.LOGIN}
+                className="flex items-center mr-[20px] text-[white] font-[700]"
+              >
+                <FaRegUser className="text-[24px]" />
+                <span className="ml-[8px]">{linkHeader.SIGN_IN}</span>
+              </Link>
+            )}
+
+            <Link
+              to={PublicPaths.BOOKING_CART}
+              className="flex items-center text-[white] font-[700] bg-[#2db192] px-[20px] py-[10px] rounded-full"
+            >
+              <RiLoopRightFill className="text-[24px]" />
+              <span className="ml-[8px]">{linkHeader.BOOKING_CART}</span>
+            </Link>
+          </div>
+        </div>
+
+        {/* Bottom Navigation */}
+        <nav className="px-[200px]">
+          <ul className="flex justify-between items-center">
+            {navLink.map((item, index) => (
+              <li
+                key={index}
+                className="text-[white] font-[500] flex items-center gap-2 text-[20px] mb-[20px] relative"
+                onMouseEnter={() => handleEnter(item.nameLink)}
+                onMouseLeave={() => setOpen(false)}
+              >
+                <Link to={item.routerLink}>{item.nameLink}</Link>
+                {open && nameNav === item.nameLink ? (
+                  <IoIosArrowUp />
+                ) : (
+                  <IoIosArrowDown />
+                )}
+                {open && nameNav === item.nameLink && (
+                  <ul className="absolute top-[30px] bg-[white] text-[black] w-[200px] z-50 rounded-[10px]">
+                    {Object.values(item.item).map((subItem, subIndex) => (
+                      <li
+                        key={subIndex}
+                        className="cursor-pointer mb-[5px] hover:bg-[#46b346] hover:text-[white] p-[10px] rounded-[10px]"
+                      >
+                        {subItem}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
     </header>
   );
