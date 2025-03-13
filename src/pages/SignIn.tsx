@@ -33,11 +33,12 @@ const SignIn = () => {
     }
 
     try {
-      const response = await axios.post('https://reqres.in/api/login', {
+      const response = await axios.post('http://localhost:3000/auth/login', {
         email,
         password,
       });
-      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('token', response.data.user.token);
+      window.dispatchEvent(new Event('authChanged'));
       navigate(PublicPaths.HOME);
     } catch (err) {
       console.log(err);
