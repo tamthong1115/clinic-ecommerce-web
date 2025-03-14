@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import PublicPaths from '../routes/public/pathPublic';
+import { Login } from '../components/Services/Api/auth_api';
 import { useNavigate } from 'react-router-dom';
 import Alert from '@mui/material/Alert';
 const SignIn = () => {
@@ -33,11 +33,8 @@ const SignIn = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:3000/auth/login', {
-        email,
-        password,
-      });
-      localStorage.setItem('token', response.data.user.token);
+      const LoginData = await Login(email, password);
+      localStorage.setItem('token', LoginData);
       window.dispatchEvent(new Event('authChanged'));
       navigate(PublicPaths.HOME);
     } catch (err) {
