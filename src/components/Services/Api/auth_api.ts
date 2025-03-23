@@ -17,3 +17,16 @@ export const Login = async (email: string, password: string) => {
     throw new Error(`login Failed ! ${error}`);
   }
 };
+
+export const Register = async (fullName: String, email: String, password: String) => {
+  try {
+    await axios.post(`${BASE_API_URL}/register`, {
+      fullName,
+      email,
+      password,
+    });
+    return true;
+  } catch (error) {
+    throw new Error(`Register Failed ! ${error}`);
+  }
+}

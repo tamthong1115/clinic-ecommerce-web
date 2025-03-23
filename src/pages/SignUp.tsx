@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import axios from 'axios';
 import PublicPaths from '../routes/public/pathPublic';
 import { useNavigate } from 'react-router-dom';
+import { Register } from '../components/Services/Api/auth_api';
 import Alert from '@mui/material/Alert';
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -33,11 +33,7 @@ const SignUp = () => {
     }
 
     try {
-      await axios.post('http://localhost:3000/auth/register', {
-        fullName,
-        email,
-        password,
-      });
+      await Register(fullName, email, password);
       navigate(PublicPaths.LOGIN);
     } catch (err) {
       console.log(err);
@@ -77,9 +73,10 @@ const SignUp = () => {
           >
             <div className="w-[100%] p-6 shadow-lg bg-white rounded-2xl h-[380px]">
               <h2 className="text-center text-[35px] font-bold mb-4">
-                Đăng Ký
+                Đăng Ký Tài Khoản
               </h2>
               <form onSubmit={handleSubmit} className="space-y-4">
+                
                 <input
                   type="text"
                   placeholder="Nhập tên:"
