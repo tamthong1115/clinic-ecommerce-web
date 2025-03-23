@@ -29,6 +29,7 @@ export const Register = async (
       email,
       password,
     });
+    //api
     return true;
   } catch (error) {
     throw new Error(`Register Failed ! ${error}`);

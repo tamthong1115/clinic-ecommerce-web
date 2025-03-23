@@ -34,6 +34,7 @@ const SignUp = () => {
 
     try {
       await Register(fullName, email, password);
+      //Api
       navigate(PublicPaths.LOGIN);
     } catch (err) {
       console.log(err);
