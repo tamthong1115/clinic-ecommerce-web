@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import axios from 'axios';
 import PublicPaths from '../routes/public/pathPublic';
+import { Register } from '../components/Services/Api/auth_api';
 import { useNavigate } from 'react-router-dom';
 import Alert from '@mui/material/Alert';
 const SignUp = () => {
@@ -33,11 +33,7 @@ const SignUp = () => {
     }
 
     try {
-      await axios.post('http://localhost:3000/auth/register', {
-        fullName,
-        email,
-        password,
-      });
+      await Register(fullName, email, password);
       navigate(PublicPaths.LOGIN);
     } catch (err) {
       console.log(err);
