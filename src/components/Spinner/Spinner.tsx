@@ -16,7 +16,19 @@ const spinnerComponents = {
 const Spinner: FC<SpinnerProps> = ({ type, color, size }) => {
   const SpinnerComponent = spinnerComponents[type];
 
-  return <SpinnerComponent color={color} size={size} />;
+  return (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+        width: '100%',
+      }}
+    >
+      <SpinnerComponent color={color} size={size} />
+    </div>
+  );
 };
 
 export default Spinner;
