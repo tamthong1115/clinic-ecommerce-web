@@ -22,9 +22,9 @@ const Login = () => {
       const response = await LoginService(email, password);
       console.log('Response từ API:', response);
       if (response) {
-        sessionStorage.setItem('token', response); // Lưu token
+        localStorage.setItem('token', response); // Lưu token
         window.dispatchEvent(new Event('authChanged'));
-        console.log('Token đã lưu:', sessionStorage.getItem('token'));
+        console.log('Token đã lưu:', localStorage.getItem('token'));
         navigate('/');
       } else {
         throw new Error('Token không hợp lệ');
