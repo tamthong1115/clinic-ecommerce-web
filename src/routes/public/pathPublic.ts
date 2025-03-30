@@ -8,6 +8,8 @@ const PublicPaths = {
   BOOKING: '/booking',
   MEDICINE: '/Medicine',
   COOPERATE: '/Cooperate',
+  PROFILE: '/profile',
+  CALENDAR: '/calendar-booking',
 };
 
 export default PublicPaths;

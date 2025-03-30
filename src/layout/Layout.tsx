@@ -4,11 +4,9 @@ import { Outlet } from 'react-router-dom';
 
 const Layout = () => {
   return (
-    <div className="">
+    <div className="w-screen h-max">
       <Header />
-      <main
-        className={`flex-1 flex container p-10 mx-auto shadow-2xl justify-center fix`}
-      >
+      <main className={`flex-1 flex container`}>
         <Outlet />
       </main>
       <Footer />
