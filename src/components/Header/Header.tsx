@@ -12,7 +12,7 @@ import { linkHeader } from '../../constants/header/linkHeader';
 import { navLink } from '../../constants/header/navLink';
 
 const Header: React.FC = () => {
-  const [tokenLogin, setTokenLogin] = useState(sessionStorage.getItem('token'));
+  const [tokenLogin, setTokenLogin] = useState(localStorage.getItem('token'));
   const [fullName, setFullName] = useState('');
 
   const [open, setOpen] = useState(false);
@@ -44,10 +44,10 @@ const Header: React.FC = () => {
     fetchData();
   }, [tokenLogin]);
 
-  // Lắng nghe sự thay đổi của sessionStorage
+  // Lắng nghe sự thay đổi của localStorage
   useEffect(() => {
     const handleAuthChange = () => {
-      setTokenLogin(sessionStorage.getItem('token'));
+      setTokenLogin(localStorage.getItem('token'));
     };
 
     window.addEventListener('authChanged', handleAuthChange);

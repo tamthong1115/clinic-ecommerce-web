@@ -2,8 +2,8 @@ import Alert from '@mui/material/Alert';
 import { useEffect, useState } from 'react';
 
 const Home = () => {
-  const tokenLogin = sessionStorage.getItem('token');
-  const hasShownAlert = sessionStorage.getItem('hasShownAlert'); // Kiểm tra trạng thái hiển thị
+  const tokenLogin = localStorage.getItem('token');
+  const hasShownAlert = localStorage.getItem('hasShownAlert'); // Kiểm tra trạng thái hiển thị
 
   const [alert, setAlert] = useState({
     type: 'success' as 'error' | 'warning' | 'info' | 'success',
@@ -16,7 +16,7 @@ const Home = () => {
   useEffect(() => {
     if (token) {
       // Đánh dấu đã hiển thị thông báo
-      sessionStorage.setItem('hasShownAlert', 'true');
+      localStorage.setItem('hasShownAlert', 'true');
 
       setTimeout(() => {
         setToken(false);
