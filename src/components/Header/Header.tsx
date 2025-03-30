@@ -12,7 +12,7 @@ import { linkHeader } from '../../constants/header/linkHeader';
 import { navLink } from '../../constants/header/navLink';
 
 const Header: React.FC = () => {
-  const [tokenLogin, setTokenLogin] = useState(localStorage.getItem('token'));
+  const [tokenLogin, setTokenLogin] = useState(sessionStorage.getItem('token'));
   const [fullName, setFullName] = useState('');
 
   const [open, setOpen] = useState(false);
@@ -44,29 +44,17 @@ const Header: React.FC = () => {
     fetchData();
   }, [tokenLogin]);
 
-  // Lắng nghe sự thay đổi của localStorage khi token thay đổi
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const newToken = localStorage.getItem('token');
-      setTokenLogin(newToken);
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-    };
-  }, []);
-
+  // Lắng nghe sự thay đổi của sessionStorage
   useEffect(() => {
     const handleAuthChange = () => {
-      setTokenLogin(localStorage.getItem('token'));
+      setTokenLogin(sessionStorage.getItem('token'));
     };
 
     window.addEventListener('authChanged', handleAuthChange);
 
     return () => {
       window.removeEventListener('authChanged', handleAuthChange);
+      //window.dispatchEvent(new Event("authChanged"));
     };
   }, []);
 
