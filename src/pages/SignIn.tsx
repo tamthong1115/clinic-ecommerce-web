@@ -1,39 +1,54 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Alert, Snackbar } from '@mui/material';
-import { Login as LoginService } from '../components/Services/Api/auth_api';
 import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
+import { loginService } from '../api/auth/authService';
+import { useToast } from '../context/ToastContext';
+import * as Yup from 'yup';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { useAuth } from '../context/AuthContext';
+
+const SignUpSchema = Yup.object().shape({
+  email: Yup.string().email('Invalid email').required('Required'),
+  password: Yup.string()
+    .min(8, 'Password must be at least 8 characters')
+    .required('Password is required'),
+});
+
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [alertOpen, setAlertOpen] = useState(false);
-  const [info, setInfo] = useState('');
+  const { showToast } = useToast();
+  const { login } = useAuth();
+
+  const { mutate } = useMutation({
+    mutationFn: loginService,
+    onSuccess: async (data) => {
+      const { token, user } = data;
+      login(token, user);
+      navigate('/');
+    },
+    onError: (error: { response?: { data?: { message?: string } } }) => {
+      // console.log(error);
+      const errorMessage =
+        error?.response?.data?.message || 'Đăng nhập thất bại!';
+      showToast(errorMessage, { type: 'error' });
+    },
+  });
+
   const navigate = useNavigate();
-  const handleSubmit = async (e: { preventDefault: () => void }) => {
-    e.preventDefault();
+  const handleSubmit = async ({
+    email,
+    password,
+  }: {
+    email: string;
+    password: string;
+  }) => {
+    // e.preventDefault();
     if (!email || !password) {
-      setInfo('Vui lòng nhập đầy đủ email và mật khẩu!');
-      setAlertOpen(true);
+      showToast('Vui lòng nhập đầy đủ email và mật khẩu!', { type: 'warning' });
       return;
     }
 
-    try {
-      const response = await LoginService(email, password);
-      console.log('Response từ API:', response);
-      if (response) {
-        localStorage.setItem('token', response); // Lưu token
-        window.dispatchEvent(new Event('authChanged'));
-        console.log('Token đã lưu:', localStorage.getItem('token'));
-        navigate('/');
-      } else {
-        throw new Error('Token không hợp lệ');
-      }
-    } catch (error) {
-      console.error('Lỗi đăng nhập:', error);
-      setInfo('Tài khoản hoặc mật khẩu không chính xác');
-      setAlertOpen(true);
-    }
+    mutate({ email, password });
   };
 
   return (
@@ -50,60 +65,89 @@ const Login = () => {
         <p className="text-center text-gray-600 mb-[40px] text-[18px]">
           Vui lòng nhập email và mật khẩu để tiếp tục
         </p>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-[30px]">
-            <label
-              className="block text-gray-700 text-[18px] font-medium mb-[15px]"
-              htmlFor="email"
-            >
-              Email
-            </label>
-            <input
-              type="email"
-              className="w-full h-[56px] p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
-              placeholder="Nhập email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div className="mb-[30px]">
-            <label
-              className="block text-gray-700 text-[18px] font-medium mb-[15px]"
-              htmlFor="password"
-            >
-              Mật khẩu
-            </label>
-            <input
-              type="password"
-              className="w-full h-[56px] p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
-              placeholder="Nhập mật khẩu"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <div className="flex items-center justify-between mb-[30px]">
-            <label className="flex items-center max-[400px]:text-[16px] text-[18px] text-gray-600">
-              <input type="checkbox" className="mr-2 w-[24px] h-[24px]" /> Nhớ
-              mật khẩu
-            </label>
-            <Link
-              to="#"
-              className="max-[400px]:text-[16px] text-[18px] text-gray-500 hover:text-green-700"
-            >
-              Quên mật khẩu?
-            </Link>
-          </div>
-          <motion.button
-            type="submit"
-            className="w-full h-[56px] bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 transition cursor-pointer"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Đăng Nhập
-          </motion.button>
-        </form>
+        <Formik
+          initialValues={{
+            email: '',
+            password: '',
+          }}
+          validationSchema={SignUpSchema}
+          onSubmit={(values, { setSubmitting }) => {
+            handleSubmit(values);
+            setSubmitting(false);
+          }}
+        >
+          {({ errors, touched }) => (
+            <Form>
+              <div className="mb-[30px]">
+                <label
+                  className="block text-gray-700 text-[18px] font-medium mb-[15px]"
+                  htmlFor="email"
+                >
+                  Email
+                </label>
+                <Field
+                  name="email"
+                  type="email"
+                  className={`w-full h-[56px] p-2 border rounded-lg focus:outline-none focus:ring-2 ${
+                    errors.email && touched.email
+                      ? 'border-red-500 focus:ring-red-400'
+                      : 'border-gray-300 focus:ring-green-400'
+                  }`}
+                  id="email"
+                />
+                <ErrorMessage
+                  name="email"
+                  component="div"
+                  className="text-red-500 text-sm mt-1"
+                />
+              </div>
+              <div className="mb-[30px]">
+                <label
+                  className="block text-gray-700 text-[18px] font-medium mb-[15px]"
+                  htmlFor="password"
+                >
+                  Mật khẩu
+                </label>
+                <Field
+                  name="password"
+                  type="password"
+                  className={`w-full h-[56px] p-2 border rounded-lg focus:outline-none focus:ring-2 ${
+                    errors.password && touched.password
+                      ? 'border-red-500 focus:ring-red-400'
+                      : 'border-gray-300 focus:ring-green-400'
+                  }`}
+                  id="password"
+                />
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  className="text-red-500 text-sm mt-1"
+                />
+              </div>
+              <div className="flex items-center justify-between mb-[30px]">
+                <label className="flex items-center max-[400px]:text-[16px] text-[18px] text-gray-600">
+                  <input type="checkbox" className="mr-2 w-[24px] h-[24px]" />{' '}
+                  Nhớ mật khẩu
+                </label>
+                <Link
+                  to="#"
+                  className="max-[400px]:text-[16px] text-[18px] text-gray-500 hover:text-green-700"
+                >
+                  Quên mật khẩu?
+                </Link>
+              </div>
+              <motion.button
+                type="submit"
+                className="w-full h-[56px] bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 transition cursor-pointer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Đăng Nhập
+              </motion.button>
+            </Form>
+          )}
+        </Formik>
+
         <p className="text-center max-[400px]:text-[16px] text-[20px] text-gray-600 mt-4">
           Bạn chưa có tài khoản?{' '}
           <Link to={'/sign-up'} className="text-blue-500 hover:underline">
@@ -111,22 +155,6 @@ const Login = () => {
           </Link>
         </p>
       </motion.div>
-
-      {/* Snackbar Alert */}
-      <Snackbar
-        open={alertOpen}
-        autoHideDuration={3000}
-        onClose={() => setAlertOpen(false)}
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      >
-        <Alert
-          onClose={() => setAlertOpen(false)}
-          severity="error"
-          sx={{ width: '100%' }}
-        >
-          {info}
-        </Alert>
-      </Snackbar>
     </div>
   );
 };

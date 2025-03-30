@@ -13,6 +13,13 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
   const showToast = (message: string, options: ToastOptions = {}) => {
     const defaultOptions: ToastOptions = {
       position: 'top-right',
+      type: 'success',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
     };
 
     if (toastIds.length >= 3) {
