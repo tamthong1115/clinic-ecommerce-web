@@ -20,7 +20,7 @@ const Header: React.FC = () => {
 
   return (
     <header className="h-max w-screen relative">
-      <div className="container bg-gradient-to-r from-yellow-400 to-green-700 py-2 px-1 shadow-md ">
+      <div className="w-full bg-gradient-to-r from-yellow-400 to-green-700 py-2 px-1 shadow-md ">
         <div className=" flex flex-col justify-center items-center">
           {/*fore header*/}
           <div className="w-full sm:w-[95%] mb-4 hidden sm:flex justify-between items-center ">
@@ -52,7 +52,7 @@ const Header: React.FC = () => {
               </div>
               <div className={'text-xl font-bold text-white'}>4ChillyGuys</div>
             </div>
-            <div className="w-[40%] flex flex-row justify-around items-center">
+            <div className="w-[40%] sm:w-[30%] flex flex-row justify-around items-center">
               {/*searching zone*/}
               <div
                 className={'mr-5 font-bold'}
