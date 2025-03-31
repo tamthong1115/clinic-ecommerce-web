@@ -1,6 +1,7 @@
 import { BsChevronLeft, BsSearch } from 'react-icons/bs';
 import React from 'react';
 import { useFormik } from 'formik';
+import { motion } from 'framer-motion';
 
 interface SearchingFieldProps {
   setIsSearching: React.Dispatch<React.SetStateAction<boolean>>;
@@ -27,7 +28,10 @@ const SearchingField: React.FC<SearchingFieldProps> = ({ setIsSearching }) => {
 
   return (
     <>
-      <div
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.3 }}
         className={
           'w-screen h-screen absolute top-0 left-0 bg-white sm:bg-transparent p-3 sm:flex sm:items-start sm:justify-center'
         }
@@ -104,7 +108,7 @@ const SearchingField: React.FC<SearchingFieldProps> = ({ setIsSearching }) => {
             handleRollBack();
           }}
         ></div>
-      </div>
+      </motion.div>
     </>
   );
 };
