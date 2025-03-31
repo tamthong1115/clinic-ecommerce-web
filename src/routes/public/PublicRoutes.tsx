@@ -1,6 +1,9 @@
 import { lazy } from 'react';
 import { Route } from 'react-router-dom';
 import PublicPaths from './pathPublic';
+import Profile from '../../pages/user/Profile.tsx';
+import ProfileLayout from '../../layout/profile/ProfileLayout.tsx';
+import Calendar from '../../pages/user/Calendar.tsx';
 
 const Home = lazy(() => import('../../pages/Home'));
 const Login = lazy(() => import('../../pages/SignIn'));
@@ -22,6 +25,22 @@ const PublicRoutesComponent = () => {
       <Route path={PublicPaths.BOOKING} element={<Booking />} />
       <Route path={PublicPaths.MEDICINE} element={<Medicine />} />
       <Route path={PublicPaths.COOPERATE} element={<Cooperate />} />
+      <Route
+        path={PublicPaths.PROFILE}
+        element={
+          <ProfileLayout current={0}>
+            <Profile />
+          </ProfileLayout>
+        }
+      />
+      <Route
+        path={PublicPaths.CALENDAR}
+        element={
+          <ProfileLayout current={2}>
+            <Calendar />
+          </ProfileLayout>
+        }
+      />
       <Route path={PublicPaths.EX} element={<Ex />} />
     </>
   );

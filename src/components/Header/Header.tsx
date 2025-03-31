@@ -1,161 +1,104 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
+import logo from '../../assets/logo.png';
 import { Link } from 'react-router-dom';
-import { FaRegUser } from 'react-icons/fa';
-import { RiLoopRightFill } from 'react-icons/ri';
-import { MdOutlinePhoneIphone, MdOutlinePhoneInTalk } from 'react-icons/md';
-import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
-import { CiSearch } from 'react-icons/ci';
-import logo from '../../assets/logo.jpg';
 import PublicPaths from '../../routes/public/pathPublic';
-import { linkHeader } from '../../constants/header/linkHeader';
-import { navLink } from '../../constants/header/navLink';
+import {
+  RiCalendarScheduleLine,
+  RiSearchLine,
+  RiUserLine,
+} from 'react-icons/ri';
+import SearchingField from './SearchingField.tsx';
+import { MdOutlinePhoneInTalk, MdOutlinePhoneIphone } from 'react-icons/md';
+import { linkHeader } from '../../constants/header/linkHeader.tsx';
+import NavigatorBar from './NavigatorBar.tsx';
 
 const Header: React.FC = () => {
-  const [tokenLogin, setTokenLogin] = useState(localStorage.getItem('token'));
-  const [fullName, setFullName] = useState('');
-
-  const [open, setOpen] = useState(false);
-  const [nameNav, setNameNav] = useState('');
-
-  const handleEnter = (nameLink: string) => {
-    setNameNav(nameLink);
-    setOpen(true);
+  const [isSearching, setIsSearching] = useState(false);
+  const openSearchField = () => {
+    setIsSearching(true);
   };
 
-  // Fetch user info when tokenLogin changes
-  useEffect(() => {
-    const fetchData = async () => {
-      if (tokenLogin) {
-        try {
-          const response = await axios.post('http://localhost:3000/auth/me', {
-            token: tokenLogin,
-          });
-          setFullName(response.data.user.fullName);
-        } catch (error) {
-          console.error('Lỗi lấy thông tin user:', error);
-          setFullName(''); // Reset tên nếu lỗi
-        }
-      } else {
-        setFullName(''); // Reset khi không có token
-      }
-    };
-
-    fetchData();
-  }, [tokenLogin]);
-
-  // Lắng nghe sự thay đổi của localStorage
-  useEffect(() => {
-    const handleAuthChange = () => {
-      setTokenLogin(localStorage.getItem('token'));
-    };
-
-    window.addEventListener('authChanged', handleAuthChange);
-
-    return () => {
-      window.removeEventListener('authChanged', handleAuthChange);
-      //window.dispatchEvent(new Event("authChanged"));
-    };
-  }, []);
-
   return (
-    <header className="bg-gradient-to-r from-yellow-400 to-green-700 p-4 shadow-md h-[210px]">
-      <div className="container mx-auto px-[160px]">
-        {/* Top section */}
-        <div className="mb-[10px] flex justify-between items-center">
-          <div className="flex items-center text-[white] font-[500]">
-            <MdOutlinePhoneInTalk className="mr-[9px] text-[20px]" />
-            <Link to="/">Liên hệ ngay: 1800 1919.</Link>
+    <header className="h-max w-screen relative">
+      <div className="container bg-gradient-to-r from-yellow-400 to-green-700 py-2 px-1 shadow-md ">
+        <div className=" flex flex-col justify-center items-center">
+          {/*fore header*/}
+          <div className="w-full sm:w-[95%] mb-4 hidden sm:flex justify-between items-center ">
+            <div className="flex items-center text-[white] font-[500]">
+              <div className="mr-[9px]">
+                <MdOutlinePhoneInTalk />
+              </div>
+              <div className=" text-lg font-bold">
+                <Link to={'/'}>Liên hệ ngay: 1800 1919.</Link>
+              </div>
+            </div>
+
+            <div className="flex items-center text-[white] font-[500]">
+              <div className="mr-[9px]">
+                <MdOutlinePhoneIphone />
+              </div>
+              <div className=" text-lg font-bold">
+                <Link to={'/'}>Tải ứng dụng.</Link>
+              </div>
+            </div>
           </div>
-          <div className="flex items-center text-[white] font-[500]">
-            <MdOutlinePhoneIphone className="mr-[9px] text-[20px]" />
-            <Link to="/">Tải ứng dụng.</Link>
+          {/*main header:searching*/}
+          <div className="w-full sm:w-[95%] flex flex-row justify-between items-center">
+            <div className="w-[55%] flex flex-row justify-start items-center">
+              <div className="w-20 mr-2">
+                <Link to={PublicPaths.HOME}>
+                  <img src={logo} alt="" className="rounded-md" />
+                </Link>
+              </div>
+              <div className={'text-xl font-bold text-white'}>4ChillyGuys</div>
+            </div>
+            <div className="w-[40%] flex flex-row justify-around items-center">
+              {/*searching zone*/}
+              <div
+                className={'mr-5 font-bold'}
+                onClick={() => {
+                  openSearchField();
+                }}
+              >
+                <RiSearchLine color={'white'} size={25} />
+              </div>
+              <div className="flex items-center">
+                <Link to={PublicPaths.BOOKING_CART}>
+                  <div className="flex items-center mr-5 bg-white rounded-full p-2">
+                    <div>
+                      <RiCalendarScheduleLine size={25} color={'#059669'} />
+                    </div>
+                    <div className="ml-[8px] hidden sm:block">
+                      {linkHeader.BOOKING_CART}
+                    </div>
+                  </div>
+                </Link>
+                <Link to={PublicPaths.LOGIN}>
+                  <div className="flex items-center mr-5 bg-white rounded-full p-2">
+                    <div>
+                      <RiUserLine size={25} color={'#059669'} />
+                    </div>
+                    <div className="ml-[8px] hidden sm:block">
+                      {linkHeader.SIGN_IN}
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
 
-        {/* Middle section */}
-        <div className="flex justify-between items-center mb-[20px]">
-          {/* Logo */}
-          <Link to={PublicPaths.HOME} className="w-[100px]">
-            <img
-              src={logo}
-              alt="Logo"
-              className="object-cover rounded-full p-[10px]"
-            />
-          </Link>
+      {/*Searching zone here*/}
+      {/*With phone's screen, we will use full screen searching*/}
+      {/*But, with larger screen, like tablet or computer, we need a dialog box (like this)*/}
+      {isSearching ? <SearchingField setIsSearching={setIsSearching} /> : null}
 
-          {/* Search Bar */}
-          <form className="flex flex-1 px-[20px] h-[52px] relative">
-            <input
-              type="text"
-              placeholder="Tra cứu phòng khám....."
-              className="w-full h-full px-[30px] py-[6px] rounded-full outline-none"
-            />
-            <CiSearch className="absolute top-1 right-6 text-[40px] opacity-40" />
-          </form>
-
-          {/* User Info & Booking */}
-          <div className="flex items-center">
-            {fullName ? (
-              <Link
-                to={'/profile'}
-                className="flex items-center mr-[20px] text-[white] font-[700]"
-              >
-                <FaRegUser className="text-[24px]" />
-                <span className="ml-[8px]">{fullName}</span>
-              </Link>
-            ) : (
-              <Link
-                to={PublicPaths.LOGIN}
-                className="flex items-center mr-[20px] text-[white] font-[700]"
-              >
-                <FaRegUser className="text-[24px]" />
-                <span className="ml-[8px]">{linkHeader.SIGN_IN}</span>
-              </Link>
-            )}
-
-            <Link
-              to={PublicPaths.BOOKING_CART}
-              className="flex items-center text-[white] font-[700] bg-[#2db192] px-[20px] py-[10px] rounded-full"
-            >
-              <RiLoopRightFill className="text-[24px]" />
-              <span className="ml-[8px]">{linkHeader.BOOKING_CART}</span>
-            </Link>
-          </div>
-        </div>
-
-        {/* Bottom Navigation */}
-        <nav className="px-[200px]">
-          <ul className="flex justify-between items-center">
-            {navLink.map((item, index) => (
-              <li
-                key={index}
-                className="text-[white] font-[500] flex items-center gap-2 text-[20px] mb-[20px] relative"
-                onMouseEnter={() => handleEnter(item.nameLink)}
-                onMouseLeave={() => setOpen(false)}
-              >
-                <Link to={item.routerLink}>{item.nameLink}</Link>
-                {open && nameNav === item.nameLink ? (
-                  <IoIosArrowUp />
-                ) : (
-                  <IoIosArrowDown />
-                )}
-                {open && nameNav === item.nameLink && (
-                  <ul className="absolute top-[30px] bg-[white] text-[black] w-[200px] z-50 rounded-[10px]">
-                    {Object.values(item.item).map((subItem, subIndex) => (
-                      <li
-                        key={subIndex}
-                        className="cursor-pointer mb-[5px] hover:bg-[#46b346] hover:text-[white] p-[10px] rounded-[10px]"
-                      >
-                        {subItem}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </li>
-            ))}
-          </ul>
-        </nav>
+      {/*About menu navigator bar Because we use this version for all screen size*/}
+      {/*(from PC to smartphone) so we will use [dot menu] - which is smaller and*/}
+      {/*easy to show*/}
+      <div className={'relative'}>
+        <NavigatorBar />
       </div>
     </header>
   );
