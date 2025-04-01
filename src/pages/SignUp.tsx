@@ -4,7 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useToast } from '../context/ToastContext';
-import { register as registerService } from '../api/auth/authService';
+import { registerService } from '../api/auth/authService';
 
 const SignUpSchema = Yup.object().shape({
   username: Yup.string().required('Full name is required'),

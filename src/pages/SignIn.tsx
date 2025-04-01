@@ -24,6 +24,7 @@ const Login = () => {
     onSuccess: async (data) => {
       const { token, user } = data;
       login(token, user);
+      showToast('Đăng nhập thành công');
       navigate('/');
     },
     onError: (error: { response?: { data?: { message?: string } } }) => {

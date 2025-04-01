@@ -1,3 +1,5 @@
+import { UUID } from 'crypto';
+
 export interface RegisterRequest {
   username: string;
   email: string;
@@ -14,7 +16,7 @@ export interface LoginRequest {
 }
 
 export interface User {
-  id: string;
+  id: UUID;
   email: string;
   username?: string;
   role: string;

@@ -7,7 +7,7 @@ import {
   LoginResponse,
 } from './authTypes';
 
-export const register = async (
+export const registerService = async (
   userData: RegisterRequest
 ): Promise<RegisterResponse> => {
   try {
@@ -24,10 +24,6 @@ export const loginService = async (
 ): Promise<LoginResponse> => {
   try {
     const response = await apiClient.post(endpoints.auth.login, credentials);
-    const { token } = response.data;
-    localStorage.setItem('authToken', token);
-
-    console.log(`RESPONSE DATA ${response.data}`);
     return response.data;
   } catch (error) {
     console.error('Login failed:', error);
