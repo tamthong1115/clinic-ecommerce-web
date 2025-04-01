@@ -1,4 +1,6 @@
 import * as Bs from 'react-icons/bs';
+import { userProfile } from '../../api/user/userService';
+import { useQuery } from '@tanstack/react-query';
 
 /**
  * @param {String} date -  using format: mmm/dd/yyyy as string
@@ -47,6 +49,23 @@ const renderBookingCalendarItem = (date: string, time: string) => {
 };
 
 const Profile = () => {
+  const {
+    data: profile,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ['userProfile'],
+    queryFn: userProfile,
+  });
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error loading profile</div>;
+  }
+
   return (
     <div
       className={'w-full h-fit m-3 flex flex-col justify-start items-center'}
@@ -72,20 +91,21 @@ const Profile = () => {
           {/*avatar here*/}
           <div className={'h-fit w-[20%]'}>
             <img
-              className={' w-full border border-gray-200 rounded-full'}
+              className={'w-full border border-gray-200 rounded-full'}
               src={
-                'https://ss-images.saostar.vn/wwebp700/2025/3/21/pc/1742525348364/9eso7emv421-keo7ztxk2r2-m86e7zgcoa3.png'
+                profile?.avatarUrl ||
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2uLl8zBoK0_iM5pNwJAC8hQ2f68YKtlgc7Q&s'
               }
-              alt={'example'}
+              alt={'User Avatar'}
             />
           </div>
           {/*Information here*/}
           <div className={'w-[75%] h-fit'}>
             <ul>
-              <li>Allen Greenlee</li>
-              <li>32 White Social Court, Albany, Ny, 16979</li>
-              <li>(122) 155-2688</li>
-              <li>Ada.Callahan52@nowehere.com</li>
+              <li>{profile?.username || 'No username available'}</li>
+              <li>{profile?.address || 'No address available'}</li>
+              <li>{profile?.phone || 'No phone number available'}</li>
+              <li>{profile?.email || 'No email available'}</li>
             </ul>
           </div>
         </div>

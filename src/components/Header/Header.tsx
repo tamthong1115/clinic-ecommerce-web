@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import logo from '../../assets/logo.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import PublicPaths from '../../routes/public/pathPublic';
 import {
   RiCalendarScheduleLine,
@@ -11,11 +11,34 @@ import SearchingField from './SearchingField.tsx';
 import { MdOutlinePhoneInTalk, MdOutlinePhoneIphone } from 'react-icons/md';
 import { linkHeader } from '../../constants/header/linkHeader.tsx';
 import NavigatorBar from './NavigatorBar.tsx';
+import { useAuth } from '../../context/AuthContext.tsx';
+import { Avatar, Menu, MenuItem } from '@mui/material';
+import UserPaths from '../../routes/user/pathUser.ts';
 
 const Header: React.FC = () => {
   const [isSearching, setIsSearching] = useState(false);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const navigate = useNavigate();
   const openSearchField = () => {
     setIsSearching(true);
+  };
+  const { isAuthenticated, user, logout } = useAuth();
+
+  const isMenuOpen = Boolean(anchorEl);
+
+  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = (path?: string) => {
+    setAnchorEl(null);
+    if (path) {
+      navigate(path);
+    }
+  };
+
+  const handleLogout = () => {
+    logout();
   };
 
   return (
@@ -73,16 +96,47 @@ const Header: React.FC = () => {
                     </div>
                   </div>
                 </Link>
-                <Link to={PublicPaths.LOGIN}>
-                  <div className="flex items-center mr-5 bg-white rounded-full p-2">
-                    <div>
-                      <RiUserLine size={25} color={'#059669'} />
-                    </div>
-                    <div className="ml-[8px] hidden sm:block">
-                      {linkHeader.SIGN_IN}
-                    </div>
+                {isAuthenticated ? (
+                  <div>
+                    <Avatar
+                      alt={user?.username || 'username'}
+                      src="/static/images/avatar/1.jpg"
+                      onClick={handleMenuOpen}
+                      className="cursor-pointer"
+                    />
+                    <Menu
+                      anchorEl={anchorEl}
+                      open={isMenuOpen}
+                      onClose={() => handleMenuClose()}
+                      anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                      }}
+                      transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                      }}
+                    >
+                      <MenuItem
+                        onClick={() => handleMenuClose(UserPaths.PROFILE)}
+                      >
+                        Profile
+                      </MenuItem>
+                      <MenuItem onClick={() => handleLogout()}>Logout</MenuItem>
+                    </Menu>
                   </div>
-                </Link>
+                ) : (
+                  <Link to={PublicPaths.LOGIN}>
+                    <div className="flex items-center mr-5 bg-white rounded-full p-2">
+                      <div>
+                        <RiUserLine size={25} color={'#059669'} />
+                      </div>
+                      <div className="ml-[8px] hidden sm:block">
+                        {linkHeader.SIGN_IN}
+                      </div>
+                    </div>
+                  </Link>
+                )}
               </div>
             </div>
           </div>
