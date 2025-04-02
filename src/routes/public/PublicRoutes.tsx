@@ -12,12 +12,14 @@ const Service = lazy(() => import('../../pages/Service'));
 const Booking = lazy(() => import('../../pages/Booking'));
 const Medicine = lazy(() => import('../../pages/Medicine'));
 const Cooperate = lazy(() => import('../../pages/Cooperate'));
+const ForgotPassword = lazy(() => import('../../pages/ForgotPassword'));
 const PublicRoutesComponent = () => {
   return (
     <>
       <Route path={PublicPaths.HOME} element={<Home />} />
       <Route path={PublicPaths.LOGIN} element={<Login />} />
       <Route path={PublicPaths.SIGN_UP} element={<SignUp />} />
+      <Route path={PublicPaths.FORGOTPASSWORD} element={<ForgotPassword />} />
       <Route path={PublicPaths.BOOKING_CART} element={<BookingCart />} />
       <Route path={PublicPaths.SERVICE} element={<Service />} />
       <Route path={PublicPaths.BOOKING} element={<Booking />} />
