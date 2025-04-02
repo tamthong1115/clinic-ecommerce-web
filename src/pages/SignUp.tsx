@@ -1,10 +1,11 @@
 import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useToast } from '../context/ToastContext';
 import { registerService } from '../api/auth/authService';
+import PublicPaths from '../routes/public/pathPublic';
 
 const SignUpSchema = Yup.object().shape({
   username: Yup.string().required('Full name is required'),
@@ -147,9 +148,12 @@ const SignUp = () => {
         </Formik>
         <p className="text-center max-[400px]:text-[16px] text-[20px] text-gray-600 mt-4">
           Bạn đã có tài khoản?{' '}
-          <a href="/login" className="text-blue-500 hover:underline">
+          <Link
+            to={PublicPaths.LOGIN}
+            className="text-blue-500 hover:underline"
+          >
             Đăng nhập
-          </a>
+          </Link>
         </p>
       </motion.div>
     </div>
