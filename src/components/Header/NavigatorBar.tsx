@@ -1,6 +1,6 @@
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import { navLink } from '../../constants/header/navLink';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { BsList } from 'react-icons/bs';
 import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
 
@@ -57,9 +57,9 @@ const NavigatorBar = () => {
     };
   };
 
-  useEffect(() => {
-    console.log(isShowMenu);
-  }, [isShowMenu]);
+  // useEffect(() => {
+  //   // console.log(isShowMenu);
+  // }, [isShowMenu]);
   return (
     <div className={'w-full h-max relative'}>
       <div
@@ -100,15 +100,17 @@ const NavigatorBar = () => {
 
                   {activeTab[index] ? (
                     <ul className="bg-[white] text-[black] w-fit ml-5">
-                      {Object.entries(item.item).map(([key, value]) => (
-                        <li
-                          className="cursor-pointer mb-[5px] p-3"
-                          key={key}
-                          onClick={handleCloseMenu}
-                        >
-                          {value}
-                        </li>
-                      ))}
+                      {Object.entries(item.item).map(
+                        ([key, value], subIndex) => (
+                          <li
+                            className="cursor-pointer mb-[5px] p-3"
+                            key={`${index}-${key}-${subIndex}`}
+                            onClick={handleCloseMenu}
+                          >
+                            {value}
+                          </li>
+                        )
+                      )}
                     </ul>
                   ) : null}
                 </li>

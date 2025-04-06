@@ -11,6 +11,7 @@ const PublicPaths = {
   PROFILE: '/profile',
   CALENDAR: '/calendar-booking',
   SUPPORT: '/support',
+  FORGOTPASSWORD: '/forgot-password',
 };
 
 export default PublicPaths;

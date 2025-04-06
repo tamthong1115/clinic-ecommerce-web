@@ -7,6 +7,7 @@ import { useToast } from '../context/ToastContext';
 import * as Yup from 'yup';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useAuth } from '../context/AuthContext';
+import PublicPaths from '../routes/public/pathPublic';
 
 const SignUpSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
@@ -24,6 +25,7 @@ const Login = () => {
     onSuccess: async (data) => {
       const { token, user } = data;
       login(token, user);
+      showToast('Đăng nhập thành công');
       navigate('/');
     },
     onError: (error: { response?: { data?: { message?: string } } }) => {
@@ -130,7 +132,7 @@ const Login = () => {
                   Nhớ mật khẩu
                 </label>
                 <Link
-                  to="#"
+                  to={PublicPaths.FORGOTPASSWORD}
                   className="max-[400px]:text-[16px] text-[18px] text-gray-500 hover:text-green-700"
                 >
                   Quên mật khẩu?
@@ -150,7 +152,10 @@ const Login = () => {
 
         <p className="text-center max-[400px]:text-[16px] text-[20px] text-gray-600 mt-4">
           Bạn chưa có tài khoản?{' '}
-          <Link to={'/sign-up'} className="text-blue-500 hover:underline">
+          <Link
+            to={PublicPaths.SIGN_UP}
+            className="text-blue-500 hover:underline"
+          >
             Tạo tài khoản
           </Link>
         </p>

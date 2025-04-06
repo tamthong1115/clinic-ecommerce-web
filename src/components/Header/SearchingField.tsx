@@ -104,7 +104,7 @@ const SearchingField: React.FC<SearchingFieldProps> = ({ setIsSearching }) => {
             'hidden sm:block w-screen h-screen absolute top-0 left-0 bg-[#5d5d5d4d] z-10'
           }
           onClick={() => {
-            console.log('clicked');
+            // console.log('clicked');
             handleRollBack();
           }}
         ></div>
