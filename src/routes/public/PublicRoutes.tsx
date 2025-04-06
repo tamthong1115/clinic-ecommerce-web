@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom';
 import PublicPaths from './pathPublic';
 import ProfileLayout from '../../layout/profile/ProfileLayout.tsx';
 import Calendar from '../../pages/user/Calendar.tsx';
+import Support from '../../pages/user/Support.tsx';
 
 const Home = lazy(() => import('../../pages/Home'));
 const Login = lazy(() => import('../../pages/SignIn'));
@@ -26,13 +27,30 @@ const PublicRoutesComponent = () => {
       <Route path={PublicPaths.MEDICINE} element={<Medicine />} />
       <Route path={PublicPaths.COOPERATE} element={<Cooperate />} />
       <Route
+        path={PublicPaths.PROFILE}
+        element={
+          <ProfileLayout>
+            <Profile />
+          </ProfileLayout>
+        }
+      />
+      <Route
         path={PublicPaths.CALENDAR}
         element={
-          <ProfileLayout current={2}>
+          <ProfileLayout>
             <Calendar />
           </ProfileLayout>
         }
       />
+      <Route
+        path={PublicPaths.SUPPORT}
+        element={
+          <ProfileLayout>
+            <Support />
+          </ProfileLayout>
+        }
+      />
+      <Route path={PublicPaths.EX} element={<Ex />} />
     </>
   );
 };
