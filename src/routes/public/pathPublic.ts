@@ -10,6 +10,7 @@ const PublicPaths = {
   COOPERATE: '/Cooperate',
   PROFILE: '/profile',
   CALENDAR: '/calendar-booking',
+  SUPPORT: '/support',
 };
 
 export default PublicPaths;

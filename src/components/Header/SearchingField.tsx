@@ -33,7 +33,7 @@ const SearchingField: React.FC<SearchingFieldProps> = ({ setIsSearching }) => {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.3 }}
         className={
-          'w-screen h-screen absolute top-0 left-0 bg-white sm:bg-transparent p-3 sm:flex sm:items-start sm:justify-center'
+          'w-screen h-screen absolute top-0 left-0 bg-white sm:bg-transparent p-3 sm:flex sm:items-start sm:justify-center z-[20]'
         }
       >
         <div
