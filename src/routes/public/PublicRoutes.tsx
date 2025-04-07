@@ -4,6 +4,7 @@ import PublicPaths from './pathPublic';
 import ProfileLayout from '../../layout/profile/ProfileLayout.tsx';
 import Calendar from '../../pages/user/Calendar.tsx';
 import Support from '../../pages/user/Support.tsx';
+import Profile from '../../pages/user/Profile.tsx';
 
 const Home = lazy(() => import('../../pages/Home'));
 const Login = lazy(() => import('../../pages/SignIn'));
@@ -50,7 +51,6 @@ const PublicRoutesComponent = () => {
           </ProfileLayout>
         }
       />
-      <Route path={PublicPaths.EX} element={<Ex />} />
     </>
   );
 };
