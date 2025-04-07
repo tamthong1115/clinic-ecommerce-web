@@ -14,7 +14,7 @@ const UserRoutesComponent = () => {
       <Route
         path={UserPaths.PROFILE}
         element={
-          <ProfileLayout current={0}>
+          <ProfileLayout>
             <Profile />
           </ProfileLayout>
         }
@@ -27,7 +27,7 @@ const UserRoutesComponent = () => {
           </ProfileLayout>
         }
       />
-    </>
+    </Route>
   );
 };
 
