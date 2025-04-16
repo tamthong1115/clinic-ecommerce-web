@@ -1,10 +1,10 @@
 import { Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
-
 import PublicRoutes from './public/PublicRoutes';
 import UserRoutes from './user/UserRoutes';
-import Layout from '../layout/Layout';
 import Spinner from '../components/Spinner/Spinner';
+import ClinicRoutes from './clinic/ClinicRouter.tsx';
+import Layout from '../layout/Layout.tsx';
 
 const AppRoutes = () => {
   return (
@@ -16,6 +16,7 @@ const AppRoutes = () => {
           {PublicRoutes()}
           {UserRoutes()}
         </Route>
+        {ClinicRoutes()}
       </Routes>
     </Suspense>
   );
