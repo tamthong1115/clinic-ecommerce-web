@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { animate } from 'framer-motion';
-import { AnimatePresence, motion, MotionConfig, press } from 'motion/react';
+import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
 
 const Support = () => {
   const [isCreate, setIsCreate] = useState(false);

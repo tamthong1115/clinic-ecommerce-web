@@ -1,11 +1,11 @@
 const ClinicPaths = {
-  DASHBOARD: 'clinic/dashboard',
-  DOCTOR_MANAGE: 'clinic/doctor',
-  INVOICE_MANAGE: 'clinic/invoice',
-  PATIENT_MANAGE: 'clinic/patient',
-  SCHEDULE_MANAGE: 'clinic/schedule',
-  SERVICE_MANAGE: 'clinic/service',
-  SYSTEM_SETTING: 'clinic/system',
+  DASHBOARD: '/dashboard/',
+  DOCTOR_MANAGE: '/dashboard/doctor',
+  INVOICE_MANAGE: '/dashboard/invoice',
+  PATIENT_MANAGE: '/dashboard/patient',
+  SCHEDULE_MANAGE: '/dashboard/schedule',
+  SERVICE_MANAGE: '/dashboard/service',
+  SYSTEM_SETTING: '/dashboard/system',
 };
 
 export default ClinicPaths;

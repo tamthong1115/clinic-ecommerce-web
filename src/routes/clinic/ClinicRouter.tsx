@@ -1,77 +1,85 @@
-import React, { lazy } from 'react';
+import { lazy } from 'react';
 import { Route } from 'react-router-dom';
 import ClinicPaths from './pathClinic.ts';
-import ClinicLayout from '../../layout/clinic/ClinicLayout.tsx';
+import DashboardLayout from '../../layout/dashboard/DashboardLayout.tsx';
 
 const DashBoard = lazy(() => import('../../pages/clinic/ClinicDashBoard'));
-const DoctorManage = lazy(()=> import('../../pages/clinic/DoctorManagement'));
-const InvoiceManage = lazy(()=> import('../../pages/clinic/InvoiceManagement'));
-const PatientManage = lazy(() => import('../../pages/clinic/PatientManagement'));
-const ScheduleManege = lazy(() => import('../../pages/clinic/ScheduleManagement'));
-const ServiceManage = lazy(() => import('../../pages/clinic/ServiceManagement'));
+const DoctorManage = lazy(() => import('../../pages/clinic/DoctorManagement'));
+const InvoiceManage = lazy(
+  () => import('../../pages/clinic/InvoiceManagement')
+);
+const PatientManage = lazy(
+  () => import('../../pages/clinic/PatientManagement')
+);
+const ScheduleManege = lazy(
+  () => import('../../pages/clinic/ScheduleManagement')
+);
+const ServiceManage = lazy(
+  () => import('../../pages/clinic/ServiceManagement')
+);
 const SystemSetting = lazy(() => import('../../pages/clinic/SystemSettings'));
 
-const ClinicRoutes: React.FC = () => {
+const ClinicRoutesComponent = () => {
   return (
     <>
       <Route
         path={ClinicPaths.DASHBOARD}
         element={
-          <ClinicLayout>
+          <DashboardLayout>
             <DashBoard />
-          </ClinicLayout>
+          </DashboardLayout>
         }
       />
       <Route
         path={ClinicPaths.DOCTOR_MANAGE}
         element={
-          <ClinicLayout>
+          <DashboardLayout>
             <DoctorManage />
-          </ClinicLayout>
+          </DashboardLayout>
         }
       />
       <Route
         path={ClinicPaths.INVOICE_MANAGE}
         element={
-          <ClinicLayout>
+          <DashboardLayout>
             <InvoiceManage />
-          </ClinicLayout>
+          </DashboardLayout>
         }
       />
       <Route
         path={ClinicPaths.PATIENT_MANAGE}
         element={
-          <ClinicLayout>
+          <DashboardLayout>
             <PatientManage />
-          </ClinicLayout>
+          </DashboardLayout>
         }
       />
       <Route
         path={ClinicPaths.SCHEDULE_MANAGE}
         element={
-          <ClinicLayout>
+          <DashboardLayout>
             <ScheduleManege />
-          </ClinicLayout>
+          </DashboardLayout>
         }
       />
       <Route
         path={ClinicPaths.SERVICE_MANAGE}
         element={
-          <ClinicLayout>
+          <DashboardLayout>
             <ServiceManage />
-          </ClinicLayout>
+          </DashboardLayout>
         }
       />
       <Route
         path={ClinicPaths.SYSTEM_SETTING}
         element={
-          <ClinicLayout>
+          <DashboardLayout>
             <SystemSetting />
-          </ClinicLayout>
+          </DashboardLayout>
         }
       />
     </>
   );
 };
 
-export default ClinicRoutes;
+export default ClinicRoutesComponent;
