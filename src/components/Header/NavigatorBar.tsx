@@ -6,6 +6,8 @@ import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
 import logo from '../../assets/logo.png';
 import PublicPaths from '../../routes/public/pathPublic.ts';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext.tsx';
+import UserPaths from '../../routes/user/pathUser.ts';
 
 const NavigatorBar = ({ widthDevice }: { widthDevice: number }) => {
   const [activeTab, setActiveTab] = useState(new Array(4).fill(false));
@@ -13,6 +15,7 @@ const NavigatorBar = ({ widthDevice }: { widthDevice: number }) => {
   const [isShowMenu, setIsShowMenu] = useState(false);
   const [widthOffset, setWidthOffset] = useState('0');
   const navigate = useNavigate();
+  const { isAuthenticated, user, logout } = useAuth();
 
   const handleEnter = (index: number) => {
     // Need to reformat this code
@@ -34,7 +37,6 @@ const NavigatorBar = ({ widthDevice }: { widthDevice: number }) => {
   };
 
   const handleCloseMenu = () => {
-    console.log('close');
     setIsShowMenu(false);
     setCurrentTab(-1);
     setActiveTab(Array.from(new Array(4).fill(false)));
@@ -49,6 +51,10 @@ const NavigatorBar = ({ widthDevice }: { widthDevice: number }) => {
       setIsShowMenu(false);
       navigate(path);
     }
+  };
+
+  const handleLogout = () => {
+    logout();
   };
 
   const getMotionMobileConfig = (isClosed: boolean, distance: string) => {
@@ -70,9 +76,9 @@ const NavigatorBar = ({ widthDevice }: { widthDevice: number }) => {
     };
   };
 
-  // useEffect(() => {
-  //   // console.log(isShowMenu);
-  // }, [isShowMenu]);
+  useEffect(() => {
+    console.log(isAuthenticated);
+  }, [isShowMenu]);
 
   useEffect(() => {
     if (widthDevice <= 640) {
@@ -125,40 +131,78 @@ const NavigatorBar = ({ widthDevice }: { widthDevice: number }) => {
               ) : null}
               {/*This is for notify if guest does not sign-in/sign-up*/}
               {widthOffset !== '0' ? (
-                <li
-                  className={
-                    'w-full bg-gradient-to-tl from-emerald-600 to-emerald-400 p-2'
-                  }
-                >
-                  <div
+                isAuthenticated ? (
+                  <li
                     className={
-                      ' w-full text-left break-words text-white font-bold'
+                      'w-full bg-gradient-to-tl from-emerald-600 to-emerald-400 p-2'
                     }
                   >
-                    Đăng nhập để hưởng những đặc quyền dành riêng cho thành viên
-                  </div>
-                  <div className={'mt-2'}>
-                    {/*Buttons for sign-in and sign-up*/}
-                    <button
-                      type={'button'}
+                    <div
                       className={
-                        'w-fit p-1 rounded-full bg-white text-emerald-600 font-bold mr-3'
+                        ' w-full text-left break-words text-white font-bold'
                       }
-                      onClick={() => handleNavigate(PublicPaths.LOGIN)}
                     >
-                      Đăng nhập
-                    </button>
-                    <button
-                      type={'button'}
+                      Xin chào, {user?.username}
+                    </div>
+                    <div className={'mt-2'}>
+                      {/*Buttons for sign-in and sign-up*/}
+                      <button
+                        type={'button'}
+                        className={
+                          'w-fit p-1 rounded-full bg-white text-emerald-600 font-bold mr-3'
+                        }
+                        onClick={() => handleNavigate(UserPaths.SETTINGS)}
+                      >
+                        {user?.username}
+                      </button>
+                      <button
+                        type={'button'}
+                        className={
+                          'w-fit px-2 py-1 rounded-full bg-emerald-700 text-white font-bold ml-3'
+                        }
+                        onClick={() => handleLogout()}
+                      >
+                        Đăng xuất
+                      </button>
+                    </div>
+                  </li>
+                ) : (
+                  <li
+                    className={
+                      'w-full bg-gradient-to-tl from-emerald-600 to-emerald-400 p-2'
+                    }
+                  >
+                    <div
                       className={
-                        'w-fit px-2 py-1 rounded-full bg-emerald-600 text-white font-bold ml-3'
+                        ' w-full text-left break-words text-white font-bold'
                       }
-                      onClick={() => handleNavigate(PublicPaths.SIGN_UP)}
                     >
-                      Đăng kí
-                    </button>
-                  </div>
-                </li>
+                      Đăng nhập để hưởng những đặc quyền dành riêng cho thành
+                      viên
+                    </div>
+                    <div className={'mt-2'}>
+                      {/*Buttons for sign-in and sign-up*/}
+                      <button
+                        type={'button'}
+                        className={
+                          'w-fit p-1 rounded-full bg-white text-emerald-600 font-bold mr-3'
+                        }
+                        onClick={() => handleNavigate(PublicPaths.LOGIN)}
+                      >
+                        Đăng nhập
+                      </button>
+                      <button
+                        type={'button'}
+                        className={
+                          'w-fit px-2 py-1 rounded-full bg-emerald-600 text-white font-bold ml-3'
+                        }
+                        onClick={() => handleNavigate(PublicPaths.SIGN_UP)}
+                      >
+                        Đăng kí
+                      </button>
+                    </div>
+                  </li>
+                )
               ) : null}
               {navLink.map((item, index) => (
                 <li
@@ -184,7 +228,7 @@ const NavigatorBar = ({ widthDevice }: { widthDevice: number }) => {
                   </div>
 
                   {activeTab[index] ? (
-                    <ul className="bg-[white] text-[black] w-fit ml-5 sm:absolute sm:top-10 sm:shadow-md sm:shadow-gray-500 sm:w-full">
+                    <ul className="bg-[white] text-[black] w-full sm:absolute sm:top-10 shadow-md shadow-gray-500">
                       {Object.entries(item.item).map(
                         ([key, value], subIndex) => (
                           <li
