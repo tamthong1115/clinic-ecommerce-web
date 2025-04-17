@@ -1,52 +1,8 @@
 import * as Bs from 'react-icons/bs';
 import { userProfile } from '../../api/user/userService';
 import { useQuery } from '@tanstack/react-query';
-
-/**
- * @param {String} date -  using format: mmm/dd/yyyy as string
- * @param {String} time - using format: hh:mm and HH:mm as string
- * **/
-const renderBookingCalendarItem = (date: string, time: string) => {
-  return (
-    <div
-      className={
-        'h-full w-[95%] flex flex-row justify-start items-center rounded-lg bg-[#00CC9B] overflow-hidden'
-      }
-    >
-      {/*Date here*/}
-      <div
-        className={
-          'h-40 w-[20%] py-auto bg-[#024D50] text-white font-bold flex justify-center items-center text-center rounded-l-lg'
-        }
-      >
-        {date}
-      </div>
-      {/*Content here*/}
-      <div
-        className={
-          'h-40 w-[80%] ml-2 py-2 flex flex-col justify-between items-start'
-        }
-      >
-        <div className="min-h[78%]">
-          <ul className={'font-bold'}>
-            <li>Galaxy</li>
-            <li>4ChillyGuys Company&#39;s event</li>
-            <li>Truong Tam Thong - B</li>
-          </ul>
-        </div>
-        {/*Booking time here*/}
-        <div
-          className={
-            'h-[20%] w-fit py-1 px-3 font-bold flex flex-row justify-start items-center bg-[#024D50] rounded-full'
-          }
-        >
-          <Bs.BsClock color={'white'} />
-          <div className={'text-white ml-2'}>{time}</div>
-        </div>
-      </div>
-    </div>
-  );
-};
+import UpdateUser from './forms/UpdateUser.tsx';
+import { useState } from 'react';
 
 const Profile = () => {
   const {
@@ -58,6 +14,11 @@ const Profile = () => {
     queryFn: userProfile,
   });
 
+  const [isUpdate, setIsUpdate] = useState<boolean>(false);
+  const handleUpdate = () => {
+    setIsUpdate(true);
+  };
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -68,7 +29,9 @@ const Profile = () => {
 
   return (
     <div
-      className={'w-full h-fit m-3 flex flex-col justify-start items-center'}
+      className={
+        'w-full h-full m-3 flex flex-col justify-start items-center relative'
+      }
     >
       {/*This is for personal card*/}
       <div
@@ -110,28 +73,6 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      {/*This is for booking calendar*/}
-      <div
-        className={'w-[80%] h-fit shadow-lg shadow-gray-300 rounded-lg mb-5'}
-      >
-        {/*title here*/}
-        <div
-          className={
-            'w-full min-h-4 p-2 bg-emerald-600 text-white font-bold text-lg text-center rounded-tl-lg rounded-tr-lg'
-          }
-        >
-          Lịch hẹn sắp tới
-        </div>
-        {/*Content here*/}
-        <div
-          className={
-            'w-full h-fit p-3 flex justify-between items-center flex-col'
-          }
-        >
-          {/*Card notify here*/}
-          {renderBookingCalendarItem('June 22, 2025', '7:65')}
-        </div>
-      </div>
 
       {/*This is for quick settings*/}
       <div
@@ -158,7 +99,10 @@ const Profile = () => {
               'max-w-[30%] h-fit font-bold flex justify-center items-center flex-col'
             }
           >
-            <button className={'bg-emerald-600 p-2 rounded-lg '}>
+            <button
+              className={'bg-emerald-600 p-2 rounded-lg '}
+              onClick={handleUpdate}
+            >
               <Bs.BsPencilFill size={30} color={'white'} />
             </button>
             Chỉnh sửa
@@ -170,7 +114,7 @@ const Profile = () => {
             }
           >
             <button className={'bg-emerald-600 p-2 rounded-lg '}>
-              <Bs.BsTrashFill size={30} color={'white'} />
+              <Bs.BsLockFill size={30} color={'white'} />
             </button>
             Đổi mật khẩu
           </div>
@@ -181,12 +125,13 @@ const Profile = () => {
             }
           >
             <button className={'bg-emerald-600 p-2 rounded-lg '}>
-              <Bs.BsLockFill size={30} color={'white'} />
+              <Bs.BsTrashFill size={30} color={'white'} />
             </button>
             Xóa tài khoản
           </div>
         </div>
       </div>
+      {isUpdate ? <UpdateUser setIsOpenForm={setIsUpdate} /> : null}
     </div>
   );
 };
