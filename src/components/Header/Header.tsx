@@ -114,7 +114,7 @@ const Header: React.FC = () => {
               {/*Quick access buttons here*/}
               <div className="w-fit flex flex-row justify-around items-center px-3">
                 <div className="flex items-center">
-                  <Link to={PublicPaths.BOOKING_CART}>
+                  <Link to={PublicPaths.BOOKING}>
                     <div className="flex items-center mr-5 bg-white rounded-full p-2">
                       <div>
                         <RiCalendarScheduleLine size={25} color={'#059669'} />
