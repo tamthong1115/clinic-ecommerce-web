@@ -33,6 +33,7 @@
     "react-router-dom": "^7.1.1",
     "react-spinners": "^0.15.0",
     "react-toastify": "^11.0.2",
+    "rsuite": "^5.80.0",
     "vite-plugin-svgr": "^4.3.0",
     "yup": "^1.6.1"
   },
