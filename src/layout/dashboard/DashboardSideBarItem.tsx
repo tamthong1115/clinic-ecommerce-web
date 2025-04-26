@@ -1,13 +1,24 @@
-import ClinicPaths from '../../routes/clinic/pathClinic.ts';
+import {
+  ClinicPaths,
+  DoctorPathsSubMenu,
+} from '../../routes/dashboard/pathClinic.ts';
 
-interface ClinicSideBarItem {
+interface DashboardSideBarItem {
   title: string;
   path: string;
   iconActive: string;
   iconInactive: string;
+  requiredRoles?: string[];
+  submenu?: {
+    title: string;
+    path: string;
+    iconActive: string;
+    iconInactive: string;
+    requiredRoles?: string[];
+  }[];
 }
 
-const sidebarItems: ClinicSideBarItem[] = [
+const sidebarItems: DashboardSideBarItem[] = [
   {
     title: 'Dashboard',
     path: ClinicPaths.DASHBOARD,
@@ -20,6 +31,16 @@ const sidebarItems: ClinicSideBarItem[] = [
     path: ClinicPaths.DOCTOR_MANAGE,
     iconActive: '/icon/icon-doctor-active.png',
     iconInactive: '/icon/icon-doctor-inactive.png',
+    requiredRoles: ['ADMIN', 'CLINIC_OWNER', 'DOCTOR'],
+    submenu: [
+      {
+        title: 'Add Doctor',
+        path: DoctorPathsSubMenu.ADD_DOCTOR,
+        iconActive: '/icon/icon-doctor-active.png',
+        iconInactive: '/icon/icon-doctor-inactive.png',
+        requiredRoles: ['ADMIN', 'CLINIC_OWNER'],
+      },
+    ],
   },
 
   {

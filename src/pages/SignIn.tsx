@@ -8,6 +8,7 @@ import * as Yup from 'yup';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useAuth } from '../context/AuthContext';
 import PublicPaths from '../routes/public/pathPublic';
+import Roles from '../constants/roles';
 
 const SignUpSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
@@ -19,6 +20,19 @@ const SignUpSchema = Yup.object().shape({
 const Login = () => {
   const { showToast } = useToast();
   const { login } = useAuth();
+  const navigate = useNavigate();
+
+  const handleNavigation = (role: string) => {
+    switch (role) {
+      case Roles.DOCTOR:
+      case Roles.CLINIC:
+      case Roles.ADMIN:
+        navigate('/dashboard');
+        break;
+      default:
+        navigate('/');
+    }
+  };
 
   const { mutate } = useMutation({
     mutationFn: loginService,
@@ -26,7 +40,7 @@ const Login = () => {
       const { token, user } = data;
       login(token, user);
       showToast('Đăng nhập thành công');
-      navigate('/');
+      handleNavigation(user.role);
     },
     onError: (error: { response?: { data?: { message?: string } } }) => {
       // console.log(error);
@@ -36,7 +50,6 @@ const Login = () => {
     },
   });
 
-  const navigate = useNavigate();
   const handleSubmit = async ({
     email,
     password,

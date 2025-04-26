@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import PublicRoutes from './public/PublicRoutes';
 import UserRoutes from './user/UserRoutes';
 import Spinner from '../components/Spinner/Spinner';
-import ClinicRoutes from './clinic/ClinicRouter.tsx';
+import ClinicRoutes from './dashboard/DashboardRouter.tsx';
 import Layout from '../layout/Layout.tsx';
 
 const AppRoutes = () => {

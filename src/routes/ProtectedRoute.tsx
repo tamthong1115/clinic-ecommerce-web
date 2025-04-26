@@ -2,17 +2,17 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 interface ProtectedRouteProps {
-  requiredRole?: string;
+  requiredRoles?: string[];
 }
 
-const ProtectedRoute = ({ requiredRole }: ProtectedRouteProps) => {
+const ProtectedRoute = ({ requiredRoles }: ProtectedRouteProps) => {
   const { isAuthenticated, hasRole } = useAuth();
 
   if (!isAuthenticated) {
     return <Navigate to="/sign-in" replace />;
   }
 
-  if (requiredRole && !hasRole(requiredRole)) {
+  if (requiredRoles && requiredRoles.some((role) => !hasRole(role))) {
     return <Navigate to="/" replace />;
   }
 

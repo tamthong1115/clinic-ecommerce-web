@@ -8,11 +8,14 @@ import { registerService } from '../api/auth/authService';
 import PublicPaths from '../routes/public/pathPublic';
 
 const SignUpSchema = Yup.object().shape({
-  username: Yup.string().required('Full name is required'),
+  username: Yup.string(),
   email: Yup.string().email('Invalid email').required('Email is required'),
   password: Yup.string()
     .min(8, 'Password must be at least 8 characters')
     .required('Password is required'),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref('password'), undefined], 'Password must match')
+    .required('Confirm Password is Required'),
 });
 
 const SignUp = () => {
@@ -37,7 +40,8 @@ const SignUp = () => {
     email: string;
     password: string;
   }) => {
-    mutate(values);
+    const { ...dataToSend } = values; // Exclude confirmPassword
+    mutate(dataToSend);
   };
 
   return (
@@ -57,6 +61,7 @@ const SignUp = () => {
             username: '',
             email: '',
             password: '',
+            confirmPassword: '',
           }}
           validationSchema={SignUpSchema}
           onSubmit={(values, { setSubmitting }) => {
@@ -131,6 +136,29 @@ const SignUp = () => {
                 />
                 <ErrorMessage
                   name="password"
+                  component="div"
+                  className="text-red-500 text-sm mt-1"
+                />
+              </div>
+              <div className="mb-[30px]">
+                <label
+                  className="block text-gray-700 text-[18px] font-medium mb-[15px]"
+                  htmlFor="confirmPassword"
+                >
+                  Confirm Password
+                </label>
+                <Field
+                  name="confirmPassword"
+                  type="password"
+                  className={`w-full h-[56px] p-2 border rounded-lg focus:outline-none focus:ring-2 ${
+                    errors.confirmPassword && touched.confirmPassword
+                      ? 'border-red-500 focus:ring-red-400'
+                      : 'border-gray-300 focus:ring-green-400'
+                  }`}
+                  id="confirmPassword"
+                />
+                <ErrorMessage
+                  name="confirmPassword"
                   component="div"
                   className="text-red-500 text-sm mt-1"
                 />

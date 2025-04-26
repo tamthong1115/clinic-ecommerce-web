@@ -1,4 +1,4 @@
-const ClinicPaths = {
+export const ClinicPaths = {
   DASHBOARD: '/dashboard/',
   DOCTOR_MANAGE: '/dashboard/doctor',
   INVOICE_MANAGE: '/dashboard/invoice',
@@ -8,4 +8,6 @@ const ClinicPaths = {
   SYSTEM_SETTING: '/dashboard/system',
 };
 
-export default ClinicPaths;
+export const DoctorPathsSubMenu = {
+  ADD_DOCTOR: '/dashboard/doctor/add',
+};
