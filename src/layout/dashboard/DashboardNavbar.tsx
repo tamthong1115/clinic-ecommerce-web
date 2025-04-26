@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import sidebarItems from './ClinicSideBarItem.tsx';
+import sidebarItems from './DashboardSideBarItem.tsx';
 import SearchField from '../../components/SearchField/SearchField.tsx';
+import UserMenu from '../../components/UserMenu/UserMenu.tsx';
 
 const DashboardNavbar: React.FC = () => {
   const location = useLocation();
@@ -32,9 +33,7 @@ const DashboardNavbar: React.FC = () => {
             className="w-5 h-5"
           />
         </Link>
-        <Link to="/" className="flex mx-2 items-center justify-evenly">
-          <div className="w-8 h-8 bg-gray-300 rounded-full" />
-        </Link>
+        <UserMenu />
       </div>
     </div>
   );
