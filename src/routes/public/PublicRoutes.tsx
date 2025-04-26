@@ -1,6 +1,11 @@
 import { lazy } from 'react';
 import { Route } from 'react-router-dom';
 import PublicPaths from './pathPublic';
+import ProfileLayout from '../../layout/profile/ProfileLayout';
+import Profile from '../../pages/user/Profile';
+import Settings from '../../pages/user/Settings';
+import UserPaths from '../user/pathUser';
+import CalendarBooking from '../../pages/user/CalendarBooking';
 
 const Home = lazy(() => import('../../pages/Home'));
 const Login = lazy(() => import('../../pages/SignIn'));
@@ -23,30 +28,30 @@ const PublicRoutesComponent = () => {
       <Route path={PublicPaths.BOOKING} element={<Booking />} />
       <Route path={PublicPaths.MEDICINE} element={<Medicine />} />
       <Route path={PublicPaths.COOPERATE} element={<Cooperate />} />
-      {/*<Route*/}
-      {/*  path={PublicPaths.PROFILE}*/}
-      {/*  element={*/}
-      {/*    <ProfileLayout>*/}
-      {/*      <Profile />*/}
-      {/*    </ProfileLayout>*/}
-      {/*  }*/}
-      {/*/>*/}
-      {/*<Route*/}
-      {/*  path={PublicPaths.CALENDAR}*/}
-      {/*  element={*/}
-      {/*    <ProfileLayout>*/}
-      {/*      <Calendar />*/}
-      {/*    </ProfileLayout>*/}
-      {/*  }*/}
-      {/*/>*/}
-      {/*<Route*/}
-      {/*  path={PublicPaths.SUPPORT}*/}
-      {/*  element={*/}
-      {/*    <ProfileLayout>*/}
-      {/*      <Support />*/}
-      {/*    </ProfileLayout>*/}
-      {/*  }*/}
-      {/*/>*/}
+      <Route
+        path={UserPaths.SETTINGS}
+        element={
+          <ProfileLayout>
+            <Settings />
+          </ProfileLayout>
+        }
+      />
+      <Route
+        path={UserPaths.PROFILE}
+        element={
+          <ProfileLayout>
+            <Profile />
+          </ProfileLayout>
+        }
+      />
+      <Route
+        path={UserPaths.CALENDAR}
+        element={
+          <ProfileLayout>
+            <CalendarBooking />
+          </ProfileLayout>
+        }
+      />
     </>
   );
 };
