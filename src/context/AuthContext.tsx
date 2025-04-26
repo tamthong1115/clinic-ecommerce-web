@@ -6,7 +6,6 @@ import {
   useEffect,
 } from 'react';
 import { jwtDecode } from 'jwt-decode';
-// import { useNavigate } from 'react-router-dom';
 
 type User = {
   id: string;
@@ -18,6 +17,7 @@ type User = {
 type AuthContextType = {
   user: User | null;
   isAuthenticated: boolean;
+  isLoading: boolean;
   login: (token: string, userData: User) => void;
   logout: () => void;
   hasRole: (role: string) => boolean;
@@ -27,38 +27,36 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
-  // const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
 
   const isAuthenticated = !!user;
 
   useEffect(() => {
     const token = localStorage.getItem('authToken');
-    if (token) {
+    const storedUser = localStorage.getItem('user');
+
+    if (token && storedUser) {
       try {
-        // Decode the token to check its expiration
         const decodedToken: { exp: number } = jwtDecode(token);
         const isTokenExpired = decodedToken.exp * 1000 < Date.now();
 
-        if (isTokenExpired) {
-          logout();
+        if (!isTokenExpired) {
+          setUser(JSON.parse(storedUser));
         } else {
-          const storedUser = localStorage.getItem('user');
-          if (storedUser) {
-            setUser(JSON.parse(storedUser));
-          }
+          logout();
         }
       } catch (error) {
         console.error('Invalid token:', error);
-        logout(); // Log out if the token is invalid
+        logout();
       }
     }
+    setIsLoading(false);
   }, []);
 
   const login = (token: string, userData: User) => {
     localStorage.setItem('authToken', token);
     localStorage.setItem('user', JSON.stringify(userData));
     setUser(userData);
-    console.log(userData);
   };
 
   const logout = () => {
@@ -73,7 +71,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, isAuthenticated, login, logout, hasRole }}
+      value={{ user, isAuthenticated, isLoading, login, logout, hasRole }}
     >
       {children}
     </AuthContext.Provider>

@@ -1,5 +1,6 @@
 import {
-  ClinicPaths,
+  ClinicPathsSubMenu,
+  DashboardPaths,
   DoctorPathsSubMenu,
 } from '../../routes/dashboard/pathClinic.ts';
 
@@ -21,14 +22,37 @@ interface DashboardSideBarItem {
 const sidebarItems: DashboardSideBarItem[] = [
   {
     title: 'Dashboard',
-    path: ClinicPaths.DASHBOARD,
+    path: DashboardPaths.DASHBOARD,
     iconActive: '/icon/icon-home-active.png',
     iconInactive: '/icon/icon-home-inactive.png',
+  },
+  {
+    title: 'Clinic Manage',
+    path: DashboardPaths.CLINIC_MANAGE,
+    iconActive: '/icon/icon-clinic-active.png',
+    iconInactive: '/icon/icon-clinic-inactive.png',
+    requiredRoles: ['ADMIN', 'CLINIC_OWNER'],
+    submenu: [
+      {
+        title: 'Create Clinic Owner',
+        path: ClinicPathsSubMenu.ADD_CLINIC_OWNER,
+        iconActive: '/icon/icon-clinic-owner-add-active.png',
+        iconInactive: '/icon/icon-clinic-owner-add-inactive.png',
+        requiredRoles: ['ADMIN'],
+      },
+      {
+        title: 'Create Clinic',
+        path: ClinicPathsSubMenu.ADD_CLINIC,
+        iconActive: '/icon/icon-clinic-add-active.png',
+        iconInactive: '/icon/icon-clinic-add-inactive.png',
+        requiredRoles: ['ADMIN'],
+      },
+    ],
   },
 
   {
     title: 'Doctor Manage',
-    path: ClinicPaths.DOCTOR_MANAGE,
+    path: DashboardPaths.DOCTOR_MANAGE,
     iconActive: '/icon/icon-doctor-active.png',
     iconInactive: '/icon/icon-doctor-inactive.png',
     requiredRoles: ['ADMIN', 'CLINIC_OWNER', 'DOCTOR'],
@@ -45,35 +69,35 @@ const sidebarItems: DashboardSideBarItem[] = [
 
   {
     title: 'Service Manage',
-    path: ClinicPaths.SERVICE_MANAGE,
+    path: DashboardPaths.SERVICE_MANAGE,
     iconActive: '/icon/icon-health-bag-active.png',
     iconInactive: '/icon/icon-health-bag-inactive.png',
   },
 
   {
     title: 'Schedule Manage',
-    path: ClinicPaths.SCHEDULE_MANAGE,
+    path: DashboardPaths.SCHEDULE_MANAGE,
     iconActive: '/icon/icon-schedule-active.png',
     iconInactive: '/icon/icon-schedule-inactive.png',
   },
 
   {
     title: 'Patient Manage',
-    path: ClinicPaths.PATIENT_MANAGE,
+    path: DashboardPaths.PATIENT_MANAGE,
     iconActive: '/icon/icon-patient-active.png',
     iconInactive: '/icon/icon-patient-inactive.png',
   },
 
   {
     title: 'Invoice',
-    path: ClinicPaths.INVOICE_MANAGE,
+    path: DashboardPaths.INVOICE_MANAGE,
     iconActive: '/icon/icon-invoice-active.png',
     iconInactive: '/icon/icon-invoice-inactive.png',
   },
 
   {
     title: 'Clinic setting',
-    path: ClinicPaths.SYSTEM_SETTING,
+    path: DashboardPaths.SYSTEM_SETTING,
     iconActive: '/icon/icon-setting-active.png',
     iconInactive: '/icon/icon-setting-inactive.png',
   },

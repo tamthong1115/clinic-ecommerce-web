@@ -76,9 +76,9 @@ const NavigatorBar = ({ widthDevice }: { widthDevice: number }) => {
     };
   };
 
-  useEffect(() => {
-    console.log(isAuthenticated);
-  }, [isShowMenu]);
+  // useEffect(() => {
+  //   console.log(isAuthenticated);
+  // }, [isShowMenu]);
 
   useEffect(() => {
     if (widthDevice <= 640) {

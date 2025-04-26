@@ -1,9 +1,15 @@
 import { lazy } from 'react';
 import { Route } from 'react-router-dom';
-import { ClinicPaths, DoctorPathsSubMenu } from './pathClinic.ts';
+import {
+  ClinicPathsSubMenu,
+  DashboardPaths,
+  DoctorPathsSubMenu,
+} from './pathClinic.ts';
 import DashboardLayout from '../../layout/dashboard/DashboardLayout.tsx';
 import AddDoctor from '../../pages/dashboard/Doctor/AddDoctor.tsx';
 import ProtectedRoute from '../ProtectedRoute.tsx';
+import ClinicManagement from '../../pages/dashboard/Clinic/ClinicManagement.tsx';
+import CreateClinicOwner from '../../pages/dashboard/Clinic/CreateClinicOwner.tsx';
 
 const DashBoard = lazy(() => import('../../pages/dashboard/ClinicDashBoard'));
 const DoctorManage = lazy(
@@ -30,10 +36,19 @@ const DashboardRoutesComponent = () => {
     <>
       <Route element={<ProtectedRoute requiredRoles={['ADMIN']} />}>
         <Route
-          path={ClinicPaths.SYSTEM_SETTING}
+          path={DashboardPaths.SYSTEM_SETTING}
           element={
             <DashboardLayout>
               <SystemSetting />
+            </DashboardLayout>
+          }
+        />
+
+        <Route
+          path={ClinicPathsSubMenu.ADD_CLINIC_OWNER}
+          element={
+            <DashboardLayout>
+              <CreateClinicOwner />
             </DashboardLayout>
           }
         />
@@ -43,7 +58,16 @@ const DashboardRoutesComponent = () => {
         element={<ProtectedRoute requiredRoles={['ADMIN', 'CLINIC_OWNER']} />}
       >
         <Route
-          path={ClinicPaths.DOCTOR_MANAGE}
+          path={DashboardPaths.CLINIC_MANAGE}
+          element={
+            <DashboardLayout>
+              <ClinicManagement />
+            </DashboardLayout>
+          }
+        />
+
+        <Route
+          path={DashboardPaths.DOCTOR_MANAGE}
           element={
             <DashboardLayout>
               <DoctorManage />
@@ -67,7 +91,7 @@ const DashboardRoutesComponent = () => {
         }
       >
         <Route
-          path={ClinicPaths.DASHBOARD}
+          path={DashboardPaths.DASHBOARD}
           element={
             <DashboardLayout>
               <DashBoard />
@@ -76,7 +100,7 @@ const DashboardRoutesComponent = () => {
         />
 
         <Route
-          path={ClinicPaths.INVOICE_MANAGE}
+          path={DashboardPaths.INVOICE_MANAGE}
           element={
             <DashboardLayout>
               <InvoiceManage />
@@ -84,7 +108,7 @@ const DashboardRoutesComponent = () => {
           }
         />
         <Route
-          path={ClinicPaths.PATIENT_MANAGE}
+          path={DashboardPaths.PATIENT_MANAGE}
           element={
             <DashboardLayout>
               <PatientManage />
@@ -92,7 +116,7 @@ const DashboardRoutesComponent = () => {
           }
         />
         <Route
-          path={ClinicPaths.SCHEDULE_MANAGE}
+          path={DashboardPaths.SCHEDULE_MANAGE}
           element={
             <DashboardLayout>
               <ScheduleManege />
@@ -100,7 +124,7 @@ const DashboardRoutesComponent = () => {
           }
         />
         <Route
-          path={ClinicPaths.SERVICE_MANAGE}
+          path={DashboardPaths.SERVICE_MANAGE}
           element={
             <DashboardLayout>
               <ServiceManage />
