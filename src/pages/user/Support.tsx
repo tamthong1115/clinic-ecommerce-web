@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { animate } from 'framer-motion';
+
 import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
 
 const Support = () => {
@@ -38,12 +38,12 @@ const Support = () => {
     console.log(isCreate);
   }, [isCreate]);
 
-  press('#createBtn', (target) => {
-    animate(target, { scale: 0.8 });
-    return () => {
-      animate(target, { scale: 1 });
-    };
-  });
+  // press('#createBtn', (target: any) => {
+  //   animate(target, { scale: 0.8 });
+  //   return () => {
+  //     animate(target, { scale: 1 });
+  //   };
+  // });
 
   return (
     <>

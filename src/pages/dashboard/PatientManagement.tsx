@@ -6,8 +6,6 @@
 //
 // Tra cứu thông tin bệnh nhân
 
-
-
 import React from 'react';
 
 const PatientManagement: React.FC = () => {

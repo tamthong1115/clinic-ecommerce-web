@@ -1,0 +1,225 @@
+import { useMutation } from '@tanstack/react-query';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import {
+  TextField,
+  Button,
+  Grid,
+  Card,
+  CardContent,
+  Typography,
+  Box,
+} from '@mui/material';
+import { createClinicOwner } from '../../../api/dashboard/clinic/clinicServices.ts';
+import { CreateClinicOwnerRequest } from '../../../api/dashboard/clinic/clinicTypes';
+import { useToast } from '../../../context/ToastContext.tsx';
+
+export default function CreateClinicOwnerForm() {
+  const { showToast } = useToast();
+
+  const mutation = useMutation({
+    mutationFn: (data: CreateClinicOwnerRequest) => createClinicOwner(data),
+    onSuccess: () => {
+      showToast('Clinic owner created successfully!', { type: 'success' });
+    },
+    onError: (error: unknown) => {
+      const errorMessage =
+        (error as { response?: { data?: { message?: string } } })?.response
+          ?.data?.message || 'Failed to create clinic owner.';
+      showToast(errorMessage, { type: 'error' });
+    },
+  });
+
+  const formik = useFormik<CreateClinicOwnerRequest>({
+    initialValues: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      phoneNumber: '',
+      dateOfBirth: '',
+      address: '',
+      city: '',
+      state: '',
+      postalCode: '',
+      licenseNumber: '',
+      profileImageUrl: '',
+    },
+    validationSchema: Yup.object({
+      firstName: Yup.string().required('First name is required'),
+      lastName: Yup.string().required('Last name is required'),
+      email: Yup.string()
+        .email('Invalid email address')
+        .required('Email is required'),
+      phoneNumber: Yup.string(),
+      dateOfBirth: Yup.date().nullable(),
+      address: Yup.string(),
+      city: Yup.string(),
+      state: Yup.string(),
+      postalCode: Yup.string(),
+      licenseNumber: Yup.string(),
+      profileImageUrl: Yup.string().url('Must be a valid URL'),
+    }),
+    onSubmit: (values) => {
+      mutation.mutate(values);
+    },
+  });
+
+  return (
+    <Box display="flex" justifyContent="center" mt={4}>
+      <Card sx={{ maxWidth: 600, width: '100%', p: 3, boxShadow: 3 }}>
+        <CardContent>
+          <Typography variant="h5" align="center" mb={3}>
+            Create Clinic Owner
+          </Typography>
+          <form onSubmit={formik.handleSubmit}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  fullWidth
+                  id="firstName"
+                  name="firstName"
+                  label="First Name *"
+                  value={formik.values.firstName}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.firstName && Boolean(formik.errors.firstName)
+                  }
+                  helperText={
+                    formik.touched.firstName && formik.errors.firstName
+                  }
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  fullWidth
+                  id="lastName"
+                  name="lastName"
+                  label="Last Name *"
+                  value={formik.values.lastName}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.lastName && Boolean(formik.errors.lastName)
+                  }
+                  helperText={formik.touched.lastName && formik.errors.lastName}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  id="email"
+                  name="email"
+                  label="Email *"
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  error={formik.touched.email && Boolean(formik.errors.email)}
+                  helperText={formik.touched.email && formik.errors.email}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  id="phoneNumber"
+                  name="phoneNumber"
+                  label="Phone Number"
+                  value={formik.values.phoneNumber}
+                  onChange={formik.handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  id="dateOfBirth"
+                  name="dateOfBirth"
+                  label="Date of Birth"
+                  type="date"
+                  InputLabelProps={{ shrink: true }}
+                  value={formik.values.dateOfBirth}
+                  onChange={formik.handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  id="address"
+                  name="address"
+                  label="Address"
+                  value={formik.values.address}
+                  onChange={formik.handleChange}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  fullWidth
+                  id="city"
+                  name="city"
+                  label="City"
+                  value={formik.values.city}
+                  onChange={formik.handleChange}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  fullWidth
+                  id="state"
+                  name="state"
+                  label="State"
+                  value={formik.values.state}
+                  onChange={formik.handleChange}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  fullWidth
+                  id="postalCode"
+                  name="postalCode"
+                  label="Postal Code"
+                  value={formik.values.postalCode}
+                  onChange={formik.handleChange}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  fullWidth
+                  id="licenseNumber"
+                  name="licenseNumber"
+                  label="License Number"
+                  value={formik.values.licenseNumber}
+                  onChange={formik.handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  id="profileImageUrl"
+                  name="profileImageUrl"
+                  label="Profile Image URL"
+                  value={formik.values.profileImageUrl}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.profileImageUrl &&
+                    Boolean(formik.errors.profileImageUrl)
+                  }
+                  helperText={
+                    formik.touched.profileImageUrl &&
+                    formik.errors.profileImageUrl
+                  }
+                />
+              </Grid>
+            </Grid>
+
+            <Button
+              color="primary"
+              variant="contained"
+              fullWidth
+              type="submit"
+              sx={{ mt: 3 }}
+              disabled={mutation.isPending}
+            >
+              {mutation.isPending ? 'Submitting...' : 'Create Owner'}
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
+    </Box>
+  );
+}
