@@ -8,10 +8,17 @@
 //
 // Gán bác sĩ cho buổi khám
 //
+
+//Name Email Phone status action
 import React from 'react';
+import DoctorList from '../../clinic/components/DoctorList.tsx';
 
 const DoctorManagement: React.FC = () => {
-  return <div>hello thsi is DoctorManage</div>;
+  return (
+    <div className={'p-0 m-0'}>
+      <DoctorList />
+    </div>
+  );
 };
 
 export default DoctorManagement;
