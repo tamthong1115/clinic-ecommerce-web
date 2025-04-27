@@ -11,7 +11,7 @@
 
 //Name Email Phone status action
 import React from 'react';
-import DoctorList from './components/DoctorList.tsx';
+import DoctorList from '../../clinic/components/DoctorList.tsx';
 
 const DoctorManagement: React.FC = () => {
   return (

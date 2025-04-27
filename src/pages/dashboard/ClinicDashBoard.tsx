@@ -1,9 +1,9 @@
 import React from 'react';
-import CardDashboardItem from './components/CardDashboard.tsx';
-import ChartFinance from './components/ChartFinance.tsx';
-import BarChar from './components/BarChart.tsx';
-import ScheduleDashboard from './components/ScheduleDashboard.tsx';
-import DoctorUp from './components/DoctorUp.tsx';
+import CardDashboardItem from '../clinic/components/CardDashboard.tsx';
+import ChartFinance from '../clinic/components/ChartFinance.tsx';
+import BarChar from '../clinic/components/BarChart.tsx';
+import ScheduleDashboard from '../clinic/components/ScheduleDashboard.tsx';
+import DoctorUp from '../clinic/components/DoctorUp.tsx';
 
 const ClinicDashBoard: React.FC = () => {
   return (
