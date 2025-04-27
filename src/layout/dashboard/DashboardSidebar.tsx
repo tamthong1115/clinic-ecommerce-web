@@ -7,8 +7,8 @@ const DashboardSidebar: React.FC = () => {
 
   return (
     <div className="flex">
-      <aside className="h-screen w-full p-4">
-        <div className="flex items-center flex-wrap justify-center py-3">
+      <aside className="h-screen w-full p-3">
+        <div className="flex items-center flex-wrap py-[0.680rem]">
           <div className="flex items-center justify-center">
             <img src="/logo.png" className="w-16 h-16" alt="logo" />
           </div>
@@ -16,13 +16,13 @@ const DashboardSidebar: React.FC = () => {
             4 Brand Chill Guys
           </span>
         </div>
-        <hr className="w-2/3 mx-auto block" />
+        <hr className="w-3/4 mx-auto block mb-3" />
         <nav>
           <ul className="my-1 flex flex-col items-center w-full">
             {sidebarItems.map((item, index) => {
               const isActive = location.pathname === item.path;
               return (
-                <li key={index} className=" w-2/3 text-lg">
+                <li key={index} className=" w-full text-lg">
                   <Link
                     to={item.path}
                     className={`flex items-center rounded-xl p-2 transition ${

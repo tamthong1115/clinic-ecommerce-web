@@ -12,7 +12,7 @@ const DashboardNavbar: React.FC = () => {
   const currentTitle = currentItem ? currentItem.title : 'Trang không tồn tại';
 
   return (
-    <div className="w-auto flex justify-between mx-8 h-28">
+    <div className="w-auto flex justify-between mx-8 h-[6.4rem]">
       <div className="items-center flex p-4 rounded-2xl">
         <span className={'text-lg font-bold'}>{currentTitle}</span>
       </div>
