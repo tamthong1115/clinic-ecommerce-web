@@ -4,12 +4,12 @@ import * as Yup from 'yup';
 import {
   TextField,
   Button,
-  Grid,
   Card,
   CardContent,
   Typography,
   Box,
 } from '@mui/material';
+import Grid from '@mui/material/Grid2';
 import { createClinicOwner } from '../../../api/dashboard/clinic/clinicServices.ts';
 import { CreateClinicOwnerRequest } from '../../../api/dashboard/clinic/clinicTypes';
 import { useToast } from '../../../context/ToastContext.tsx';
@@ -73,7 +73,7 @@ export default function CreateClinicOwnerForm() {
           </Typography>
           <form onSubmit={formik.handleSubmit}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid size={{ xs: 12, sm: 6 }}>
                 <TextField
                   fullWidth
                   id="firstName"
@@ -89,7 +89,7 @@ export default function CreateClinicOwnerForm() {
                   }
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid size={{ xs: 12, sm: 6 }}>
                 <TextField
                   fullWidth
                   id="lastName"
@@ -103,7 +103,7 @@ export default function CreateClinicOwnerForm() {
                   helperText={formik.touched.lastName && formik.errors.lastName}
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid size={{ xs: 12 }}>
                 <TextField
                   fullWidth
                   id="email"
@@ -115,7 +115,7 @@ export default function CreateClinicOwnerForm() {
                   helperText={formik.touched.email && formik.errors.email}
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid size={{ xs: 12 }}>
                 <TextField
                   fullWidth
                   id="phoneNumber"
@@ -125,7 +125,7 @@ export default function CreateClinicOwnerForm() {
                   onChange={formik.handleChange}
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid size={{ xs: 12 }}>
                 <TextField
                   fullWidth
                   id="dateOfBirth"
@@ -137,7 +137,7 @@ export default function CreateClinicOwnerForm() {
                   onChange={formik.handleChange}
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid size={{ xs: 12 }}>
                 <TextField
                   fullWidth
                   id="address"
@@ -147,7 +147,7 @@ export default function CreateClinicOwnerForm() {
                   onChange={formik.handleChange}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid size={{ xs: 12, sm: 6 }}>
                 <TextField
                   fullWidth
                   id="city"
@@ -157,7 +157,7 @@ export default function CreateClinicOwnerForm() {
                   onChange={formik.handleChange}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid size={{ xs: 12, sm: 6 }}>
                 <TextField
                   fullWidth
                   id="state"
@@ -167,7 +167,7 @@ export default function CreateClinicOwnerForm() {
                   onChange={formik.handleChange}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid size={{ xs: 12, sm: 6 }}>
                 <TextField
                   fullWidth
                   id="postalCode"
@@ -177,7 +177,7 @@ export default function CreateClinicOwnerForm() {
                   onChange={formik.handleChange}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid size={{ xs: 12, sm: 6 }}>
                 <TextField
                   fullWidth
                   id="licenseNumber"
@@ -187,7 +187,7 @@ export default function CreateClinicOwnerForm() {
                   onChange={formik.handleChange}
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid size={{ xs: 12 }}>
                 <TextField
                   fullWidth
                   id="profileImageUrl"
