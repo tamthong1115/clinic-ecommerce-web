@@ -132,7 +132,7 @@ export default function CreateClinicOwnerForm() {
                   name="dateOfBirth"
                   label="Date of Birth"
                   type="date"
-                  InputLabelProps={{ shrink: true }}
+                  slotProps={{ inputLabel: { shrink: true } }}
                   value={formik.values.dateOfBirth}
                   onChange={formik.handleChange}
                 />
