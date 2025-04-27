@@ -81,8 +81,8 @@ const TodoList = ({ date }) => {
     <List style={{ flex: 1 }}>
       {list.map((item) => (
         <List.Item key={item.time} index={item.time}>
-          <div className='border-1 border-gray-600 shadow-md shadow-gray-600'>
-            <div className='text-emerald-600'>{item.time}</div>
+          <div className="border-1 border-gray-600 shadow-md shadow-gray-600">
+            <div className="text-emerald-600">{item.time}</div>
             <div>{item.title}</div>
           </div>
         </List.Item>
@@ -120,7 +120,7 @@ function renderCell(date) {
   const list = getTodoList(date);
 
   if (list.length) {
-    return <Badge className="bg-emerald-600 rounded-full h-2 w-2" >.</Badge>;
+    return <Badge className="bg-emerald-600 rounded-full h-2 w-2">.</Badge>;
   }
 
   return null;
