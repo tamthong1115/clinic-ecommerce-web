@@ -66,16 +66,24 @@ export default function CreateClinicOwnerForm() {
 
   return (
     <Box display="flex" justifyContent="center" mt={4}>
-      <Card sx={{ maxWidth: 600, width: '100%', p: 3, boxShadow: 3 }}>
+      <Card
+        sx={{
+          width: '95%',
+          height: '90%',
+          boxShadow: 'none',
+          border: 'none',
+        }}
+      >
         <CardContent>
-          <Typography variant="h5" align="center" mb={3}>
-            Create Clinic Owner
+          <Typography variant="h6" align="center" mb={3}>
+            Fill this form to create new clinic owner
           </Typography>
           <form onSubmit={formik.handleSubmit}>
             <Grid container spacing={2}>
               <Grid size={{ xs: 12, sm: 6 }}>
                 <TextField
                   fullWidth
+                  variant="standard"
                   id="firstName"
                   name="firstName"
                   label="First Name *"
@@ -91,6 +99,7 @@ export default function CreateClinicOwnerForm() {
               </Grid>
               <Grid size={{ xs: 12, sm: 6 }}>
                 <TextField
+                  variant="standard"
                   fullWidth
                   id="lastName"
                   name="lastName"
@@ -103,8 +112,9 @@ export default function CreateClinicOwnerForm() {
                   helperText={formik.touched.lastName && formik.errors.lastName}
                 />
               </Grid>
-              <Grid size={{ xs: 12 }}>
+              <Grid size={{ xs: 12, sm: 6 }}>
                 <TextField
+                  variant="standard"
                   fullWidth
                   id="email"
                   name="email"
@@ -115,8 +125,9 @@ export default function CreateClinicOwnerForm() {
                   helperText={formik.touched.email && formik.errors.email}
                 />
               </Grid>
-              <Grid size={{ xs: 12 }}>
+              <Grid size={{ xs: 12, sm: 6 }}>
                 <TextField
+                  variant="standard"
                   fullWidth
                   id="phoneNumber"
                   name="phoneNumber"
@@ -127,6 +138,7 @@ export default function CreateClinicOwnerForm() {
               </Grid>
               <Grid size={{ xs: 12 }}>
                 <TextField
+                  variant="standard"
                   fullWidth
                   id="dateOfBirth"
                   name="dateOfBirth"
@@ -139,6 +151,7 @@ export default function CreateClinicOwnerForm() {
               </Grid>
               <Grid size={{ xs: 12 }}>
                 <TextField
+                  variant="standard"
                   fullWidth
                   id="address"
                   name="address"
@@ -149,6 +162,7 @@ export default function CreateClinicOwnerForm() {
               </Grid>
               <Grid size={{ xs: 12, sm: 6 }}>
                 <TextField
+                  variant="standard"
                   fullWidth
                   id="city"
                   name="city"
@@ -159,6 +173,7 @@ export default function CreateClinicOwnerForm() {
               </Grid>
               <Grid size={{ xs: 12, sm: 6 }}>
                 <TextField
+                  variant="standard"
                   fullWidth
                   id="state"
                   name="state"
@@ -169,6 +184,7 @@ export default function CreateClinicOwnerForm() {
               </Grid>
               <Grid size={{ xs: 12, sm: 6 }}>
                 <TextField
+                  variant="standard"
                   fullWidth
                   id="postalCode"
                   name="postalCode"
@@ -179,6 +195,7 @@ export default function CreateClinicOwnerForm() {
               </Grid>
               <Grid size={{ xs: 12, sm: 6 }}>
                 <TextField
+                  variant="standard"
                   fullWidth
                   id="licenseNumber"
                   name="licenseNumber"
@@ -189,6 +206,7 @@ export default function CreateClinicOwnerForm() {
               </Grid>
               <Grid size={{ xs: 12 }}>
                 <TextField
+                  variant="standard"
                   fullWidth
                   id="profileImageUrl"
                   name="profileImageUrl"
@@ -208,11 +226,24 @@ export default function CreateClinicOwnerForm() {
             </Grid>
 
             <Button
-              color="primary"
               variant="contained"
               fullWidth
               type="submit"
-              sx={{ mt: 3 }}
+              sx={{
+                mt: 3,
+                backgroundColor: '#4fd1c5',
+                color: '#fff',
+                borderRadius: 2,
+                overflow: 'hidden',
+                backgroundSize: '200% 100%',
+                backgroundPosition: 'left center',
+                transition: 'all 2s ease',
+                '&:hover': {
+                  backgroundImage: 'linear-gradient(90deg, #aaff47, #2043c9)',
+                  backgroundPosition: 'right center',
+                  backgroundSize: '200% 100%',
+                },
+              }}
               disabled={mutation.isPending}
             >
               {mutation.isPending ? 'Submitting...' : 'Create Owner'}

@@ -38,7 +38,7 @@ const Header: React.FC = () => {
 
   return (
     <header className="h-max w-screen relative">
-      <div className="w-full sm:pt-4 bg-gradient-to-t from-emerald-600 to-emerald-400">
+      <div className="w-full sm:pt-4 bg-[#1695a0]/70">
         <div className=" flex flex-col justify-center items-center">
           {/*fore header*/}
           <div className="w-full sm:px-4 mb-4 hidden sm:flex justify-between items-center ">

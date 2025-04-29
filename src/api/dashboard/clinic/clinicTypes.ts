@@ -27,3 +27,24 @@ export type ClinicOwnerDTO = {
   licenseNumber: string;
   profileImageUrl: string;
 };
+
+export type CreateClinicRequest = {
+  clinicName: string;
+  clinicAddress: string;
+  clinicPhone: string;
+  description?: string;
+  image?: string;
+};
+
+export type ClinicDTO = {
+  clinicId: string;
+  ownerId: string;
+  ownerName: string;
+  clinicName: string;
+  email: string;
+  clinicPhone: string;
+  clinicAddress: string;
+  description: string;
+  image: string;
+  status: string;
+};

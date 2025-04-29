@@ -28,7 +28,9 @@ const AdsApp = () => {
 
   return !isVisible ? (
     <div
-      className={'flex justify-center items-center p-5 w-full h-full bg-white'}
+      className={
+        'flex justify-center items-center p-5 w-full h-full bg-white z-50'
+      }
     >
       <div className={'lg:w-2/3 md:max-lg:w-3/4 h-full bg-white'}>
         <div className="w-full h-full flex justify-around items-center lg:p-5 md:max-lg:p-1">
