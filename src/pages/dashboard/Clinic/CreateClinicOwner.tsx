@@ -2,8 +2,7 @@ import CreateClinicOwnerForm from './CreateClinicOwnerForm';
 
 const CreateClinicOwner = () => {
   return (
-    <div>
-      <h1>Create Clinic Owner</h1>
+    <div className={'w-full h-full bg-white shadow-2xl rounded-xl'}>
       <CreateClinicOwnerForm />
     </div>
   );

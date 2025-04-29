@@ -41,11 +41,11 @@ const DashboardSidebar: React.FC = () => {
               );
 
               return (
-                <li key={index} className="w-2/3 text-lg">
+                <li key={index} className="w-full text-lg">
                   <div className="flex items-center justify-between w-full">
                     <Link
                       to={item.path}
-                      className={`flex items-center rounded-xl p-2 transition ${
+                      className={`flex items-center rounded-xl p-2 transition w-full ${
                         isActive ? 'bg-white text-black' : 'text-gray-500'
                       }`}
                     >
@@ -67,7 +67,16 @@ const DashboardSidebar: React.FC = () => {
                           onClick={() => toggleSubmenu(item.path)}
                           className="ml-2 text-gray-500 hover:text-black"
                         >
-                          {openSubmenu === item.path ? '▲' : '▼'}
+                          <span
+                            className={`inline-block transform duration-1000 ${
+                              openSubmenu === item.path
+                                ? 'rotate-180'
+                                : 'rotate-0'
+                            }`}
+                          >
+                            ▲
+                          </span>
+                          {/*{openSubmenu === item.path ? '▲' : '▼'}*/}
                         </button>
                       )}
                   </div>
@@ -95,7 +104,7 @@ const DashboardSidebar: React.FC = () => {
                                       ? subItem.iconActive
                                       : subItem.iconInactive
                                   }
-                                  className="w-8 h-8 mr-2"
+                                  className="w-8 h-8 rounded-xl mr-2"
                                   alt=""
                                 />
                                 <span>{subItem.title}</span>

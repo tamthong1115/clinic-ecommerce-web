@@ -7,14 +7,26 @@ import UserMenu from '../../components/UserMenu/UserMenu.tsx';
 const DashboardNavbar: React.FC = () => {
   const location = useLocation();
 
-  const currentItem = sidebarItems.find(
-    (item) => item.path === location.pathname
-  );
-  const currentTitle = currentItem ? currentItem.title : 'Trang không tồn tại';
+  const currentItem = location.pathname;
+  let currentTitle = 'Trang không tồn tại';
+
+  sidebarItems.forEach((item) => {
+    const match =
+      item.path === currentItem
+        ? item
+        : item.submenu?.find((sub) => sub.path === currentItem);
+
+    if (match) {
+      currentTitle = item.submenu?.includes(match)
+        ? `${item.title} - ${match.title}`
+        : match.title;
+    }
+  });
 
   return (
     <div className="w-auto flex justify-between mx-8 h-[6.4rem]">
-      <div className="items-center flex p-4 rounded-2xl">
+      <div className="text-left flex py-4 rounded-2xl flex-col mt-2">
+        <span className={'text-lg font-bold'}>Pages</span>
         <span className={'text-lg font-bold'}>{currentTitle}</span>
       </div>
       <div className="flex items-center justify-evenly w-auto h-auto">

@@ -68,7 +68,7 @@ const Footer: React.FC = () => {
         }
       ></div>
       {/*those are contents of footer*/}
-      <div className="w-full lg:max-xl:w-11/12 xl:grid xl:grid-cols-5 xl:justify-items-center lg:gap-0 xl:gap-9 flex flex-col justify-start  p-2.5">
+      <div className="w-full lg:max-xl:w-11/12 xl:grid xl:grid-cols-5 xl:justify-items-center lg:gap-0 xl:gap-9 flex flex-col justify-start p-2.5">
         <div className="text-left ms:max-lg:w-full">
           <div
             className={
