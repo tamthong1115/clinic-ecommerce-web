@@ -1,8 +1,9 @@
 import PublicPaths from '../../routes/public/pathPublic';
+
 export const navLink = [
   {
     nameLink: 'Dịch vụ',
-    routerLink: PublicPaths.SERVICE,
+    routerLink: PublicPaths.SPECIALITY,
     item: {
       item1: 'item-1',
       item2: 'item-2',
