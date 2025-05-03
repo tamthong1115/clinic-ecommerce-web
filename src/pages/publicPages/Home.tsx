@@ -1,8 +1,8 @@
 import Alert from '@mui/material/Alert';
 import { useEffect, useState } from 'react';
-import MainPresent from '../components/Home/MainPresent.tsx';
-import WhatWeDo from '../components/Home/WhatWeDo.tsx';
-import WhoWeAre from '../components/Home/WhoWeAre.tsx';
+import MainPresent from '../../components/Home/MainPresent.tsx';
+import WhatWeDo from '../../components/Home/WhatWeDo.tsx';
+import WhoWeAre from '../../components/Home/WhoWeAre.tsx';
 
 const Home = () => {
   const tokenLogin = localStorage.getItem('token');

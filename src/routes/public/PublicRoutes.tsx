@@ -7,15 +7,20 @@ import Settings from '../../pages/user/Settings';
 import UserPaths from '../user/pathUser';
 import CalendarBooking from '../../pages/user/CalendarBooking';
 
-const Home = lazy(() => import('../../pages/Home'));
-const Login = lazy(() => import('../../pages/SignIn'));
-const SignUp = lazy(() => import('../../pages/SignUp'));
-const BookingCart = lazy(() => import('../../pages/BookingCart'));
-const Service = lazy(() => import('../../pages/Service'));
-const Booking = lazy(() => import('../../pages/Booking'));
-const Medicine = lazy(() => import('../../pages/Medicine'));
-const Cooperate = lazy(() => import('../../pages/Cooperate'));
-const ForgotPassword = lazy(() => import('../../pages/ForgotPassword'));
+const Home = lazy(() => import('../../pages/publicPages/Home.tsx'));
+const Login = lazy(() => import('../../pages/publicPages/SignIn.tsx'));
+const SignUp = lazy(() => import('../../pages/publicPages/SignUp.tsx'));
+const BookingCart = lazy(
+  () => import('../../pages/publicPages/BookingCart.tsx')
+);
+const Service = lazy(() => import('../../pages/publicPages/Service.tsx'));
+const Booking = lazy(() => import('../../pages/publicPages/Booking.tsx'));
+const Medicine = lazy(() => import('../../pages/publicPages/Medicine.tsx'));
+const Cooperate = lazy(() => import('../../pages/publicPages/Cooperate.tsx'));
+const ForgotPassword = lazy(
+  () => import('../../pages/publicPages/ForgotPassword.tsx')
+);
+const Speciality = lazy(() => import('../../pages/publicPages/Speciality.tsx'));
 const PublicRoutesComponent = () => {
   return (
     <>
@@ -28,6 +33,7 @@ const PublicRoutesComponent = () => {
       <Route path={PublicPaths.BOOKING} element={<Booking />} />
       <Route path={PublicPaths.MEDICINE} element={<Medicine />} />
       <Route path={PublicPaths.COOPERATE} element={<Cooperate />} />
+      <Route path={PublicPaths.SPECIALITY} element={<Speciality />} />
       <Route
         path={UserPaths.SETTINGS}
         element={

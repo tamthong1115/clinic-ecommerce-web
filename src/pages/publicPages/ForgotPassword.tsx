@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { useToast } from '../context/ToastContext';
-import PublicPaths from '../routes/public/pathPublic';
+import { useToast } from '../../context/ToastContext.tsx';
+import PublicPaths from '../../routes/public/pathPublic.ts';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');

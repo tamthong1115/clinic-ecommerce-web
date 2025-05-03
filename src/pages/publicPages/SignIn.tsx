@@ -1,47 +1,69 @@
 import { motion } from 'framer-motion';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { loginService } from '../../api/auth/authService.ts';
+import { useToast } from '../../context/ToastContext.tsx';
 import * as Yup from 'yup';
-import { useToast } from '../context/ToastContext';
-import { registerService } from '../api/auth/authService';
-import PublicPaths from '../routes/public/pathPublic';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { useAuth } from '../../context/AuthContext.tsx';
+import PublicPaths from '../../routes/public/pathPublic.ts';
+import Roles from '../../constants/roles.ts';
 
 const SignUpSchema = Yup.object().shape({
-  username: Yup.string(),
-  email: Yup.string().email('Invalid email').required('Email is required'),
+  email: Yup.string().email('Invalid email').required('Required'),
   password: Yup.string()
     .min(8, 'Password must be at least 8 characters')
     .required('Password is required'),
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password'), undefined], 'Password must match')
-    .required('Confirm Password is Required'),
 });
 
-const SignUp = () => {
+const Login = () => {
   const { showToast } = useToast();
+  const { login } = useAuth();
   const navigate = useNavigate();
 
+  const handleNavigation = (role: string) => {
+    switch (role) {
+      case Roles.DOCTOR:
+      case Roles.CLINIC:
+      case Roles.ADMIN:
+        navigate('/dashboard');
+        break;
+      default:
+        navigate('/');
+    }
+  };
+
   const { mutate } = useMutation({
-    mutationFn: registerService,
-    onSuccess: () => {
-      showToast('Registration successful!', { type: 'success' });
-      navigate('/');
+    mutationFn: loginService,
+    onSuccess: async (data) => {
+      const { token, user } = data;
+      login(token, user);
+      showToast('Đăng nhập thành công');
+      handleNavigation(user.role);
     },
     onError: (error: { response?: { data?: { message?: string } } }) => {
+      // console.log(error);
       const errorMessage =
-        error?.response?.data?.message || 'Registration failed!';
+        error?.response?.data?.message || 'Đăng nhập thất bại!';
       showToast(errorMessage, { type: 'error' });
     },
   });
 
-  const handleSubmit = async (values: {
-    username: string;
+  const handleSubmit = async ({
+    email,
+    password,
+  }: {
     email: string;
     password: string;
   }) => {
-    const { ...dataToSend } = values; // Exclude confirmPassword
-    mutate(dataToSend);
+    // e.preventDefault();
+    if (!email || !password) {
+      showToast('Vui lòng nhập đầy đủ email và mật khẩu!', { type: 'warning' });
+      return;
+    }
+
+    mutate({ email, password });
   };
 
   return (
@@ -52,16 +74,16 @@ const SignUp = () => {
         transition={{ duration: 0.5 }}
         className="w-full max-w-xl h-auto bg-white max-[700px]:p-[50px] max-[500px]:p-[30px] py-[70px] px-[50px] rounded-2xl shadow-lg"
       >
-        <h2 className="text-[32px] font-semibold text-center mb-4">Đăng Ký</h2>
+        <h2 className="text-[32px] font-semibold text-center mb-4">
+          Đăng nhập
+        </h2>
         <p className="text-center text-gray-600 mb-[40px] text-[18px]">
-          Vui lòng nhập thông tin để tạo tài khoản
+          Vui lòng nhập email và mật khẩu để tiếp tục
         </p>
         <Formik
           initialValues={{
-            username: '',
             email: '',
             password: '',
-            confirmPassword: '',
           }}
           validationSchema={SignUpSchema}
           onSubmit={(values, { setSubmitting }) => {
@@ -71,29 +93,6 @@ const SignUp = () => {
         >
           {({ errors, touched }) => (
             <Form>
-              <div className="mb-[30px]">
-                <label
-                  className="block text-gray-700 text-[18px] font-medium mb-[15px]"
-                  htmlFor="username"
-                >
-                  Full Name
-                </label>
-                <Field
-                  name="username"
-                  type="text"
-                  className={`w-full h-[56px] p-2 border rounded-lg focus:outline-none focus:ring-2 ${
-                    errors.username && touched.username
-                      ? 'border-red-500 focus:ring-red-400'
-                      : 'border-gray-300 focus:ring-green-400'
-                  }`}
-                  id="username"
-                />
-                <ErrorMessage
-                  name="username"
-                  component="div"
-                  className="text-red-500 text-sm mt-1"
-                />
-              </div>
               <div className="mb-[30px]">
                 <label
                   className="block text-gray-700 text-[18px] font-medium mb-[15px]"
@@ -122,7 +121,7 @@ const SignUp = () => {
                   className="block text-gray-700 text-[18px] font-medium mb-[15px]"
                   htmlFor="password"
                 >
-                  Password
+                  Mật khẩu
                 </label>
                 <Field
                   name="password"
@@ -140,28 +139,17 @@ const SignUp = () => {
                   className="text-red-500 text-sm mt-1"
                 />
               </div>
-              <div className="mb-[30px]">
-                <label
-                  className="block text-gray-700 text-[18px] font-medium mb-[15px]"
-                  htmlFor="confirmPassword"
-                >
-                  Confirm Password
+              <div className="flex items-center justify-between mb-[30px]">
+                <label className="flex items-center max-[400px]:text-[16px] text-[18px] text-gray-600">
+                  <input type="checkbox" className="mr-2 w-[24px] h-[24px]" />{' '}
+                  Nhớ mật khẩu
                 </label>
-                <Field
-                  name="confirmPassword"
-                  type="password"
-                  className={`w-full h-[56px] p-2 border rounded-lg focus:outline-none focus:ring-2 ${
-                    errors.confirmPassword && touched.confirmPassword
-                      ? 'border-red-500 focus:ring-red-400'
-                      : 'border-gray-300 focus:ring-green-400'
-                  }`}
-                  id="confirmPassword"
-                />
-                <ErrorMessage
-                  name="confirmPassword"
-                  component="div"
-                  className="text-red-500 text-sm mt-1"
-                />
+                <Link
+                  to={PublicPaths.FORGOTPASSWORD}
+                  className="max-[400px]:text-[16px] text-[18px] text-gray-500 hover:text-green-700"
+                >
+                  Quên mật khẩu?
+                </Link>
               </div>
               <motion.button
                 type="submit"
@@ -169,18 +157,19 @@ const SignUp = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Đăng Ký
+                Đăng Nhập
               </motion.button>
             </Form>
           )}
         </Formik>
+
         <p className="text-center max-[400px]:text-[16px] text-[20px] text-gray-600 mt-4">
-          Bạn đã có tài khoản?{' '}
+          Bạn chưa có tài khoản?{' '}
           <Link
-            to={PublicPaths.LOGIN}
+            to={PublicPaths.SIGN_UP}
             className="text-blue-500 hover:underline"
           >
-            Đăng nhập
+            Tạo tài khoản
           </Link>
         </p>
       </motion.div>
@@ -188,4 +177,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Login;

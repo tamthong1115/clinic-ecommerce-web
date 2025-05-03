@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
-import logo from '../assets/logo.png';
+import logo from '../../assets/logo.png';
 import { GrSchedulePlay } from 'react-icons/gr';
+
 const Booking = () => {
   return (
     <div className="bg-gray-200">
