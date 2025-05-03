@@ -60,7 +60,7 @@ const Footer: React.FC = () => {
   }, [windowWidth]);
 
   return (
-    <div className="flex flex-col w-full justify-center items-center bg-white text-black">
+    <div className="flex flex-col w-full justify-center items-center bg-white text-black mt-40">
       <AdsApp />
       <div
         className={

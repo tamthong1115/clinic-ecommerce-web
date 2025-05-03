@@ -38,7 +38,7 @@ const Header: React.FC = () => {
 
   return (
     <header className="h-max w-screen relative">
-      <div className="w-full sm:pt-4 bg-[#1695a0]/70">
+      <div className="w-full sm:pt-4 bg-[#1695a0]">
         <div className=" flex flex-col justify-center items-center">
           {/*fore header*/}
           <div className="w-full sm:px-4 mb-4 hidden sm:flex justify-between items-center ">
@@ -91,8 +91,13 @@ const Header: React.FC = () => {
               {/*Quick access buttons here*/}
               <div className="w-fit flex flex-row justify-around items-center px-3">
                 <div className="flex items-center">
-                  <Link to={PublicPaths.BOOKING}>
+                  <Link to={PublicPaths.BOOKING} className={' relative'}>
                     <div className="flex items-center mr-5 bg-white rounded-full p-2">
+                      <div
+                        className={
+                          'w-4 h-4 rounded-full bg-red-600 absolute top-1 right-3'
+                        }
+                      ></div>
                       <div>
                         <RiCalendarScheduleLine size={25} color={'#059669'} />
                       </div>
@@ -108,13 +113,13 @@ const Header: React.FC = () => {
             {/*Searching field here*/}
             {/*We are desiring from longchau's website*/}
             <div
-              className={'w-[80%] bg-white rounded-full mb-2'}
+              className={'w-[70%] bg-white rounded-full mb-2'}
               onClick={() => setIsSearching(true)}
             >
               <form
                 className={' w-full flex flex-row justify-between items-center'}
               >
-                <fieldset className={'w-[90%]'}>
+                <fieldset className={'w-[95%]'}>
                   <input
                     type={'text'}
                     placeholder={'Tìm kiếm tại đây...'}
@@ -123,15 +128,17 @@ const Header: React.FC = () => {
                     }
                   />
                 </fieldset>
-                <button type={'submit'} className={'ml-2 rounded-full p-3'}>
-                  <BsSearch />
-                </button>
+                <div className={'w-[5%] flex justify-center items-center'}>
+                  <button type={'submit'} className={'rounded-full p-3'}>
+                    <BsSearch />
+                  </button>
+                </div>
               </form>
             </div>
             {/*With tablet or PC version (or larger screen) we use visible menu*/}
             <div
               className={
-                'w-full flex flex-col justify-center items-center max-sm:hidden bg-white shadow-md shadow-gray-300'
+                'w-full flex flex-col justify-center items-center max-sm:hidden bg-white shadow-md shadow-gray-500'
               }
             >
               <NavigatorBar widthDevice={winSize.width} />

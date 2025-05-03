@@ -1,6 +1,6 @@
 const WhatWeDo = () => {
   return (
-    <section className="w-full py-12 px-6 bg-white text-gray-800">
+    <section className="w-full h-full py-12 px-6 bg-white text-gray-800">
       <h2 className="text-4xl font-semibold text-center mb-4 relative inline-block w-full">
         <span className="px-4 py-1 rounded shadow-sm">What We Do</span>
       </h2>
