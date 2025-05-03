@@ -70,7 +70,7 @@ const Home = () => {
 
       <div className="relative w-full h-full">
         <div
-          className=" fixed top-0 left-0 w-full h-full bg-no-repeat bg-center transition-all duration-700 -z-50"
+          className="fixed top-0 left-0 w-full h-full bg-no-repeat bg-center transition-all duration-700 -z-50"
           style={{
             backgroundImage: `url(${activeBg})`,
             backgroundSize: '100%',
@@ -85,13 +85,14 @@ const Home = () => {
           >
             <MainPresent />
           </section>
-
           <div className="flex items-center justify-center bg-white">
             <WhatWeDo />
           </div>
 
           <section
+
             className="flex items- center justify-center"
+
             data-bg="/image/background2.jpg"
           >
             <WhoWeAre />
