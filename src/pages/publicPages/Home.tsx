@@ -78,20 +78,21 @@ const Home = () => {
             backgroundPosition: 'center',
           }}
         ></div>
-        <div className="relative z-10">
+        <div className="relative">
           <section
             className="h-screen flex items-center justify-center"
             data-bg="/image/background1.jpg"
           >
             <MainPresent />
           </section>
-
-          <div className="h-screen flex items-center justify-center bg-white">
+          <div className="flex items-center justify-center bg-white">
             <WhatWeDo />
           </div>
 
           <section
-            className="h-screen flex items-center justify-center"
+
+            className="flex items- center justify-center"
+
             data-bg="/image/background2.jpg"
           >
             <WhoWeAre />

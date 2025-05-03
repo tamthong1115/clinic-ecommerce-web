@@ -1,0 +1,45 @@
+const sampleData =  [
+    {
+      ID: 11011101,
+      title: 'Khám cơ xương khớp',
+      doctor: {
+        name: 'Đỗ Nguyễn Diệu Anh',
+        title: 'Phó Chủ tịch hôi Phẩu thuật cột sống Việt Nam',
+      },
+      selectedTime: { date: '25/5', time: '08:00 - 09:00' },
+      bookTime: [
+        '08:00 - 09:00',
+        '09:00 - 10:00',
+        '10:00 - 11:00',
+        '11:00 - 12:00',
+        '13:00 - 14:00',
+        '14:00 - 15:00',
+      ],
+      address: {
+        name: 'Phòng khám Spinetech CLinic',
+        addr: 'Tòa nhà GP, 257 Giải Phóng, Phương Mai, Đống Đa, Hà Nội',
+      },
+      cost: 500000,
+    },
+    {
+      ID: 11011101,
+      doctor: {
+        name: 'Đỗ Nguyễn Diệu Anh',
+        title: 'Phó Chủ tịch hôi Phẩu thuật cột sống Việt Nam',
+      },
+      selectedTime: { date: '30/5', time: '11:00 - 12:00' },
+      bookTime: [
+        '08:00 - 09:00',
+        '09:00 - 10:00',
+        '10:00 - 11:00',
+        '11:00 - 12:00',
+        '13:00 - 14:00',
+        '14:00 - 15:00',
+      ],
+      address: {
+        name: 'Phòng khám Spinetech CLinic',
+        addr: 'Tòa nhà GP, 257 Giải Phóng, Phương Mai, Đống Đa, Hà Nội',
+      },
+      cost: 650000,
+    },
+  ];
