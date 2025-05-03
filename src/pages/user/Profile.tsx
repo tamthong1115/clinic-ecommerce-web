@@ -3,6 +3,7 @@ import { userProfile } from '../../api/user/userService';
 import { useQuery } from '@tanstack/react-query';
 import UpdateUser from './forms/UpdateUser.tsx';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Profile = () => {
   const {
@@ -70,6 +71,56 @@ const Profile = () => {
               <li>{profile?.phone || 'No phone number available'}</li>
               <li>{profile?.email || 'No email available'}</li>
             </ul>
+          </div>
+        </div>
+      </div>
+
+      {/*This is for calendar booking quick access*/}
+      <div
+        className={'w-[80%] h-fit shadow-lg shadow-gray-300 rounded-lg mb-5'}
+      >
+        {/*title here*/}
+        <div
+          className={
+            'w-full min-h-4 p-2 bg-emerald-600 text-white font-bold text-lg text-center rounded-tl-lg rounded-tr-lg'
+          }
+        >
+          Lịch hẹn sắp tới
+        </div>
+        {/*content here*/}
+        <div
+          className={
+            'w-full h-fit p-3 flex justify-between items-center flex-col'
+          }
+        >
+          {/*The next booking here*/}
+          <div
+            className={
+              'w-full h-fit border-2 border-emerald-600 rounded-lg p-1 flex flex-row justify-center items-center'
+            }
+          >
+            {/*datetime here*/}
+            <div
+              className={
+                'w-[30%] h-full flex justify-center items-center text-center font-bold border-r-2 border-r-emerald-600 p-1'
+              }
+            >
+              MAY 01 <br /> 2025
+            </div>
+            {/*booking's content here*/}
+            <div className={'w-full p-1'}>
+              Dịch vụ đã đặt trước: Khám tổng quát.
+              <br />
+              Nơi khám: BV Đa khoa Khu vực Củ Chi
+            </div>
+          </div>
+          {/*Quick access button here*/}
+          <div
+            className={
+              'w-fit h-fit p-2 bg-emerald-600 rounded-lg text-white mt-5'
+            }
+          >
+            <Link to={'/calendar'}>Xem thêm</Link>
           </div>
         </div>
       </div>
