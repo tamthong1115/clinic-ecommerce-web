@@ -5,6 +5,8 @@ const PublicPaths = {
   EX: '/ex',
   BOOKING_CART: '/bookingCart',
   SERVICE: '/service',
+  SERVICE_BY_ID: (id: string) => `/service/${id}`,
+  SERVICE_BY_SPECIALITY: (specId: string) => `/service?specialityId=${specId}`,
   BOOKING: '/booking',
   MEDICINE: '/Medicine',
   COOPERATE: '/Cooperate',
@@ -12,6 +14,7 @@ const PublicPaths = {
   CALENDAR: '/calendar-booking',
   SUPPORT: '/support',
   FORGOTPASSWORD: '/forgot-password',
+  SPECIALITY: `/speciality`,
 };
 
 export default PublicPaths;
