@@ -9,6 +9,7 @@ import { MdOutlinePhoneInTalk, MdOutlinePhoneIphone } from 'react-icons/md';
 import { linkHeader } from '../../constants/header/linkHeader.tsx';
 import NavigatorBar from './NavigatorBar.tsx';
 import UserMenu from '../UserMenu/UserMenu.tsx';
+import UserPaths from '../../routes/user/pathUser.ts';
 
 const Header: React.FC = () => {
   const [isSearching, setIsSearching] = useState(false);
@@ -91,13 +92,8 @@ const Header: React.FC = () => {
               {/*Quick access buttons here*/}
               <div className="w-fit flex flex-row justify-around items-center px-3">
                 <div className="flex items-center">
-                  <Link to={PublicPaths.BOOKING} className={' relative'}>
+                  <Link to={UserPaths.BOOKING_CART} className={' relative'}>
                     <div className="flex items-center mr-5 bg-white rounded-full p-2">
-                      <div
-                        className={
-                          'w-4 h-4 rounded-full bg-red-600 absolute top-1 right-3'
-                        }
-                      ></div>
                       <div>
                         <RiCalendarScheduleLine size={25} color={'#059669'} />
                       </div>
@@ -148,8 +144,8 @@ const Header: React.FC = () => {
       </div>
 
       {/*Searching zone here*/}
-      {/*With phone's screen, we will use full screen searching*/}
-      {/*But, with larger screen, like tablet or computer, we need a dialog box (like this)*/}
+      {/*With phone's screen, we will use full-screen searching*/}
+      {/*But with a larger screen, like tablet or computer, we need a dialog box (like this)*/}
       {isSearching && isMobile ? (
         <SearchingField setIsSearching={setIsSearching} />
       ) : null}

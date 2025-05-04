@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import logo from '../assets/logo.png';
+import logo from '../../assets/logo.png';
 import { GrSchedulePlay } from 'react-icons/gr';
 
 const sampleData = [
@@ -27,6 +27,7 @@ const sampleData = [
   },
   {
     ID: 11011101,
+    title: 'Khám cơ xương khớp',
     doctor: {
       name: 'Đỗ Nguyễn Diệu Anh',
       title: 'Phó Chủ tịch hôi Phẩu thuật cột sống Việt Nam',
@@ -114,7 +115,7 @@ const Booking = () => {
                 {item.bookTime.map((item1, index1) => (
                   <div
                     key={index1}
-                    className={`p-2 text-white ${item1 === item.selectedTime.time ? `bg-emerald-600` : `bg-[#eeeeeeee]`} text-center text-[14px] h-[41px] font-[500] cursor-not-allowed`}
+                    className={`p-2 ${item1 === item.selectedTime.time ? ` text-white bg-emerald-600` : ` text-gray-600 bg-[#eeeeeeee]`} text-center text-[14px] h-[41px] font-[500] cursor-not-allowed`}
                   >
                     {item1}
                   </div>

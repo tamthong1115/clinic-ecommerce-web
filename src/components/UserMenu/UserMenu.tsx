@@ -65,9 +65,19 @@ const UserMenu: React.FC = () => {
         }}
       >
         <MenuItem onClick={() => handleMenuClose(UserPaths.PROFILE)}>
-          Profile
+          Hồ sơ
         </MenuItem>
-        <MenuItem onClick={() => handleLogout()}>Logout</MenuItem>
+        <MenuItem>
+          {isAuthenticated ? (
+            <div
+              className={
+                'w-4 h-4 rounded-full bg-red-600 absolute top-1 right-3'
+              }
+            ></div>
+          ) : null}
+          <Link to={UserPaths.BOOKING_LIST}>Lịch hẹn</Link>
+        </MenuItem>
+        <MenuItem onClick={() => handleLogout()}>Đăng xuất</MenuItem>
       </Menu>
     </div>
   );

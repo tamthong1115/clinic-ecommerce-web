@@ -6,11 +6,13 @@ import Calendar from '../../pages/user/CalendarBooking.tsx';
 import ProtectedRoute from '../ProtectedRoute.tsx';
 import Settings from '../../pages/user/Settings.tsx';
 
+const Booking = lazy(() => import('../../pages/publicPages/Booking.tsx'));
+
 const Profile = lazy(() => import('../../pages/user/Profile'));
 
 const UserRoutesComponent = () => {
   return (
-    <Route element={<ProtectedRoute requiredRoles={['ADMIN']} />}>
+    <Route element={<ProtectedRoute requiredRoles={['ADMIN', 'USER']} />}>
       <Route
         path={UserPaths.SETTINGS}
         element={
@@ -35,6 +37,7 @@ const UserRoutesComponent = () => {
           </ProfileLayout>
         }
       />
+      <Route path={UserPaths.BOOKING_LIST} element={<Booking />} />
     </Route>
   );
 };
