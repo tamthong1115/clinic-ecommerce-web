@@ -8,6 +8,7 @@ const PublicPaths = {
   SERVICE_BY_ID: (id: string) => `/service/${id}`,
   SERVICE_BY_SPECIALITY: (specId: string) => `/service?specialityId=${specId}`,
   BOOKING: '/booking',
+  BOOKING_DETAIL: '/booking/detail/:id',
   MEDICINE: '/Medicine',
   COOPERATE: '/Cooperate',
   PROFILE: '/profile',
