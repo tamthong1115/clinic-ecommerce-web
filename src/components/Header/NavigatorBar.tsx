@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
 import logo from '../../assets/logo.png';
 import PublicPaths from '../../routes/public/pathPublic.ts';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext.tsx';
 import UserPaths from '../../routes/user/pathUser.ts';
 
@@ -215,32 +215,38 @@ const NavigatorBar = ({ widthDevice }: { widthDevice: number }) => {
                   <div
                     className={`w-full p-2 flex flex-row items-center justify-between  ${activeTab[index] ? `text-emerald-600` : `text-black`}`}
                   >
-                    {item.nameLink}
-                    {activeTab[index] ? (
-                      <div className={`text-[20px]`}>
-                        <IoIosArrowUp />
-                      </div>
+                    {item.routerLink ? (
+                      <Link to={item.routerLink}>{item.nameLink}</Link>
                     ) : (
-                      <div className="text-[20px]">
-                        <IoIosArrowDown />
-                      </div>
+                      item.nameLink
                     )}
+                    {item.item ? (
+                      activeTab[index] ? (
+                        <div className={`text-[20px]`}>
+                          <IoIosArrowUp />
+                        </div>
+                      ) : (
+                        <div className="text-[20px]">
+                          <IoIosArrowDown />
+                        </div>
+                      )
+                    ) : null}
                   </div>
 
-                  {activeTab[index] ? (
-                    <ul className="bg-[white] text-[black] w-full sm:absolute sm:top-10 shadow-md shadow-gray-500">
-                      {Object.entries(item.item).map(
-                        ([key, value], subIndex) => (
+                  {item.item ? (
+                    activeTab[index] ? (
+                      <ul className="bg-[white] text-[black] w-full sm:absolute sm:top-10 shadow-md shadow-gray-500">
+                        {item.item.map((item1, subIndex) => (
                           <li
                             className="cursor-pointer mb-[5px] p-3"
-                            key={`${index}-${key}-${subIndex}`}
+                            key={subIndex}
                             onClick={handleCloseMenu}
                           >
-                            {value}
+                            <Link to={item1.link}>{item1.name}</Link>
                           </li>
-                        )
-                      )}
-                    </ul>
+                        ))}
+                      </ul>
+                    ) : null
                   ) : null}
                 </li>
               ))}

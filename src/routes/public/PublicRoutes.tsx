@@ -6,6 +6,8 @@ import Profile from '../../pages/user/Profile';
 import Settings from '../../pages/user/Settings';
 import UserPaths from '../user/pathUser';
 import CalendarBooking from '../../pages/user/CalendarBooking';
+import AboutUs from '../../pages/publicPages/About/AboutUs.tsx';
+import AboutForPatient from '../../pages/publicPages/About/AboutForPatient.tsx';
 
 const Home = lazy(() => import('../../pages/publicPages/Home.tsx'));
 const Login = lazy(() => import('../../pages/publicPages/SignIn.tsx'));
@@ -36,6 +38,11 @@ const PublicRoutesComponent = () => {
       <Route path={PublicPaths.MEDICINE} element={<Medicine />} />
       <Route path={PublicPaths.COOPERATE} element={<Cooperate />} />
       <Route path={PublicPaths.SPECIALITY} element={<Speciality />} />
+      <Route path={PublicPaths.ABOUT_US} element={<AboutUs />} />
+      <Route
+        path={PublicPaths.ABOUT_FOR_PATIENT}
+        element={<AboutForPatient />}
+      />
       <Route
         path={UserPaths.SETTINGS}
         element={

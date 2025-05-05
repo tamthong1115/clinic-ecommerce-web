@@ -4,37 +4,40 @@ export const navLink = [
   {
     nameLink: 'Dịch vụ',
     routerLink: PublicPaths.SPECIALITY,
-    item: {
-      item1: 'item-1',
-      item2: 'item-2',
-      item3: 'item-3',
-    },
+    item: [
+      { name: 'Dịch vụ nhi đồng', link: '/' },
+      { name: 'Dịch vụ sản khoa', link: '/' },
+      { name: 'Dịch vụ người cao tuổi', link: '/' },
+    ],
   },
   {
     nameLink: 'Đặt lịch',
     routerLink: PublicPaths.BOOKING,
-    item: {
-      item1: 'item-1',
-      item2: 'item-2',
-      item3: 'item-3',
-    },
   },
   {
     nameLink: 'Thuốc',
     routerLink: PublicPaths.MEDICINE,
-    item: {
-      item1: 'item-1',
-      item2: 'item-2',
-      item3: 'item-3',
-    },
+    item: [
+      { name: 'Thực phẩm chức năng', link: '/' },
+      { name: 'Thực phẩm bổ sung', link: '/' },
+      { name: 'Thuốc điều trị', link: '/' },
+    ],
   },
   {
     nameLink: 'Hợp tác',
     routerLink: PublicPaths.COOPERATE,
-    item: {
-      item1: 'item-1',
-      item2: 'item-2',
-      item3: 'item-3',
-    },
+    item: [
+      { name: 'Dịch vụ nhi đồng', link: '/' },
+      { name: 'Dịch vụ sản khoa', link: '/' },
+      { name: 'Dịch vụ người cao tuổi', link: '/' },
+    ],
+  },
+  {
+    nameLink: 'Về chúng tôi',
+    item: [
+      { name: 'Dành cho bệnh nhân', link: '/about-for-patient' },
+      { name: 'Dành cho bác sĩ', link: '/' },
+      { name: 'Liên hệ', link: '/' },
+    ],
   },
 ];
