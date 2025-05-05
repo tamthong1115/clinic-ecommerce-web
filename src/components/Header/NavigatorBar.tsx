@@ -10,7 +10,7 @@ import { useAuth } from '../../context/AuthContext.tsx';
 import UserPaths from '../../routes/user/pathUser.ts';
 
 const NavigatorBar = ({ widthDevice }: { widthDevice: number }) => {
-  const [activeTab, setActiveTab] = useState(new Array(4).fill(false));
+  const [activeTab, setActiveTab] = useState(new Array(5).fill(false));
   const [currentTab, setCurrentTab] = useState(-1);
   const [isShowMenu, setIsShowMenu] = useState(false);
   const [widthOffset, setWidthOffset] = useState('0');
@@ -39,7 +39,7 @@ const NavigatorBar = ({ widthDevice }: { widthDevice: number }) => {
   const handleCloseMenu = () => {
     setIsShowMenu(false);
     setCurrentTab(-1);
-    setActiveTab(Array.from(new Array(4).fill(false)));
+    setActiveTab(Array.from(new Array(5).fill(false)));
   };
 
   const handleShowMenu = () => {
@@ -76,9 +76,10 @@ const NavigatorBar = ({ widthDevice }: { widthDevice: number }) => {
     };
   };
 
-  // useEffect(() => {
-  //   console.log(isAuthenticated);
-  // }, [isShowMenu]);
+  useEffect(() => {
+    console.log(isShowMenu);
+    setActiveTab(Array.from(new Array(5).fill(false)));
+  }, [isShowMenu]);
 
   useEffect(() => {
     if (widthDevice <= 640) {
@@ -153,7 +154,7 @@ const NavigatorBar = ({ widthDevice }: { widthDevice: number }) => {
                         }
                         onClick={() => handleNavigate(UserPaths.SETTINGS)}
                       >
-                        {user?.username}
+                        {user?.username || 'Bạn'}
                       </button>
                       <button
                         type={'button'}
@@ -239,7 +240,7 @@ const NavigatorBar = ({ widthDevice }: { widthDevice: number }) => {
                         {item.item.map((item1, subIndex) => (
                           <li
                             className="cursor-pointer mb-[5px] p-3"
-                            key={subIndex}
+                            key={subIndex + '1'}
                             onClick={handleCloseMenu}
                           >
                             <Link to={item1.link}>{item1.name}</Link>
