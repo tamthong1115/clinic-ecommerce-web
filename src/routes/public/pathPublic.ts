@@ -16,7 +16,6 @@ const PublicPaths = {
   SUPPORT: '/support',
   FORGOTPASSWORD: '/forgot-password',
   SPECIALITY: `/speciality`,
-  BOOKING: `/booking`,
   ABOUT_US: '/about-us',
   ABOUT_FOR_PATIENT: '/about-for-patient',
 };
