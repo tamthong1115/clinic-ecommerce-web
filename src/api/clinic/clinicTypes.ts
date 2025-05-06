@@ -1,3 +1,6 @@
+export type clinicStatus = 'OPEN' | 'CLOSED';
+export type clinicServiceStatus = 'ACTIVE' | 'INACTIVE';
+
 export type CreateClinicOwnerRequest = {
   firstName: string;
   lastName: string;
@@ -45,6 +48,35 @@ export type ClinicDTO = {
   clinicPhone: string;
   clinicAddress: string;
   description: string;
-  image: string;
+  images: string[];
   status: string;
 };
+
+export type UpdateClinicRequest = {
+  clinicName?: string;
+  clinicAddress?: string;
+  clinicPhone?: string;
+  description?: string;
+  image: string[];
+  status: clinicStatus;
+};
+
+export type clinicServiceDTO = {
+  clinicId: string;
+  serviceId: string;
+  status?: clinicServiceStatus;
+};
+
+export type clinicServiceRequest = {
+  clinicId: string;
+  serviceId: string;
+  status?: clinicServiceStatus;
+};
+
+export interface serviceInClinic {
+  serviceId: string;
+  clinicId: string;
+  serviceName: string;
+  clinicName: string;
+  status?: string;
+}

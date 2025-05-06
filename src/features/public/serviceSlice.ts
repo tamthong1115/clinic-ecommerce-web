@@ -1,10 +1,20 @@
-import { ServiceDTO } from '../api/public/service/serviceTypes.ts';
+import { ServiceDTO } from '../../api/public/service/serviceTypes.ts';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import {
   getAllService,
   getServiceById,
   getServiceBySpecId,
-} from '../api/public/service/servicePublicService.ts';
+} from '../../api/public/service/servicePublicService.ts';
+import { Page } from '../../api/commonTypes.ts';
+
+interface PaginationState {
+  page: number;
+  size: number;
+  totalPages: number;
+  totalElements: number;
+  last: boolean;
+  first: boolean;
+}
 
 interface ServiceState {
   allServices: ServiceDTO[];
@@ -12,7 +22,18 @@ interface ServiceState {
   servicesBySpeciality: ServiceDTO[];
   loading: boolean;
   error: string | null;
+  paginationAll: PaginationState;
+  paginationSpec: PaginationState;
 }
+
+const defaultPagination: PaginationState = {
+  page: 0,
+  size: 12,
+  totalPages: 0,
+  totalElements: 0,
+  last: false,
+  first: true,
+};
 
 const initialState: ServiceState = {
   allServices: [],
@@ -20,15 +41,17 @@ const initialState: ServiceState = {
   servicesBySpeciality: [],
   loading: false,
   error: null,
+  paginationAll: { ...defaultPagination },
+  paginationSpec: { ...defaultPagination },
 };
 
 export const fetchAllServices = createAsyncThunk<
-  ServiceDTO[],
-  void,
+  Page<ServiceDTO>,
+  { page?: number; size?: number },
   { rejectValue: string }
->('service/fetchAll', async (_, thunkAPI) => {
+>('service/fetchAll', async ({ page, size }, thunkAPI) => {
   try {
-    const data = await getAllService();
+    const data = await getAllService(page, size);
     return data;
   } catch (e) {
     return thunkAPI.rejectWithValue('Lỗi khi lấy danh sách dịch vụ ' + e);
@@ -49,12 +72,12 @@ export const fetchServiceById = createAsyncThunk<
 });
 
 export const fetchServiceBySpecialityId = createAsyncThunk<
-  ServiceDTO[],
-  string,
+  Page<ServiceDTO>,
+  { id: string; page?: number; size?: number },
   { rejectValue: string }
->('service/fetchBySpecialityId', async (id, thunkAPI) => {
+>('service/fetchBySpecialityId', async ({ id, page, size }, thunkAPI) => {
   try {
-    const data = await getServiceBySpecId(id);
+    const data = await getServiceBySpecId(id, page, size);
     return data;
   } catch (e) {
     return thunkAPI.rejectWithValue(
@@ -69,17 +92,28 @@ const ServiceSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      //Builder for all service
       .addCase(fetchAllServices.pending, (state) => {
         state.loading = true;
       })
       .addCase(fetchAllServices.fulfilled, (state, action) => {
         state.loading = false;
-        state.allServices = action.payload;
+        state.allServices = action.payload.content;
+        state.paginationAll = {
+          page: action.payload.number,
+          size: action.payload.size,
+          totalPages: action.payload.totalPages,
+          totalElements: action.payload.totalElements,
+          first: action.payload.first,
+          last: action.payload.last,
+        };
       })
       .addCase(fetchAllServices.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || null;
       })
+
+      //Builder for fetch service by id
       .addCase(fetchServiceById.pending, (state) => {
         state.loading = true;
       })
@@ -91,12 +125,22 @@ const ServiceSlice = createSlice({
         state.loading = false;
         state.error = action.payload || null;
       })
+
+      //Builder for fetch service by speciality
       .addCase(fetchServiceBySpecialityId.pending, (state) => {
         state.loading = true;
       })
       .addCase(fetchServiceBySpecialityId.fulfilled, (state, action) => {
         state.loading = false;
-        state.servicesBySpeciality = action.payload;
+        state.servicesBySpeciality = action.payload.content;
+        state.paginationSpec = {
+          page: action.payload.number,
+          size: action.payload.size,
+          totalPages: action.payload.totalPages,
+          totalElements: action.payload.totalElements,
+          first: action.payload.first,
+          last: action.payload.last,
+        };
       })
       .addCase(fetchServiceBySpecialityId.rejected, (state, action) => {
         state.loading = false;

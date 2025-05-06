@@ -47,6 +47,13 @@ const sidebarItems: DashboardSideBarItem[] = [
         iconInactive: '/icon/icon-add-clinic-2.png',
         requiredRoles: ['ADMIN'],
       },
+      {
+        title: 'Update Clinic',
+        path: ClinicPathsSubMenu.UPDATE_CLINIC,
+        iconActive: '/icon/icon-pencil(edit).png',
+        iconInactive: '/icon/icon-pencil(edit).png',
+        requiredRoles: ['CLINIC_OWNER'],
+      },
     ],
   },
 
