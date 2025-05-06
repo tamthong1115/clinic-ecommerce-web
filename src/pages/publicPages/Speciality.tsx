@@ -1,36 +1,41 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { AppDispatch, RootState } from '../../app/store.ts';
-import { fetchSpeciality } from '../../features/specialitySlice.ts';
+import { fetchSpeciality } from '../../features/public/specialitySlice.ts';
 import { SpecialityDTO } from '../../api/public/speciality/specialityTypes.ts';
 import { Link } from 'react-router-dom';
 import PublicPaths from '../../routes/public/pathPublic.ts';
 
-const ITEM_PER_PAGE = 12;
 const SpecialityPages = () => {
   const dispatch = useDispatch<AppDispatch>();
   const {
     speciality = [],
     loading = false,
     error = null,
+    pagination,
   } = useSelector((state: RootState) => state.serviceSpeciality || {});
-  const [currentPage, setCurrentPage] = useState(1);
+
+  const currentItems: SpecialityDTO[] = speciality;
+
+  const ITEM_PER_PAGE = pagination.size;
+  const totalPages = pagination.totalPages;
+  const [currentPage, setCurrentPage] = useState(pagination.page + 1);
+
   useEffect(() => {
-    dispatch(fetchSpeciality());
-  }, [dispatch]);
+    const pageParam = currentPage - 1;
+    dispatch(fetchSpeciality({ page: pageParam, size: ITEM_PER_PAGE }));
+  }, [dispatch, currentPage, ITEM_PER_PAGE]);
 
   // console.log('🔎 speciality:', speciality);
   // console.log('🔎 isArray:', Array.isArray(speciality));
   // console.log('🔎 type of speciality:', typeof speciality);
   // console.log('🔎 length:', speciality.length);
 
-  const totalPages = Math.ceil(speciality.length / ITEM_PER_PAGE);
-  const currentItems = speciality.slice(
-    (currentPage - 1) * ITEM_PER_PAGE,
-    currentPage * ITEM_PER_PAGE
-  );
-
-  const handlePageChange = (page: number) => setCurrentPage(page);
+  const handlePageChange = (page: number) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
 
   return (
     <>
@@ -79,7 +84,7 @@ const SpecialityPages = () => {
             </Link>
           ))}
         </div>
-
+        {/* Pagination */}
         <div className="flex justify-center mt-8 gap-2">
           {Array.from({ length: totalPages }, (_, i) => (
             <button

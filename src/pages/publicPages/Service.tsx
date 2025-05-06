@@ -5,44 +5,65 @@ import { useEffect, useState } from 'react';
 import {
   fetchAllServices,
   fetchServiceBySpecialityId,
-} from '../../features/serviceSlice.ts';
+} from '../../features/public/serviceSlice.ts';
 import { ServiceDTO } from '../../api/public/service/serviceTypes.ts';
+import { fetchSpeciality } from '../../features/public/specialitySlice.ts';
 
-const ITEM_PER_PAGE = 12;
 const ServicePage = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [searchParams] = useSearchParams();
-  const specialityId = searchParams.get('specialityId');
-  const [currentPage, setCurrentPage] = useState(1);
+
+  const specialityId = searchParams.get('specialityId') || undefined;
 
   const {
     allServices = [],
     servicesBySpeciality = [],
     loading = false,
     error = null,
+    paginationAll,
+    paginationSpec,
   } = useSelector((state: RootState) => state.service || {});
 
-  useEffect(() => {
-    if (specialityId) {
-      dispatch(fetchServiceBySpecialityId(specialityId));
-    } else {
-      dispatch(fetchAllServices());
-    }
-  }, [dispatch, specialityId]);
-
-  const services: ServiceDTO[] = Array.isArray(
-    specialityId ? servicesBySpeciality : allServices
-  )
-    ? specialityId
-      ? servicesBySpeciality
-      : allServices
-    : [];
-
-  const totalPages = Math.ceil(services.length / ITEM_PER_PAGE);
-  const currentItems = services.slice(
-    (currentPage - 1) * ITEM_PER_PAGE,
-    currentPage * ITEM_PER_PAGE
+  const { speciality = [] } = useSelector(
+    (state: RootState) => state.serviceSpeciality || {}
   );
+
+  const matchedSpeciality = speciality.find(
+    (spec) => spec.specialityId === String(specialityId)
+  );
+  const pagination = specialityId ? paginationSpec : paginationAll;
+  const ITEM_PER_PAGE = pagination.size;
+  const totalPages = pagination.totalPages || 1;
+  const [currentPage, setCurrentPage] = useState(pagination.page + 1);
+
+  useEffect(() => {
+    const pageParam = Number(currentPage - 1);
+    if (specialityId) {
+      dispatch(
+        fetchServiceBySpecialityId({
+          id: specialityId,
+          page: pageParam,
+          size: ITEM_PER_PAGE,
+        })
+      );
+    } else {
+      dispatch(fetchAllServices({ page: pageParam, size: ITEM_PER_PAGE }));
+    }
+  }, [dispatch, currentPage, specialityId]);
+
+  useEffect(() => {
+    if (!speciality || speciality.length === 0) {
+      dispatch(fetchSpeciality({ page: 0, size: 100 }));
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [specialityId]);
+
+  const services: ServiceDTO[] = specialityId
+    ? servicesBySpeciality
+    : allServices;
 
   const handlePageChange = (page: number) => {
     if (page >= 1 && page <= totalPages) {
@@ -53,14 +74,16 @@ const ServicePage = () => {
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-4">
-        {specialityId ? 'Dịch vụ theo chuyên khoa' : 'Tất cả dịch vụ'}
+        {specialityId
+          ? `Dịch vụ chuyên khoa: ${matchedSpeciality?.specialityName || '...'}`
+          : 'Tất cả dịch vụ'}
       </h1>
 
       {loading && <p>Đang tải dữ liệu...</p>}
       {error && <p className="text-red-500">Lỗi: {error}</p>}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {currentItems.map((svc) => (
+        {services.map((svc) => (
           <div
             key={svc.serviceId}
             className="p-4 border rounded shadow hover:shadow-md transition group cursor-pointer"

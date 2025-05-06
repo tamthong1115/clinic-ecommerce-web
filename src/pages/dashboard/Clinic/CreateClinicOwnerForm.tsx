@@ -10,8 +10,8 @@ import {
   Box,
 } from '@mui/material';
 import Grid from '@mui/material/Grid2';
-import { createClinicOwner } from '../../../api/dashboard/clinic/clinicServices.ts';
-import { CreateClinicOwnerRequest } from '../../../api/dashboard/clinic/clinicTypes';
+import { createClinicOwner } from '../../../api/clinic/clinicServices.ts';
+import { CreateClinicOwnerRequest } from '../../../api/clinic/clinicTypes';
 import { useToast } from '../../../context/ToastContext.tsx';
 
 export default function CreateClinicOwnerForm() {

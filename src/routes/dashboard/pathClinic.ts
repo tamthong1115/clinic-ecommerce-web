@@ -16,4 +16,5 @@ export const DoctorPathsSubMenu = {
 export const ClinicPathsSubMenu = {
   ADD_CLINIC_OWNER: '/dashboard/clinic-owner/add',
   ADD_CLINIC: '/dashboard/clinic/add',
+  UPDATE_CLINIC: 'dashboard/clinic/update-infor',
 };

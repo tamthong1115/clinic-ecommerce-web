@@ -1,8 +1,9 @@
+import ClinicListPages from '../ClinicList.tsx';
+
 const ClinicManagement = () => {
   return (
     <div>
-      <h1>Clinic Management</h1>
-      <p>Manage your clinic settings and information here.</p>
+      <ClinicListPages />
     </div>
   );
 };

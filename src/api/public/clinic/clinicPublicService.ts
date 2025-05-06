@@ -2,7 +2,7 @@ import { ClinicDTO } from './clinicTypes.ts';
 import apiClient from '../../client.ts';
 import endpoints from '../../endpoints.ts';
 import { UUID } from 'crypto';
-import { ApiResponse } from '../commonTypes.ts';
+import { ApiResponse } from '../../commonTypes.ts';
 
 export const getAllClinic = async (): Promise<ClinicDTO[]> => {
   try {
