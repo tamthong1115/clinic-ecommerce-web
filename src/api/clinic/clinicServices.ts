@@ -75,9 +75,9 @@ export const updateStatusClinic = async (
 //Add new service to clinic
 export const addNewService = async (
   data: clinicServiceRequest
-): Promise<clinicServiceDTO> => {
+): Promise<serviceInClinic> => {
   try {
-    const response = await apiClient.post<ApiResponse<clinicServiceDTO>>(
+    const response = await apiClient.post<ApiResponse<serviceInClinic>>(
       endpoints.clinic.addNewServiceToClinic,
       data
     );

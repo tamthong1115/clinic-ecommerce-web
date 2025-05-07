@@ -25,7 +25,7 @@ const ScheduleManege = lazy(
   () => import('../../pages/dashboard/ScheduleManagement')
 );
 const ServiceManage = lazy(
-  () => import('../../pages/dashboard/ServiceManagement')
+  () => import('../../pages/clinic/components/ServiceList.tsx')
 );
 const SystemSetting = lazy(
   () => import('../../pages/dashboard/SystemSettings')

@@ -4,7 +4,7 @@
 //
 // Tùy chỉnh dịch vụ: thêm, sửa, ẩn...
 
-const ServiceManagement: React.FC = () => {
+const ServiceManagement = () => {
   return <div>hello this is service manage</div>;
 };
 

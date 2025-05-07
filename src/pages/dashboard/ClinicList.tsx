@@ -10,6 +10,8 @@ import EditClinicManagementModal from './Clinic/EditClinicManagement.tsx';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils.ts';
+import { Link } from 'react-router-dom';
+import { DashboardPaths } from '@/routes/dashboard/pathClinic.ts';
 
 type StatusSwitchProps = {
   clinic: ClinicDTO;
@@ -123,6 +125,15 @@ const ClinicListPages = () => {
                   />
                   <StatusSwitch clinic={item} />
                 </div>
+                <Link
+                  to={DashboardPaths.LIST_SERVICE_CLINIC_PATH(item.clinicId)}
+                  className={`flex items-center gap-2`}
+                >
+                  <img className={`w-6 h-6`} src="/icon/icon-list.png" alt="" />
+                  <span className={`text-xs hover:underline`}>
+                    View all service
+                  </span>
+                </Link>
               </div>
             </div>
           ))}
