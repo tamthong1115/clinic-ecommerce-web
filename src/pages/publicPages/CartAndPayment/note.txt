@@ -1,0 +1,22 @@
+File NewOrder.tsx:
+    create form here
+      in this form, we will have:
+                          patient's name,
+                          gender,
+                          numberphone,
+                          email,
+                          patient's birthday (required),
+                          address (city),
+                          address (street)
+                          address (commune),
+                          address (number house),
+                          type of services (choose from the list),
+                           type of sub-services (choose from the list),
+                          time booking,
+                          date booking,
+                          reason,
+                          cost and payment (only paying at the medical facility),
+                          warning (if you need),
+                          submit button
+      In fact, we actully choose the department first, doctor and time then.
+      But if patient does not know or choose someone, they can use this form to create quickly and randomly doctor.

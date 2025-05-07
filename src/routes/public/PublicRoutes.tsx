@@ -13,11 +13,13 @@ const Home = lazy(() => import('../../pages/publicPages/Home.tsx'));
 const Login = lazy(() => import('../../pages/publicPages/SignIn.tsx'));
 const SignUp = lazy(() => import('../../pages/publicPages/SignUp.tsx'));
 const BookingCart = lazy(
-  () => import('../../pages/publicPages/BookingCart.tsx')
+  () => import('../../pages/publicPages/CartAndPayment/ProductCart.tsx')
 );
 const Service = lazy(() => import('../../pages/publicPages/Service.tsx'));
 const Booking = lazy(() => import('../../pages/publicPages/Booking.tsx'));
-const BookingDetail = lazy(() => import('../../pages/publicPages/BookingDetail.tsx'));
+const BookingDetail = lazy(
+  () => import('../../pages/publicPages/BookingOrder.tsx')
+);
 const Medicine = lazy(() => import('../../pages/publicPages/Medicine.tsx'));
 const Cooperate = lazy(() => import('../../pages/publicPages/Cooperate.tsx'));
 const ForgotPassword = lazy(
@@ -34,7 +36,7 @@ const PublicRoutesComponent = () => {
       <Route path={PublicPaths.BOOKING_CART} element={<BookingCart />} />
       <Route path={PublicPaths.SERVICE} element={<Service />} />
       <Route path={PublicPaths.BOOKING} element={<Booking />} />
-      <Route path={PublicPaths.BOOKING_DETAIL} element={<BookingDetail/>}/>
+      <Route path={PublicPaths.BOOKING_DETAIL} element={<BookingDetail />} />
       <Route path={PublicPaths.MEDICINE} element={<Medicine />} />
       <Route path={PublicPaths.COOPERATE} element={<Cooperate />} />
       <Route path={PublicPaths.SPECIALITY} element={<Speciality />} />
