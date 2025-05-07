@@ -57,7 +57,7 @@ export type UpdateClinicRequest = {
   clinicAddress?: string;
   clinicPhone?: string;
   description?: string;
-  image: string[];
+  image?: string[];
   status: clinicStatus;
 };
 
