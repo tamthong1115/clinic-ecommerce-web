@@ -3,7 +3,7 @@ import logo from '../../assets/logo.png';
 import { Link } from 'react-router-dom';
 import PublicPaths from '../../routes/public/pathPublic';
 import { RiCalendarScheduleLine } from 'react-icons/ri';
-import { BsSearch } from 'react-icons/bs';
+import { BsBagPlus, BsSearch } from 'react-icons/bs';
 import SearchingField from './SearchingField.tsx';
 import { MdOutlinePhoneInTalk, MdOutlinePhoneIphone } from 'react-icons/md';
 import { linkHeader } from '../../constants/header/linkHeader.tsx';
@@ -40,7 +40,7 @@ const Header: React.FC = () => {
   return (
     <header className="h-max w-screen relative">
       <div className="w-full sm:pt-4 bg-[#1695a0]">
-        <div className=" flex flex-col justify-center items-center">
+        <div className="w-full flex flex-col justify-center items-center">
           {/*fore header*/}
           <div className="w-full sm:px-4 mb-4 hidden sm:flex justify-between items-center ">
             <div className="flex items-center text-[white] font-[500]">
@@ -48,7 +48,7 @@ const Header: React.FC = () => {
                 <MdOutlinePhoneInTalk />
               </div>
               <div className=" text-lg font-bold">
-                <Link to={'/'}>Liên hệ ngay: 1800 1919.</Link>
+                <Link to={'/'}>Liên hệ ngay: 1800 3508</Link>
               </div>
             </div>
 
@@ -57,7 +57,7 @@ const Header: React.FC = () => {
                 <MdOutlinePhoneIphone />
               </div>
               <div className=" text-lg font-bold">
-                <Link to={'/'}>Tải ứng dụng.</Link>
+                <Link to={'/'}>Tải ứng dụng</Link>
               </div>
             </div>
           </div>
@@ -67,7 +67,7 @@ const Header: React.FC = () => {
           <div className="w-full flex flex-col justify-around items-center">
             <div
               className={
-                'relative w-full flex flex-row justify-between items-center'
+                'relative w-[90%] flex flex-row justify-between items-center'
               }
             >
               {/*With smartphone version (or small screen) we use minimize menu*/}
@@ -92,13 +92,26 @@ const Header: React.FC = () => {
               {/*Quick access buttons here*/}
               <div className="w-fit flex flex-row justify-around items-center px-3">
                 <div className="flex items-center">
-                  <Link to={UserPaths.BOOKING_CART} className={' relative'}>
+                  <Link
+                    to={UserPaths.BOOKING_EVENT}
+                    className={'relative hidden sm:block'}
+                  >
                     <div className="flex items-center mr-5 bg-white rounded-full p-2">
                       <div>
                         <RiCalendarScheduleLine size={25} color={'#059669'} />
                       </div>
                       <div className="ml-[8px] hidden sm:block">
-                        {linkHeader.BOOKING_CART}
+                        {linkHeader.BOOKING_EVENT}
+                      </div>
+                    </div>
+                  </Link>
+                  <Link to={UserPaths.PRODUCT_CART} className={' relative'}>
+                    <div className="flex items-center mr-5 bg-white rounded-full p-2">
+                      <div>
+                        <BsBagPlus size={25} color={'#059669'} />
+                      </div>
+                      <div className="ml-[8px] hidden sm:block">
+                        {linkHeader.PRODUCT_CART}
                       </div>
                     </div>
                   </Link>

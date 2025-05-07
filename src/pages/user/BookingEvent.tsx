@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import logo from '../../assets/logo.png';
 import { GrSchedulePlay } from 'react-icons/gr';
+import { BsXSquareFill } from 'react-icons/bs';
 
 const sampleData = [
   {
@@ -24,6 +25,7 @@ const sampleData = [
       addr: 'Tòa nhà GP, 257 Giải Phóng, Phương Mai, Đống Đa, Hà Nội',
     },
     cost: 500000,
+    reason: 'Đau khớp bả vai bên trái, trở lạnh lại đau',
   },
   {
     ID: 11011101,
@@ -46,10 +48,12 @@ const sampleData = [
       addr: 'Tòa nhà GP, 257 Giải Phóng, Phương Mai, Đống Đa, Hà Nội',
     },
     cost: 650000,
+    reason:
+      'Khớp gối phải có cảm giác bị trật mỗi khi thay đổi tư thế ngồi, đặc biệt là khi từ ngồi xổm đứng dậy',
   },
 ];
 
-const Booking = () => {
+const BookingEvent = () => {
   return (
     <div className="bg-gray-200">
       <div className="w-full h-full flex flex-col justify-center items-center mx-auto container">
@@ -65,11 +69,10 @@ const Booking = () => {
           rounded-[10px]
         "
         >
-          <option value="">--Toàn bộ--</option>
-          <option value="">Hôm nay</option>
-          <option value="">Ngày mai</option>
-          <option value="">Tuần tới</option>
-          <option value="">Tháng tới</option>
+          <option value="all">--Toàn bộ--</option>
+          <option value="closer">Sắp tới</option>
+          <option value="tweek">Tháng này</option>
+          <option value="nmoth">Tháng tới</option>
         </select>
         {sampleData.map((item, index) => (
           <div
@@ -77,9 +80,16 @@ const Booking = () => {
             className="w-[80%] h-full flex flex-col justify-center items-center bg-white mb-2 rounded-lg "
           >
             <div
-              className={'text-white bg-emerald-600 p-1 w-full text-left mb-2'}
+              className={
+                'text-white bg-emerald-600 w-full flex justify-between items-center mb-2'
+              }
             >
-              Dịch vụ đã đặt: {item.title}
+              <div className={'p-2 font-bold'}>
+                Dịch vụ đã đặt: {item.title}
+              </div>
+              <div className={'px-2'}>
+                <BsXSquareFill color={'white'} size={30} />
+              </div>
             </div>
             <div className={'w-full flex flex-row jus-center item-center p-4'}>
               <div className="w-[150px] h-[100px] pr-[15px]">
@@ -131,13 +141,14 @@ const Booking = () => {
               </div>
 
               <div className="mt-4 flex flex-col justify-center items-center">
+                <span className="w-full text-left border-b-2 border-gray-300">
+                  <p className={'font-bold'}>Lí do khám: </p>
+                  <p>{item.reason}</p>
+                </span>
                 <span className="text-[18px] font-[500]">
                   Phí dịch vụ:{' '}
                   {new Intl.NumberFormat('vi-VN').format(Number(item.cost))} VND
-                  (đã thanh toán)
-                </span>
-                <span className="text-[17px] cursor-pointer text-[#20a2b0]">
-                  Xem chi tiết...
+                  (thanh toán tại cơ sở y tế)
                 </span>
               </div>
             </div>
@@ -148,4 +159,4 @@ const Booking = () => {
   );
 };
 
-export default Booking;
+export default BookingEvent;

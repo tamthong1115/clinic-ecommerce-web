@@ -305,7 +305,7 @@ const Footer: React.FC = () => {
                 {!hideContent[4] ? (
                   <motion.div
                     {...getMotionConfig(hideContent[4])}
-                    className={'flex flex-row text-gray-800'}
+                    className={'flex flex-row flex-wrap text-gray-800'}
                   >
                     <img className={'h-10'} src={dmca} alt={'DMCA'} />
                     <img className={'h-10'} src={ccdv} alt={'ccdv'} />

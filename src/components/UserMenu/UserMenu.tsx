@@ -75,7 +75,7 @@ const UserMenu: React.FC = () => {
               }
             ></div>
           ) : null}
-          <Link to={UserPaths.BOOKING_LIST}>Lịch hẹn</Link>
+          <Link to={UserPaths.CALENDAR}>Lịch hẹn</Link>
         </MenuItem>
         <MenuItem onClick={() => handleLogout()}>Đăng xuất</MenuItem>
       </Menu>

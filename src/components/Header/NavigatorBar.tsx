@@ -241,7 +241,7 @@ const NavigatorBar = ({ widthDevice }: { widthDevice: number }) => {
                           <li
                             className="cursor-pointer mb-[5px] p-3"
                             key={subIndex + '1'}
-                            onClick={handleCloseMenu}
+                            onClick={() => handleCloseMenu}
                           >
                             <Link to={item1.link}>{item1.name}</Link>
                           </li>

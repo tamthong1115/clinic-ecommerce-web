@@ -49,7 +49,7 @@ const AboutForPatient = () => {
             <br />
             <br />
             <span className={'text-sm'}>
-              GIúp bệnh nhân dễ dàng lựa chọn bác sĩ phù hợp, thăm khám đứng bác
+              Giúp bệnh nhân dễ dàng lựa chọn bác sĩ phù hợp, thăm khám đứng bác
               sĩ, đúng bệnh và đặt lịch khám nhanh chóng, được khám ưu tiên
             </span>
           </div>
