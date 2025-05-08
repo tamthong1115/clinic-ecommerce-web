@@ -60,10 +60,10 @@ const NavigatorBar = ({ widthDevice }: { widthDevice: number }) => {
   const getMotionMobileConfig = (isClosed: boolean, distance: string) => {
     return {
       initial: {
-        left: isClosed ? distance : 0,
+        left: isClosed ? distance : '-21px',
       },
       animate: {
-        left: isClosed ? 0 : distance,
+        left: isClosed ? '-21px' : distance,
       },
       transition: {
         left: {
@@ -71,7 +71,7 @@ const NavigatorBar = ({ widthDevice }: { widthDevice: number }) => {
         },
       },
       exit: {
-        left: isClosed ? distance : 0,
+        left: isClosed ? distance : '-21px',
       },
     };
   };
@@ -103,7 +103,7 @@ const NavigatorBar = ({ widthDevice }: { widthDevice: number }) => {
         <AnimatePresence initial={false}>
           <motion.div
             {...getMotionMobileConfig(isShowMenu, widthOffset)}
-            className=" bg-white top-0 max-w-[80%] sm:w-full h-max absolute sm:relative shadow-lg sm:shadow-none shadow-gray-500 text-black z-[10]"
+            className=" bg-white top-0 -left-10 max-w-[80%] sm:w-full h-max absolute sm:relative shadow-lg sm:shadow-none shadow-gray-500 text-black z-[10]"
           >
             <ul className=" w-full h-full flex flex-col sm:flex-row justify-between items-start sm:items-center">
               {/*This is for brand's banner*/}
@@ -217,7 +217,12 @@ const NavigatorBar = ({ widthDevice }: { widthDevice: number }) => {
                     className={`w-full p-2 flex flex-row items-center justify-between  ${activeTab[index] ? `text-emerald-600` : `text-black`}`}
                   >
                     {item.routerLink ? (
-                      <Link to={item.routerLink}>{item.nameLink}</Link>
+                      <Link
+                        to={item.routerLink}
+                        onClick={() => handleCloseMenu()}
+                      >
+                        {item.nameLink}
+                      </Link>
                     ) : (
                       item.nameLink
                     )}

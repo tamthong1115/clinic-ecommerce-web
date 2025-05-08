@@ -35,12 +35,12 @@ const endpoints = {
     getAllClinic: '/public/api/v1/public/get-all-clinic',
     getClinicById: (id: string) => `/public/api/v1/public/clinic/${id}`,
     getAllSpeciality: (page?: string, size?: string) =>
-      buildUrlWithParams('/public/api/v1/public/speciality/get-all', {
+      buildUrlWithParams('/clinic/api/v1/public/speciality/get-all', {
         page,
         size,
       }),
     getServiceBySpecialityId: (specId: string, page?: string, size?: string) =>
-      buildUrlWithParams(`/public/api/v1/public/service-by-specid/${specId}`, {
+      buildUrlWithParams(`/clinic/api/v1/public/service-by-specid/${specId}`, {
         page,
         size,
       }),

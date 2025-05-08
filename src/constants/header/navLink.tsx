@@ -4,11 +4,6 @@ export const navLink = [
   {
     nameLink: 'Dịch vụ',
     routerLink: PublicPaths.SPECIALITY,
-    item: [
-      { name: 'Dịch vụ nhi đồng', link: '/' },
-      { name: 'Dịch vụ sản khoa', link: '/' },
-      { name: 'Dịch vụ người cao tuổi', link: '/' },
-    ],
   },
   {
     nameLink: 'Đặt lịch',

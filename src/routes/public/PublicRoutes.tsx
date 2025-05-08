@@ -12,9 +12,6 @@ import AboutForPatient from '../../pages/publicPages/About/AboutForPatient.tsx';
 const Home = lazy(() => import('../../pages/publicPages/Home.tsx'));
 const Login = lazy(() => import('../../pages/publicPages/SignIn.tsx'));
 const SignUp = lazy(() => import('../../pages/publicPages/SignUp.tsx'));
-const BookingCart = lazy(
-  () => import('../../pages/publicPages/CartAndPayment/ProductCart.tsx')
-);
 const Service = lazy(() => import('../../pages/publicPages/Service.tsx'));
 const Booking = lazy(() => import('../../pages/publicPages/Booking.tsx'));
 const BookingDetail = lazy(
@@ -33,7 +30,6 @@ const PublicRoutesComponent = () => {
       <Route path={PublicPaths.LOGIN} element={<Login />} />
       <Route path={PublicPaths.SIGN_UP} element={<SignUp />} />
       <Route path={PublicPaths.FORGOTPASSWORD} element={<ForgotPassword />} />
-      <Route path={PublicPaths.BOOKING_CART} element={<BookingCart />} />
       <Route path={PublicPaths.SERVICE} element={<Service />} />
       <Route path={PublicPaths.BOOKING} element={<Booking />} />
       <Route path={PublicPaths.BOOKING_DETAIL} element={<BookingDetail />} />
