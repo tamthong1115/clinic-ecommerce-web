@@ -16,9 +16,9 @@ import {
 } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { createDoctor } from '../../../api/clinic/clinicServices';
-import { DoctorRequest } from '../../../api/clinic/clinicTypes';
 import { useToast } from '../../../context/ToastContext';
 import { useState } from 'react';
+import { DoctorRequest } from '@/api/doctor/doctorTypes.ts';
 
 export default function CreateDoctorForm() {
   const { showToast } = useToast();

@@ -22,6 +22,9 @@ const endpoints = {
       `/clinic/api/v1/clinic/get-service/${id}`,
     createDoctor: (clinic_id: string) => `${clinic_id}/create-doctor`,
   },
+  doctor: {
+    getDoctorSchedulesByDoctorId: '/clinic/api/v1/doctor/get-schedules',
+  },
 
   user: {
     profile: '/auth/api/v1/me',
