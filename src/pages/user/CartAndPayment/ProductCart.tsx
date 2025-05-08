@@ -1,5 +1,5 @@
-import PublicPaths from '../../../routes/public/pathPublic.ts';
 import { Link } from 'react-router-dom';
+import UserPaths from '../../../routes/user/pathUser.ts';
 
 const ProductCart = () => {
   return (
@@ -17,7 +17,7 @@ const ProductCart = () => {
         GIỎ HÀNG CỦA BẠN
       </p>
       {/*option buttons here: payment and create new*/}
-      <div className={'w-[30%] grid grid-cols-2 grid-rows-1 gap-4'}>
+      <div className={'w-[60%] grid grid-cols-2 grid-rows-1 gap-4'}>
         <Link
           to={'/'}
           className={
@@ -27,7 +27,7 @@ const ProductCart = () => {
           Hủy đặt
         </Link>
         <Link
-          to={PublicPaths.BOOKING_CART_CREATE}
+          to={UserPaths.PRODUCT_ORDER_CREATE}
           className={
             'rounded-full bg-emerald-600 text-white text-center p-2 font-bold'
           }

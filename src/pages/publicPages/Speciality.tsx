@@ -50,19 +50,19 @@ const SpecialityPages = () => {
           </span>
         </h2>
       </div>
-      <div className="mx-40 my-4">
+      <div className="w-full my-4">
         {loading && <p className="text-center">Loading...</p>}
         {error && <p className="text-center text-red-500">{error}</p>}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-3 grid-rows-[repeat(6,1fr)] gap-y-4 gap-x-2 p-2">
           {currentItems.map((item: SpecialityDTO, index: number) => (
             <Link
               to={PublicPaths.SERVICE_BY_SPECIALITY(item.specialityId)}
               key={index}
-              className="bg-[#fafafa] group rounded-md transition cursor-pointer"
+              className="bg-gray-300 group rounded-md transition cursor-pointer"
             >
-              <div className="p-6 flex items-center gap-4">
+              <div className="w-full h-full flex justify-center items-center gap-2">
                 <div
-                  className="w-20 h-20 bg-[#32c1ce] rounded-md flex items-center justify-center
+                  className="w-20 h-full bg-[#32c1ce] rounded-md flex flex-row items-center justify-center
         group-hover:shadow-[0_12px_10px_rgba(0,0,0,0.4)] transition duration-500"
                 >
                   <img
@@ -71,7 +71,7 @@ const SpecialityPages = () => {
                     className="w-12 h-12 object-contain"
                   />
                 </div>
-                <div>
+                <div className={'w-full h-full'}>
                   <h3 className="text-lg font-semibold mb-2 uppercase text-cyan-700">
                     {item.specialityName}
                   </h3>
