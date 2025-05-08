@@ -1,6 +1,7 @@
 import { AiOutlineStock } from "react-icons/ai";
 import { FaMedal } from "react-icons/fa";
 import { BsPersonFillUp } from "react-icons/bs";
+import { Link } from "react-router-dom";
 import logo1 from '../../../assets/aboutDoctor/093307logo-pk-da-lieu-bs-thai-ha.jpg';
 import logo2 from '../../../assets/aboutDoctor/101707-logo-sg.png';
 import logo3 from '../../../assets/aboutDoctor/104922-logo-med-tai-ha-noi--01.png';
@@ -71,6 +72,69 @@ const AboutForDoctor = () => {
               <img src={logo} alt={`logo-${index}`} className="object-contain w-full h-full p-2" />
             </div>
           ))}
+        </div>
+
+
+        <div className="text-[42px] text-center text-[#1695a0] border-b-2 border-[#1695a0] pb-[20px] mt-[30px]">
+          Lượng truy cập đều
+        </div>
+
+        <div className="grid grid-cols-2 gap-[40px] mt-[40px]">
+          <div className="border-2 border-[#1695a0] text-[20px] p-[20px] rounded-md">
+            <div className="flex justify-center items-center text-[#1695a0] font-[700]">
+              <div className="ml-[5px] text-[24px]">
+                1.500.000 +
+              </div>
+            </div>
+
+            <div className="text-center mt-[10px]">
+              LƯỢT TRUY CẬP/ THÁNG
+            </div>
+          </div>
+
+          <div className="border-2 border-[#1695a0] text-[20px] p-[20px] rounded-md ">
+            <div className="flex justify-center items-center text-[#1695a0] font-[700]">
+              <div className="ml-[5px] text-[24px]">
+                2.000 +
+              </div>
+            </div>
+
+            <div className="text-center mt-[10px]">
+              BÁC SĨ ĐÃ HỢP TÁC
+            </div>
+          </div>
+
+          <div className="border-2 border-[#1695a0] text-[20px] p-[20px] rounded-md ">
+            <div className="flex justify-center items-center text-[#1695a0] font-[700]">
+              <div className="ml-[5px] text-[24px]">
+                300.000 +
+              </div>
+            </div>
+
+            <div className="text-center mt-[10px]">
+              NGƯỜI ĐÃ SỬ DỤNG DỊCH VỤ
+            </div>
+          </div>
+
+          <div className="border-2 border-[#1695a0] text-[20px] p-[20px] rounded-md ">
+            <div className="flex justify-center items-center text-[#1695a0] font-[700]">
+              <div className="ml-[5px] text-[24px]">
+                300 +
+              </div>
+            </div>
+
+            <div className="text-center mt-[10px]">
+              CƠ SỞ Y TẾ
+            </div>
+          </div>
+        </div>
+
+        <div className="w-[50%] mx-auto">
+          <div className="text-center text-white text-[24px] mt-[60px] rounded-xl bg-[#1695a0] p-[20px]">
+            <Link to={"/about-contact"} className="">
+              Liên Hệ Hợp Tác Ngay
+            </Link>
+          </div>
         </div>
       </div>
     </>
