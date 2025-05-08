@@ -7,6 +7,8 @@ export const DashboardPaths = {
   SCHEDULE_MANAGE: '/dashboard/schedule',
   SERVICE_MANAGE: '/dashboard/service',
   SYSTEM_SETTING: '/dashboard/system',
+  LIST_SERVICE_CLINIC_PATH: (clinicId: string) =>
+    `/dashboard/service?clinicId=${clinicId}`,
 };
 
 export const DoctorPathsSubMenu = {

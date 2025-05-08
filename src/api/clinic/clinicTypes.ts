@@ -57,7 +57,7 @@ export type UpdateClinicRequest = {
   clinicAddress?: string;
   clinicPhone?: string;
   description?: string;
-  image: string[];
+  image?: string[];
   status: clinicStatus;
 };
 
@@ -76,7 +76,9 @@ export type clinicServiceRequest = {
 export interface serviceInClinic {
   serviceId: string;
   clinicId: string;
-  serviceName: string;
   clinicName: string;
+  serviceName: string;
+  specialityId: string;
+  specialityName: string;
   status?: string;
 }

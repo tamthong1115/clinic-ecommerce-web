@@ -79,6 +79,7 @@ const sidebarItems: DashboardSideBarItem[] = [
     path: DashboardPaths.SERVICE_MANAGE,
     iconActive: '/icon/icon-health-bag-active.png',
     iconInactive: '/icon/icon-health-bag-inactive.png',
+    requiredRoles: ['ADMIN'],
   },
 
   {

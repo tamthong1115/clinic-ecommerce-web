@@ -1,6 +1,5 @@
 import {
   ClinicDTO,
-  clinicServiceDTO,
   clinicServiceRequest,
   clinicStatus,
   serviceInClinic,
@@ -75,7 +74,7 @@ export const updateStatus = createAsyncThunk<
 });
 
 export const addService = createAsyncThunk<
-  clinicServiceDTO,
+  serviceInClinic,
   clinicServiceRequest,
   { rejectValue: string }
 >('clinic/addService', async (request, thunkAPI) => {
@@ -189,8 +188,11 @@ const ClinicOwnerSlice = createSlice({
         const mapped: serviceInClinic = {
           serviceId: newService.serviceId,
           clinicId: newService.clinicId,
-          serviceName: state.selectedService?.serviceName || 'unknow service',
-          clinicName: state.selectedClinic?.clinicName || 'unknow clinic',
+          serviceName: newService.serviceName,
+          clinicName: newService.clinicName,
+          specialityId: newService.specialityId,
+          specialityName: newService.specialityName,
+          status: newService.status,
         };
 
         if (!state.listServiceInClinic) state.listServiceInClinic = [];
