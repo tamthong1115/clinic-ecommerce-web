@@ -90,13 +90,13 @@ export const addNewService = async (
 //Update status of service
 export const setStatusForService = async (
   data: clinicServiceRequest
-): Promise<string> => {
+): Promise<clinicServiceDTO> => {
   try {
     const response = await apiClient.put<ApiResponse<clinicServiceDTO>>(
       endpoints.clinic.updateServiceStatus,
       data
     );
-    return response.data.message;
+    return response.data.data;
   } catch (e) {
     throw new Error('Error when update status of service ' + e);
   }
