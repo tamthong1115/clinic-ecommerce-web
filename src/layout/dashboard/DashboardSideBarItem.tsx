@@ -62,7 +62,7 @@ const sidebarItems: DashboardSideBarItem[] = [
     path: DashboardPaths.DOCTOR_MANAGE,
     iconActive: '/icon/icon-doctor-active.png',
     iconInactive: '/icon/icon-doctor-inactive.png',
-    requiredRoles: ['ADMIN', 'CLINIC_OWNER', 'DOCTOR'],
+    requiredRoles: ['ADMIN', 'CLINIC_OWNER'],
     submenu: [
       {
         title: 'Add Doctor',
