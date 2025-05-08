@@ -131,7 +131,7 @@ const AboutForDoctor = () => {
 
         <div className="w-[50%] mx-auto">
           <div className="text-center text-white text-[24px] mt-[60px] rounded-xl bg-[#1695a0] p-[20px]">
-            <Link to={"/about-Cooperation"} className="">
+            <Link to={"/about-for-cooperation"} className="">
               Liên Hệ Hợp Tác Ngay
             </Link>
           </div>
