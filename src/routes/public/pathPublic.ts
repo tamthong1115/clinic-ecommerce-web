@@ -20,6 +20,7 @@ const PublicPaths = {
   ABOUT_US: '/about-us',
   ABOUT_FOR_PATIENT: '/about-for-patient',
   ABOUT_F0R_DOCTOR: '/about-for-doctor',
+  ABOUT_FOR_CONTACT: '/about-for-contact',
 };
 
 export default PublicPaths;
