@@ -10,6 +10,7 @@ import AboutUs from '../../pages/publicPages/About/AboutUs.tsx';
 import AboutForPatient from '../../pages/publicPages/About/AboutForPatient.tsx';
 import AboutForDoctor from '@/pages/publicPages/About/AboutForDoctor.tsx';
 import AboutForContact from '@/pages/publicPages/About/AboutForContact.tsx';
+import AboutForCooperation from '@/pages/publicPages/About/AboutForCooperation.tsx';
 
 const Home = lazy(() => import('../../pages/publicPages/Home.tsx'));
 const Login = lazy(() => import('../../pages/publicPages/SignIn.tsx'));
@@ -45,6 +46,7 @@ const PublicRoutesComponent = () => {
       <Route path={PublicPaths.ABOUT_US} element={<AboutUs />} />
       <Route path= {PublicPaths.ABOUT_F0R_DOCTOR} element = {<AboutForDoctor/>}/>
       <Route path={PublicPaths.ABOUT_FOR_CONTACT} element= {<AboutForContact/>}/>
+      <Route path={PublicPaths.ABOUT_FOR_cooperation} element = {<AboutForCooperation/>}/>
       <Route
         path={PublicPaths.ABOUT_FOR_PATIENT}
         element={<AboutForPatient />}
