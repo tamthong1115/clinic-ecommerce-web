@@ -1,7 +1,9 @@
+import CreateDoctorForm from './CreateDoctorForm';
+
 const AddDoctor = () => {
   return (
     <div>
-      <h1>Add Doctor Page</h1>
+      <CreateDoctorForm />
     </div>
   );
 };

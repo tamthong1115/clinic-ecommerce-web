@@ -20,6 +20,7 @@ const endpoints = {
     getClinicByOwner: '/clinic/api/v1/clinic/get-by-owner',
     getServiceByOwner: (id: string) =>
       `/clinic/api/v1/clinic/get-service/${id}`,
+    createDoctor: (clinic_id: string) => `${clinic_id}/create-doctor`,
   },
 
   user: {
