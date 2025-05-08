@@ -8,9 +8,9 @@ import {
   CreateClinicOwnerRequest,
   serviceInClinic,
   UpdateClinicRequest,
-  DoctorDetailResponse,
 } from './clinicTypes.ts';
 import { ApiResponse, Page } from '../commonTypes.ts';
+import { DoctorDetailResponse } from '@/api/doctor/doctorTypes.ts';
 
 export const createClinicOwner = async (
   data: CreateClinicOwnerRequest

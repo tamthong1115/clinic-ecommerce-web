@@ -18,8 +18,16 @@
 //
 // Xem chi tiết lịch sử
 
+import { useAuth } from '@/context/AuthContext';
+import DoctorScheduleCalendar from '@/pages/dashboard/Schedule/DoctorScheduleCalendar.tsx';
+
 const ScheduleManagement: React.FC = () => {
-  return <div>hello this is SCHEDULE MANAGE</div>;
+  const { user } = useAuth();
+  return (
+    <div>
+      <DoctorScheduleCalendar doctorId={user?.id} />
+    </div>
+  );
 };
 
 export default ScheduleManagement;

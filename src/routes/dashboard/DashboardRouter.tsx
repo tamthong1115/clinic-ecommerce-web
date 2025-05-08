@@ -22,7 +22,7 @@ const PatientManage = lazy(
   () => import('../../pages/dashboard/PatientManagement')
 );
 const ScheduleManege = lazy(
-  () => import('../../pages/dashboard/ScheduleManagement')
+  () => import('../../pages/dashboard/Schedule/ScheduleManagement.tsx')
 );
 const ServiceManage = lazy(
   () => import('../../pages/clinic/components/ServiceList.tsx')
