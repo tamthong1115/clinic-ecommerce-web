@@ -19,6 +19,7 @@ const PublicPaths = {
   SPECIALITY: `/speciality`,
   ABOUT_US: '/about-us',
   ABOUT_FOR_PATIENT: '/about-for-patient',
+  ABOUT_F0R_DOCTOR: '/about-for-doctor',
 };
 
 export default PublicPaths;

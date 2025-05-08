@@ -36,7 +36,7 @@ export const navLink = [
     nameLink: 'Về chúng tôi',
     item: [
       { name: 'Dành cho bệnh nhân', link: '/about-for-patient' },
-      { name: 'Dành cho bác sĩ', link: '/' },
+      { name: 'Dành cho bác sĩ', link: '/about-for-doctor' },
       { name: 'Liên hệ', link: '/' },
     ],
   },

@@ -8,6 +8,7 @@ import UserPaths from '../user/pathUser';
 import CalendarBooking from '../../pages/user/CalendarBooking';
 import AboutUs from '../../pages/publicPages/About/AboutUs.tsx';
 import AboutForPatient from '../../pages/publicPages/About/AboutForPatient.tsx';
+import AboutForDoctor from '@/pages/publicPages/About/AboutForDoctor.tsx';
 
 const Home = lazy(() => import('../../pages/publicPages/Home.tsx'));
 const Login = lazy(() => import('../../pages/publicPages/SignIn.tsx'));
@@ -41,6 +42,7 @@ const PublicRoutesComponent = () => {
       <Route path={PublicPaths.COOPERATE} element={<Cooperate />} />
       <Route path={PublicPaths.SPECIALITY} element={<Speciality />} />
       <Route path={PublicPaths.ABOUT_US} element={<AboutUs />} />
+      <Route path= {PublicPaths.ABOUT_F0R_DOCTOR} element = {<AboutForDoctor/>}/>
       <Route
         path={PublicPaths.ABOUT_FOR_PATIENT}
         element={<AboutForPatient />}
