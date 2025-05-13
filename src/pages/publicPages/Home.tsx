@@ -3,6 +3,9 @@ import { useEffect, useState } from 'react';
 import MainPresent from '../../components/Home/MainPresent.tsx';
 import WhatWeDo from '../../components/Home/WhatWeDo.tsx';
 import WhoWeAre from '../../components/Home/WhoWeAre.tsx';
+import WhyChooseUs from '@/components/Home/WhyChooseUs.tsx';
+import OurTeam from '@/components/Home/OurTeam.tsx';
+import OnEmergency from '@/components/Home/OnEmergency.tsx';
 
 const Home = () => {
   const tokenLogin = localStorage.getItem('token');
@@ -90,33 +93,25 @@ const Home = () => {
           </div>
 
           <section
-
             className="flex items- center justify-center"
-
             data-bg="/image/background2.jpg"
           >
             <WhoWeAre />
           </section>
 
-          <div className="h-screen flex items-center justify-center bg-white">
-            <h2 className="text-4xl font-bold text-gray-800">
-              Khoảng trắng - Hiển thị nội dung tiếp
-            </h2>
+          <div className="h-full flex items-center justify-center bg-white">
+            <WhyChooseUs />
           </div>
 
           <section
-            className="h-screen flex items-center justify-center"
+            className="h-full flex flex-row items-center justify-center"
             data-bg="/image/background3.jpg"
           >
-            <h1 className="text-5xl font-bold text-white">
-              Section 3 - Có nền
-            </h1>
+            <OurTeam />
           </section>
 
-          <div className="h-screen flex items-center justify-center bg-white">
-            <h2 className="text-4xl font-bold text-gray-800">
-              Khoảng trắng - Nội dung cuối
-            </h2>
+          <div className="h-full flex items-center justify-center bg-white">
+            <OnEmergency />
           </div>
         </div>
       </div>

@@ -1,10 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { AppDispatch, RootState } from '../../app/store.ts';
-import { fetchSpeciality } from '../../features/public/specialitySlice.ts';
-import { SpecialityDTO } from '../../api/public/speciality/specialityTypes.ts';
+import { AppDispatch, RootState } from '@/app/store.ts';
+import { fetchSpeciality } from '@/features/public/specialitySlice.ts';
+import { SpecialityDTO } from '@/api/public/speciality/specialityTypes.ts';
 import { Link } from 'react-router-dom';
-import PublicPaths from '../../routes/public/pathPublic.ts';
 
 const SpecialityPages = () => {
   const dispatch = useDispatch<AppDispatch>();
