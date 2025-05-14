@@ -5,12 +5,20 @@ import {
   DashboardPaths,
   DoctorPathsSubMenu,
 } from './pathClinic.ts';
-import DashboardLayout from '../../layout/dashboard/DashboardLayout.tsx';
-import AddDoctor from '../../pages/dashboard/Doctor/AddDoctor.tsx';
-import ProtectedRoute from '../ProtectedRoute.tsx';
-import ClinicManagement from '../../pages/dashboard/Clinic/ClinicManagement.tsx';
-import CreateClinicOwner from '../../pages/dashboard/Clinic/CreateClinicOwner.tsx';
 
+const DashboardLayout = lazy(
+  () => import('../../layout/dashboard/DashboardLayout.tsx')
+);
+const AddDoctor = lazy(
+  () => import('../../pages/dashboard/Doctor/AddDoctor.tsx')
+);
+const ProtectedRoute = lazy(() => import('../ProtectedRoute.tsx'));
+const ClinicManagement = lazy(
+  () => import('../../pages/dashboard/Clinic/ClinicManagement.tsx')
+);
+const CreateClinicOwner = lazy(
+  () => import('../../pages/dashboard/Clinic/CreateClinicOwner.tsx')
+);
 const DashBoard = lazy(() => import('../../pages/dashboard/ClinicDashBoard'));
 const DoctorManage = lazy(
   () => import('../../pages/dashboard/Doctor/DoctorManagement.tsx')
@@ -23,6 +31,12 @@ const PatientManage = lazy(
 );
 const ScheduleManege = lazy(
   () => import('../../pages/dashboard/Schedule/ScheduleManagement.tsx')
+);
+const CreateDoctorSchedule = lazy(
+  () => import('@/pages/dashboard/Schedule/CreateDoctorSchedule.tsx')
+);
+const DoctorAppointmentPage = lazy(
+  () => import('@/pages/dashboard/Appointment/DoctorAppointmentPage')
 );
 const ServiceManage = lazy(
   () => import('../../pages/clinic/components/ServiceList.tsx')
@@ -128,6 +142,22 @@ const DashboardRoutesComponent = () => {
           element={
             <DashboardLayout>
               <ServiceManage />
+            </DashboardLayout>
+          }
+        />
+        <Route
+          path="/dashboard/doctor/create-schedule"
+          element={
+            <DashboardLayout>
+              <CreateDoctorSchedule />
+            </DashboardLayout>
+          }
+        />
+        <Route
+          path={DashboardPaths.APPOINTMENT_MANAGE}
+          element={
+            <DashboardLayout>
+              <DoctorAppointmentPage />
             </DashboardLayout>
           }
         />

@@ -23,11 +23,19 @@ const endpoints = {
     createDoctor: (clinic_id: string) => `${clinic_id}/create-doctor`,
   },
   doctor: {
+    getDotorsBasic: '/clinic/api/v1/clinic/doctors',
     getDoctorSchedulesByDoctorId: '/clinic/api/v1/doctor/get-schedules',
+    searchDoctors: '/clinic/api/v1/public/search-doctors',
+    createSchedule: (userId: string) =>
+      `/clinic/api/v1/doctor/${userId}/create-schedule`,
   },
 
   user: {
     profile: '/auth/api/v1/me',
+  },
+  appointment: {
+    create: '/appointment/api/v1/patient',
+    calendarAppointments: '/appointment/api/v1/doctor/calendar-appointments',
   },
   public: {
     getAllService: (page?: string, size?: string) =>

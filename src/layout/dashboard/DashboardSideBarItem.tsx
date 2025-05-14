@@ -87,8 +87,23 @@ const sidebarItems: DashboardSideBarItem[] = [
     path: DashboardPaths.SCHEDULE_MANAGE,
     iconActive: '/icon/icon-schedule-active.png',
     iconInactive: '/icon/icon-schedule-inactive.png',
+    submenu: [
+      {
+        title: 'Create Doctor Schedule',
+        path: '/dashboard/doctor/create-schedule',
+        iconActive: '/icon/icon-schedule-active.png',
+        iconInactive: '/icon/icon-schedule-inactive.png',
+        requiredRoles: ['ADMIN', 'CLINIC_OWNER', 'DOCTOR'],
+      },
+    ],
   },
-
+  {
+    title: 'Appointment',
+    path: DashboardPaths.APPOINTMENT_MANAGE,
+    iconActive: '/icon/icon-schedule-active.png',
+    iconInactive: '/icon/icon-schedule-inactive.png',
+    requiredRoles: ['DOCTOR'],
+  },
   {
     title: 'Patient Manage',
     path: DashboardPaths.PATIENT_MANAGE,

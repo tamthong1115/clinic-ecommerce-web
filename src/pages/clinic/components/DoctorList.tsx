@@ -1,9 +1,35 @@
 import React from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { getDoctorsBasic } from '@/api/doctor/doctorServices.ts';
+import Spinner from '@/components/Spinner/Spinner.tsx';
 
 const DoctorList: React.FC = () => {
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ['doctorsBasic'],
+    queryFn: getDoctorsBasic,
+  });
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-full">
+        <Spinner type="PacmanLoader" color="#4fd1c5" size={50} />
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="flex justify-center items-center h-full text-red-500">
+        Error: {(error as Error).message}
+      </div>
+    );
+  }
+
+  const doctors = data?.content || [];
+
   return (
     <div className={'w-full h-full bg-white rounded-xl shadow-2xl'}>
-      <h2>Doctor List</h2>
+      <h2 className="text-center text-xl font-bold my-4">Doctor List</h2>
       <div className={'p-6 items-center flex justify-center'}>
         <table className={'w-[90%] h-[90%] rounded-xl'}>
           <thead
@@ -20,37 +46,46 @@ const DoctorList: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {doctors.map((item, index) => (
-              <tr key={index} className={'items-center border-b-black'}>
+            {doctors.map((doctor) => (
+              <tr key={doctor.id} className={'items-center border-b-black'}>
                 <td className="p-3 ">
                   <div className={'flex gap-2 items-center'}>
-                    <span className={'font-bold'}>{item.name}</span>
+                    <span className={'font-bold'}>
+                      {doctor.firstName} {doctor.lastName}
+                    </span>
                   </div>
                 </td>
                 <td className="p-3 ">
                   <div className={'flex gap-2 items-center'}>
-                    <span className={'font-bold '}>{item.email}</span>
+                    <span className={'font-bold '}>{doctor.email}</span>
                   </div>
                 </td>
                 <td className="p-3 ">
                   <div className={'flex gap-2 items-center'}>
-                    <span className={'font-bold '}>{item.phone}</span>
+                    <span className={'font-bold '}>{doctor.phone}</span>
                   </div>
                 </td>
                 <td className="p-3">
                   <div className="flex gap-2 items-center">
                     <div
-                      className={`px-2 py-1 rounded-2xl ${item.status === 'active' ? 'bg-green-100' : 'bg-red-100'}`}
+                      className={`px-2 py-1 rounded-2xl ${
+                        doctor.status === 'active'
+                          ? 'bg-green-100'
+                          : 'bg-red-100'
+                      }`}
                     >
                       <span
-                        className={`px-1 py-1 rounded-xl text-xs text-white ${item.status === 'active' ? 'bg-green-600' : 'bg-red-500'}`}
+                        className={`px-1 py-1 rounded-xl text-xs text-white ${
+                          doctor.status === 'active'
+                            ? 'bg-green-600'
+                            : 'bg-red-500'
+                        }`}
                       >
-                        {item.status}
+                        {doctor.status}
                       </span>
                     </div>
                   </div>
                 </td>
-
                 <td className="p-3 ">
                   <div
                     className={'flex gap-2 items-center hover:cursor-pointer'}
@@ -58,7 +93,7 @@ const DoctorList: React.FC = () => {
                     <img
                       className={'w-12 h-12 '}
                       src="/icon/icon-edit-colorful.png"
-                      alt=""
+                      alt="Edit"
                     />
                   </div>
                 </td>
@@ -72,78 +107,3 @@ const DoctorList: React.FC = () => {
 };
 
 export default DoctorList;
-
-const doctors = [
-  {
-    name: 'Dr. Nguyễn Văn A',
-    email: 'a.nguyen@example.com',
-    phone: '0912345678',
-    status: 'active',
-  },
-  {
-    name: 'Dr. Trần Thị B',
-    email: 'b.tran@example.com',
-    phone: '0934567890',
-    status: 'inactive',
-  },
-  {
-    name: 'Dr. Lê Văn C',
-    email: 'c.le@example.com',
-    phone: '0901122334',
-    status: 'active',
-  },
-  {
-    name: 'Dr. Phạm Thị D',
-    email: 'd.pham@example.com',
-    phone: '0987654321',
-    status: 'active',
-  },
-  {
-    name: 'Dr. Hoàng Văn E',
-    email: 'e.hoang@example.com',
-    phone: '0977123456',
-    status: 'inactive',
-  },
-  {
-    name: 'Dr. Đỗ Thị F',
-    email: 'f.do@example.com',
-    phone: '0966543210',
-    status: 'active',
-  },
-  {
-    name: 'Dr. Võ Văn G',
-    email: 'g.vo@example.com',
-    phone: '0944332211',
-    status: 'inactive',
-  },
-  {
-    name: 'Dr. Bùi Thị H',
-    email: 'h.bui@example.com',
-    phone: '0933221100',
-    status: 'active',
-  },
-  {
-    name: 'Dr. Dương Văn I',
-    email: 'i.duong@example.com',
-    phone: '0922110033',
-    status: 'active',
-  },
-  {
-    name: 'Dr. Hà Thị J',
-    email: 'j.ha@example.com',
-    phone: '0911002233',
-    status: 'inactive',
-  },
-  {
-    name: 'Dr. Lý Văn K',
-    email: 'k.ly@example.com',
-    phone: '0900099887',
-    status: 'active',
-  },
-  {
-    name: 'Dr. Nguyễn Thị L',
-    email: 'l.nguyen@example.com',
-    phone: '0988997766',
-    status: 'active',
-  },
-];
