@@ -19,6 +19,7 @@ const ClinicManagement = lazy(
 const CreateClinicOwner = lazy(
   () => import('../../pages/dashboard/Clinic/CreateClinicOwner.tsx')
 );
+
 const DashBoard = lazy(() => import('../../pages/dashboard/ClinicDashBoard'));
 const DoctorManage = lazy(
   () => import('../../pages/dashboard/Doctor/DoctorManagement.tsx')
