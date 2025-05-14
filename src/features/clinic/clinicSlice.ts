@@ -1,5 +1,6 @@
 import {
   ClinicDTO,
+  clinicServiceDTO,
   clinicServiceRequest,
   clinicStatus,
   serviceInClinic,
@@ -134,7 +135,7 @@ export const addService = createAsyncThunk<
 });
 
 export const editStatusService = createAsyncThunk<
-  string,
+  clinicServiceDTO,
   clinicServiceRequest,
   { rejectValue: string }
 >('clinic/updateServiceStatus', async (request, thunkAPI) => {
@@ -279,14 +280,19 @@ const ClinicOwnerSlice = createSlice({
 
       //Edit status of service
       .addCase(editStatusService.fulfilled, (state, action) => {
-        const updated = action.meta.arg;
+        const updated = action.payload;
+
         const index = state.listServiceInClinic.findIndex(
           (svc) =>
             svc.clinicId === updated.clinicId &&
             svc.serviceId === updated.serviceId
         );
+
         if (index !== -1) {
-          state.listServiceInClinic[index].status = updated.status;
+          state.listServiceInClinic[index] = {
+            ...state.listServiceInClinic[index],
+            status: updated.status,
+          };
         }
       });
   },

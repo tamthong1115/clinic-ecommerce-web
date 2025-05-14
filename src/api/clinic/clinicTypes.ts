@@ -37,6 +37,7 @@ export type CreateClinicRequest = {
   clinicPhone: string;
   description?: string;
   image?: string;
+  status?: clinicStatus;
 };
 
 export type ClinicDTO = {
