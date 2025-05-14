@@ -56,8 +56,8 @@ const SpecialityPages = () => {
         <div className="grid grid-cols-2 lg:grid-cols-3 grid-rows-[repeat(6,1fr)] gap-y-4 gap-x-2 p-2 sm:p-4 lg:p-6">
           {currentItems.map((item: SpecialityDTO, index: number) => (
             <Link
-              // to={PublicPaths.SERVICE_BY_SPECIALITY(item.specialityId)}
-              to={`/speciality/doctor/abc`}
+              to={PublicPaths.SERVICE_BY_SPECIALITY(item.specialityId)}
+              // to={`/speciality/doctor/abc`}
               key={index}
               className="bg-gray-300 group rounded-md transition cursor-pointer"
             >

@@ -46,12 +46,18 @@ function transformSchedulesToEvents(schedules: DoctorScheduleDTO[]) {
   });
 }
 
-const DoctorScheduleCalendar = ({ doctorId }: { doctorId?: string }) => {
+const DoctorScheduleCalendar = ({
+  doctorId,
+  role,
+}: {
+  doctorId?: string;
+  role: string;
+}) => {
   const { data, isLoading, error } = useQuery({
     queryKey: ['doctorSchedules', doctorId],
     queryFn: () =>
-      doctorId ? getDoctorSchedulesByDoctorId(doctorId) : Promise.resolve([]),
-    enabled: !!doctorId, // Only fetch if doctorId is provided
+      doctorId ? getDoctorSchedulesByDoctorId() : Promise.resolve([]),
+    enabled: role === 'DOCTOR', // Only fetch if doctorId is provided
   });
 
   if (isLoading) return <div>Loading...</div>;

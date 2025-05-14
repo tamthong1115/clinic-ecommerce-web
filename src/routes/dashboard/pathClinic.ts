@@ -5,6 +5,7 @@ export const DashboardPaths = {
   INVOICE_MANAGE: '/dashboard/invoice',
   PATIENT_MANAGE: '/dashboard/patient',
   SCHEDULE_MANAGE: '/dashboard/schedule',
+  APPOINTMENT_MANAGE: '/dashboard/appointment',
   SERVICE_MANAGE: '/dashboard/service',
   SYSTEM_SETTING: '/dashboard/system',
   LIST_SERVICE_CLINIC_PATH: (clinicId: string) =>
