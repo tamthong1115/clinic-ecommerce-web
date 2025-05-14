@@ -8,7 +8,20 @@ const endpoints = {
 
   admin: {
     createClinicOwner: '/clinic/api/v1/admin/clinic-owners',
-    createNewClinic: '/clinic/api/v1/admin/create',
+    createNewClinic: '/clinic/api/v1/clinic/create-clinic',
+    fetchClinicOwner: (id: string) => `/clinic/api/v1/admin/get-owner/${id}`,
+    fetchOwner: (
+      page?: string,
+      size?: string,
+      sortBy?: string,
+      direction?: string
+    ) =>
+      buildUrlWithParams('/clinic/api/v1/admin/get-owner', {
+        page,
+        size,
+        sortBy,
+        direction,
+      }),
   },
 
   clinic: {

@@ -34,6 +34,13 @@ const sidebarItems: DashboardSideBarItem[] = [
     requiredRoles: ['ADMIN', 'CLINIC_OWNER'],
     submenu: [
       {
+        title: 'Clinic Owner',
+        path: ClinicPathsSubMenu.OWNER_MANAGE,
+        iconActive: '/icon/icon-add-user.png',
+        iconInactive: '/icon/icon-add-user.png',
+        requiredRoles: ['ADMIN'],
+      },
+      {
         title: 'Create Clinic Owner',
         path: ClinicPathsSubMenu.ADD_CLINIC_OWNER,
         iconActive: '/icon/icon-add-user.png',
@@ -45,13 +52,6 @@ const sidebarItems: DashboardSideBarItem[] = [
         path: ClinicPathsSubMenu.ADD_CLINIC,
         iconActive: '/icon/icon-add-clinic-2.png',
         iconInactive: '/icon/icon-add-clinic-2.png',
-        requiredRoles: ['ADMIN'],
-      },
-      {
-        title: 'Update Clinic',
-        path: ClinicPathsSubMenu.UPDATE_CLINIC,
-        iconActive: '/icon/icon-pencil(edit).png',
-        iconInactive: '/icon/icon-pencil(edit).png',
         requiredRoles: ['CLINIC_OWNER'],
       },
     ],

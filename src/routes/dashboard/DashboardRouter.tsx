@@ -45,6 +45,12 @@ const ServiceManage = lazy(
 const SystemSetting = lazy(
   () => import('../../pages/dashboard/SystemSettings')
 );
+const OwnerManage = lazy(
+  () => import('../../pages/dashboard/Clinic/ClinicOwnerManage')
+);
+const AddClinic = lazy(
+  () => import('../../pages/dashboard/Clinic/CreateClinic')
+);
 
 const DashboardRoutesComponent = () => {
   return (
@@ -68,7 +74,14 @@ const DashboardRoutesComponent = () => {
           }
         />
       </Route>
-
+      <Route
+        path={ClinicPathsSubMenu.OWNER_MANAGE}
+        element={
+          <DashboardLayout>
+            <OwnerManage />
+          </DashboardLayout>
+        }
+      />
       <Route
         element={<ProtectedRoute requiredRoles={['ADMIN', 'CLINIC_OWNER']} />}
       >
@@ -77,6 +90,15 @@ const DashboardRoutesComponent = () => {
           element={
             <DashboardLayout>
               <ClinicManagement />
+            </DashboardLayout>
+          }
+        />
+
+        <Route
+          path={ClinicPathsSubMenu.ADD_CLINIC}
+          element={
+            <DashboardLayout>
+              <AddClinic />
             </DashboardLayout>
           }
         />
@@ -99,7 +121,6 @@ const DashboardRoutesComponent = () => {
           }
         />
       </Route>
-
       <Route
         element={
           <ProtectedRoute requiredRoles={['ADMIN', 'CLINIC_OWNER', 'DOCTOR']} />
@@ -163,6 +184,7 @@ const DashboardRoutesComponent = () => {
           }
         />
       </Route>
+      ;
     </>
   );
 };
