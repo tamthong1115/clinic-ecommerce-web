@@ -25,7 +25,7 @@ const ScheduleManagement: React.FC = () => {
   const { user } = useAuth();
   return (
     <div>
-      <DoctorScheduleCalendar doctorId={user?.id} />
+      <DoctorScheduleCalendar doctorId={user?.id} role={user?.role || ''} />
     </div>
   );
 };

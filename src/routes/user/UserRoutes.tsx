@@ -12,7 +12,9 @@ const NewBooking = lazy(
   () => import('../../pages/user/CartAndPayment/NewOrder.tsx')
 );
 
-const Booking = lazy(() => import('../../pages/publicPages/Booking.tsx'));
+const Booking = lazy(
+  () => import('../../pages/publicPages/DoctorsByService.tsx')
+);
 
 const Profile = lazy(() => import('../../pages/user/Profile'));
 

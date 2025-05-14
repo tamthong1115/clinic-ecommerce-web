@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { AppDispatch, RootState } from '../../app/store.ts';
 import { useEffect, useState } from 'react';
 import {
@@ -8,6 +8,7 @@ import {
 } from '../../features/public/serviceSlice.ts';
 import { ServiceDTO } from '../../api/public/service/serviceTypes.ts';
 import { fetchSpeciality } from '../../features/public/specialitySlice.ts';
+import Spinner from '@/components/Spinner/Spinner.tsx';
 
 const ServicePage = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -71,6 +72,14 @@ const ServicePage = () => {
     }
   };
 
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-full">
+        <Spinner type="PacmanLoader" color="#4fd1c5" size={50} />
+      </div>
+    );
+  }
+
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-4">
@@ -79,12 +88,13 @@ const ServicePage = () => {
           : 'Tất cả dịch vụ'}
       </h1>
 
-      {loading && <p>Đang tải dữ liệu...</p>}
       {error && <p className="text-red-500">Lỗi: {error}</p>}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {services.map((svc) => (
-          <div
+          <Link
+            to={`/service/${svc.serviceId}/doctors`}
+            state={{ service: svc }}
             key={svc.serviceId}
             className="p-4 border rounded shadow hover:shadow-md transition group cursor-pointer"
           >
@@ -94,7 +104,7 @@ const ServicePage = () => {
             <p className="mt-1 text-blue-600 font-medium">
               {svc.price.toLocaleString()} VNĐ
             </p>
-          </div>
+          </Link>
         ))}
       </div>
 

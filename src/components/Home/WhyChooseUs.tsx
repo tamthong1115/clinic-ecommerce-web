@@ -6,7 +6,7 @@ const WhyChooseUs = () => {
     <>
       <div
         className={
-          'w-full h-full flex flex-col justify-center items-center p-2'
+          'w-full h-full flex flex-col justify-center items-center p-2 m-5'
         }
       >
         <div
@@ -18,7 +18,7 @@ const WhyChooseUs = () => {
         </div>
         <div
           className={
-            'w-full sm:w-[80%] flex flex-col sm:flex-row sm:flex-wrap justify-around items-center'
+            'w-full sm:w-[80%] flex flex-col sm:grid sm:grid-cols-3 sm:grid-rows-2 sm:gap-4 justify-center items-center sm:justify-items-center sm:items-start'
           }
         >
           <div
@@ -32,7 +32,9 @@ const WhyChooseUs = () => {
               </div>
             </div>
             <div className={'text-[#015259] p-2'}>Dịch vụ khẩn cấp</div>
-            <div>Bla Bla Bla</div>
+            <div className={'text-center'}>
+              Luôn sẵn sàng hỗ trợ khi bạn cần nhất
+            </div>
           </div>
 
           <div
@@ -46,7 +48,7 @@ const WhyChooseUs = () => {
               </div>
             </div>
             <div className={'text-[#015259] p-2'}>Hoạt động 24/24</div>
-            <div>Bla Bla Bla</div>
+            <div className={'text-center'}>Không bao giờ ngừng nghỉ</div>
           </div>
 
           <div
@@ -60,7 +62,9 @@ const WhyChooseUs = () => {
               </div>
             </div>
             <div className={'text-[#015259] p-2'}>Hoạt động trực tuyến</div>
-            <div>Bla Bla Bla</div>
+            <div className={'text-center'}>
+              Tiếp cận y tế chỉ với một cú nhấp chuột
+            </div>
           </div>
 
           <div
@@ -74,7 +78,9 @@ const WhyChooseUs = () => {
               </div>
             </div>
             <div className={'text-[#015259] p-2'}>Cấp cứu</div>
-            <div>Bla Bla Bla</div>
+            <div className={'text-center'}>
+              Phản ứng nhanh, chuyên nghiệp, hiệu quả
+            </div>
           </div>
 
           <div
@@ -90,7 +96,9 @@ const WhyChooseUs = () => {
             <div className={'text-[#015259] p-2'}>
               Chăm sóc sức khỏe ưu tiên
             </div>
-            <div>Bla Bla Bla</div>
+            <div className={'text-center'}>
+              Quan tâm từ trái tim, chăm sóc tận tình
+            </div>
           </div>
         </div>
       </div>
