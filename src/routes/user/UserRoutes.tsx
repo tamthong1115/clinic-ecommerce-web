@@ -20,7 +20,13 @@ const Profile = lazy(() => import('../../pages/user/Profile'));
 
 const UserRoutesComponent = () => {
   return (
-    <Route element={<ProtectedRoute requiredRoles={['ADMIN', 'USER']} />}>
+    <Route
+      element={
+        <ProtectedRoute
+          requiredRoles={['ADMIN', 'DOCTOR', 'CLINIC_OWNER', 'PATIENT']}
+        />
+      }
+    >
       <Route
         path={UserPaths.SETTINGS}
         element={

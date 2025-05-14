@@ -28,7 +28,7 @@ const DoctorList: React.FC = () => {
   const doctors = data?.content || [];
 
   return (
-    <div className={'w-full h-full bg-white rounded-xl shadow-2xl'}>
+    <div className={'w-full h-full bg-white rounded-xl shadow-2xl pt-2'}>
       <h2 className="text-center text-xl font-bold my-4">Doctor List</h2>
       <div className={'p-6 items-center flex justify-center'}>
         <table className={'w-[90%] h-[90%] rounded-xl'}>
@@ -69,14 +69,14 @@ const DoctorList: React.FC = () => {
                   <div className="flex gap-2 items-center">
                     <div
                       className={`px-2 py-1 rounded-2xl ${
-                        doctor.status === 'active'
+                        doctor.status === 'ACTIVE'
                           ? 'bg-green-100'
                           : 'bg-red-100'
                       }`}
                     >
                       <span
                         className={`px-1 py-1 rounded-xl text-xs text-white ${
-                          doctor.status === 'active'
+                          doctor.status === 'ACTIVE'
                             ? 'bg-green-600'
                             : 'bg-red-500'
                         }`}

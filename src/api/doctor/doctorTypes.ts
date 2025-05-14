@@ -16,6 +16,7 @@ export interface DoctorBasicResponse {
   email: string;
   phone: string;
   gender: string;
+  status?: string;
   profilePicture?: string;
 }
 

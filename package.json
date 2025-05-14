@@ -51,6 +51,7 @@
     "recharts": "^2.15.3",
     "rsuite": "^5.80.0",
     "shadcn-ui": "^0.9.5",
+    "swiper": "^11.2.6",
     "switch": "^0.0.0",
     "tailwind-merge": "^3.2.0",
     "tailwindcss-animate": "^1.0.7",
