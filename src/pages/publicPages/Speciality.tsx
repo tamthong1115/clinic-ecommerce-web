@@ -1,10 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { AppDispatch, RootState } from '../../app/store.ts';
-import { fetchSpeciality } from '../../features/public/specialitySlice.ts';
-import { SpecialityDTO } from '../../api/public/speciality/specialityTypes.ts';
+import { AppDispatch, RootState } from '@/app/store.ts';
+import { fetchSpeciality } from '@/features/public/specialitySlice.ts';
+import { SpecialityDTO } from '@/api/public/speciality/specialityTypes.ts';
 import { Link } from 'react-router-dom';
-import PublicPaths from '../../routes/public/pathPublic.ts';
 
 const SpecialityPages = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -53,10 +52,11 @@ const SpecialityPages = () => {
       <div className="w-full my-4">
         {loading && <p className="text-center">Loading...</p>}
         {error && <p className="text-center text-red-500">{error}</p>}
-        <div className="grid grid-cols-2 lg:grid-cols-3 grid-rows-[repeat(6,1fr)] gap-y-4 gap-x-2 p-2">
+        <div className="grid grid-cols-2 lg:grid-cols-3 grid-rows-[repeat(6,1fr)] gap-y-4 gap-x-2 p-2 sm:p-4 lg:p-6">
           {currentItems.map((item: SpecialityDTO, index: number) => (
             <Link
-              to={PublicPaths.SERVICE_BY_SPECIALITY(item.specialityId)}
+              // to={PublicPaths.SERVICE_BY_SPECIALITY(item.specialityId)}
+              to={`/speciality/doctor/abc`}
               key={index}
               className="bg-gray-300 group rounded-md transition cursor-pointer"
             >

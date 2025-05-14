@@ -15,39 +15,86 @@ import {
   updateClinicInfor,
   updateStatusClinic,
 } from '../../api/clinic/clinicServices.ts';
+import { getAllClinics } from '../../api/public/clinic/clinicPublicService.ts';
 import { ServiceDTO } from '../../api/public/service/serviceTypes.ts';
+
+interface PaginationState {
+  page: number;
+  size: number;
+  totalPages: number;
+  totalElements: number;
+}
 
 interface ClinicByOwnerState {
   listClinic: ClinicDTO[];
+  allClinics: ClinicDTO[];
   selectedClinic: ClinicDTO | null;
   listServiceInClinic: serviceInClinic[];
   selectedService: ServiceDTO | null;
   loading: boolean;
   error: string | null;
+  pagination: PaginationState;
 }
 
 const initialState: ClinicByOwnerState = {
   listClinic: [],
+  allClinics: [],
   selectedClinic: null,
   listServiceInClinic: [],
   selectedService: null,
   loading: false,
   error: null,
+  pagination: {
+    page: 0,
+    size: 10,
+    totalPages: 1,
+    totalElements: 0, // Initialize pagination
+  },
 };
 
-export const fetchClinicByOwner = createAsyncThunk<
-  ClinicDTO[],
-  void,
+export const fetchAllClinics = createAsyncThunk<
+  {
+    content: ClinicDTO[];
+    number: number;
+    size: number;
+    totalPages: number;
+    totalElements: number;
+  },
+  { page: number; size: number },
   { rejectValue: string }
->('clinic/fetchByOwner', async (_, thunkAPI) => {
+>('clinic/fetchAllClinics', async ({ page, size }, thunkAPI) => {
   try {
-    const data = await findClinicByOwner();
-    return data;
-  } catch (e) {
-    return thunkAPI.rejectWithValue('\n' + e);
+    const response = await getAllClinics({ page, size });
+    return {
+      content: response.data.content,
+      number: response.data.number,
+      size: response.data.size,
+      totalPages: response.data.totalPages,
+      totalElements: response.data.totalElements,
+    };
+  } catch (error) {
+    return thunkAPI.rejectWithValue('Failed to fetch all clinics: ' + error);
   }
 });
 
+export const fetchClinicByOwner = createAsyncThunk<
+  {
+    content: ClinicDTO[];
+    number: number;
+    size: number;
+    totalPages: number;
+    totalElements: number;
+  },
+  { page: number; size: number },
+  { rejectValue: string }
+>('clinic/fetchByOwner', async ({ page, size }, thunkAPI) => {
+  try {
+    const response = await findClinicByOwner(page, size);
+    return response;
+  } catch (error) {
+    return thunkAPI.rejectWithValue('Failed to fetch clinics ' + error);
+  }
+});
 export const updateClinicInformation = createAsyncThunk<
   ClinicDTO,
   { id: string; data: FormData },
@@ -133,15 +180,46 @@ const ClinicOwnerSlice = createSlice({
       })
       .addCase(fetchClinicByOwner.fulfilled, (state, action) => {
         state.loading = false;
-        state.listClinic = action.payload;
+        state.listClinic = action.payload.content;
+        state.pagination = {
+          page: action.payload.number,
+          size: action.payload.size,
+          totalPages: action.payload.totalPages,
+          totalElements: action.payload.totalElements,
+        };
       })
       .addCase(fetchClinicByOwner.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || 'Lỗi khi tải danh sách phòng khám';
       })
 
+      // Get all clinics
+      .addCase(fetchAllClinics.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchAllClinics.fulfilled, (state, action) => {
+        state.loading = false;
+        state.allClinics = action.payload.content;
+        state.pagination = {
+          page: action.payload.number,
+          size: action.payload.size,
+          totalPages: action.payload.totalPages,
+          totalElements: action.payload.totalElements,
+        };
+      })
+      .addCase(fetchAllClinics.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload || 'Error loading all clinics';
+      })
+
       // Update clinic information
+      .addCase(updateClinicInformation.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
       .addCase(updateClinicInformation.fulfilled, (state, action) => {
+        state.loading = false;
         const updated = action.payload;
         const index = state.listClinic.findIndex(
           (c) => c.clinicId === updated.clinicId

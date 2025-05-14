@@ -9,7 +9,8 @@ import {
   serviceInClinic,
   UpdateClinicRequest,
 } from './clinicTypes.ts';
-import { ApiResponse } from '../commonTypes.ts';
+import { ApiResponse, Page } from '../commonTypes.ts';
+import { DoctorDetailResponse } from '@/api/doctor/doctorTypes.ts';
 
 export const createClinicOwner = async (
   data: CreateClinicOwnerRequest
@@ -26,17 +27,25 @@ export const createClinicOwner = async (
 };
 
 //Fetching data with token
-export const findClinicByOwner = async (): Promise<ClinicDTO[]> => {
+export const findClinicByOwner = async (
+  page: number,
+  size: number
+): Promise<Page<ClinicDTO>> => {
   try {
-    const response = await apiClient.get<ApiResponse<ClinicDTO[]>>(
-      endpoints.clinic.getClinicByOwner
+    const response = await apiClient.get<ApiResponse<Page<ClinicDTO>>>(
+      endpoints.clinic.getClinicByOwner,
+      {
+        params: {
+          page,
+          size,
+        },
+      }
     );
     return response.data.data;
   } catch (e) {
-    throw new Error('Error when fetching clinic ' + e);
+    throw new Error('Error when fetching clinics by owner: ' + e);
   }
 };
-
 //Update information for clinic
 export const updateClinicInfor = async (
   id: string,
@@ -113,5 +122,23 @@ export const getServiceInClinic = async (
     return response.data.data;
   } catch (e) {
     throw new Error('\n ' + e);
+  }
+};
+
+export const createDoctor = async (
+  clinicId: string,
+  doctorRequest: FormData
+): Promise<DoctorDetailResponse> => {
+  try {
+    const response = await apiClient.post<ApiResponse<DoctorDetailResponse>>(
+      endpoints.clinic.createDoctor(clinicId),
+      doctorRequest,
+      {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      }
+    );
+    return response.data.data;
+  } catch (e) {
+    throw new Error('Error when creating doctor: ' + e);
   }
 };

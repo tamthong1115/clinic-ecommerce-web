@@ -90,7 +90,7 @@ const Booking = () => {
               </div>
               <div className="">
                 <div className="text-[#41d6e7] font-[700] text-[18px] mb-[2px] hover:text-[#1c919e]">
-                  <Link to={'/detail/doctor/${id}'}>{item.doctor.name}</Link>
+                  <Link to={`/booking/detail/1234`}>{item.doctor.name}</Link>
                 </div>
                 <div className="mb-[5px]">
                   <div className="font-[700]">Danh hiệu:</div>
